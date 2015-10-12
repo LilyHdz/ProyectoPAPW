@@ -419,6 +419,42 @@ hr{
     box-shadow: 5px 5px 5px #888888;
     
 }
+/*////////////////////////AgregarSucursal/////////////////////////////////////*/
+.cajitaSuc{
+    width: 600px;
+    height: 200px;
+    margin: 20px 20px 20px 50px;
+    padding:  20px 20px 20px 10px;
+    display: none;
+}
+
+.cajitaSuc fieldset{
+    width: 600px; 
+    border: 6px groove #0f4e5d;
+    border-radius: 10px;
+    font-size: 15pt;
+    margin: 0 auto;
+    margin-right: 50px;
+    margin-bottom: 80px;
+    
+}
+
+.cajitaSuc table{
+    padding-top: 10px;
+}
+
+.cajitaSuc table td{
+    font-family: "Cambria", Arial;
+    font-size: 12pt;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 50px;
+}
+
+.cajitaSuc input{
+    border-radius: 5px;
+    border-color: #93cede;
+}
 
 /*////////////////////////Inventario////////////////////////////////////*/
 

@@ -18,6 +18,19 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="style.css">
+         
+         <script>
+             function esconde_div(){
+                 var elemento = document.getElementById('esconder');
+                 elemento.style.display = 'none';
+             }
+             
+             function visible_div(){
+                 var elemento = document.getElementById('esconder');
+                 elemento.style.display='block';
+             }
+    
+          </script>
     </head>
     
     <body>
@@ -48,13 +61,48 @@ and open the template in the editor.
              <hr>
          </div>
                      
+            <button id="AgregarP" onclick="visible_div();">Agregar Sucursal</button>
+            
+            <div class="cajitaSuc" id="esconder">
+            <form action="" method="POST">
+                <fieldset >
+                    <legend>Ingrese Nueva Sucursal:</legend>
+		
+                        <table>
+                    
+                            <tr>
+                                <td><label>Nombre(s):</label></td>
+                                <td><input type="text" style="width:200px; height: 20px;"><br></td>
+                            </tr>
+                            
+                             <tr>
+                                 <td><select>
+                                    <option value="Estado">Estado</option>
+                                    <option value="Nuevo Leon">Nuevo Leon</option>
+                                     </select></td>
+                                 <td><select>
+                                    <option value="Municipio">Municipio</option>
+                                    <option value="Cadereyta Jimenez">Cadereyta Jimenez</option>
+                                         </select></td>
+                            </tr>
+                        </table>
+                    <br>
+                
+                    <input type="submit" name="nameFacul" class="AgreButton" value="Guardar">
+                    <input type="submit" name="Cancelar" class="AgreButton" value="Cancelar">
+                </fieldset>
+            </form>
+        </div>
+            
             <div class="Busca">
-                <label>Buscar personal por: </label>
+                <label>Buscar sucursal: </label>
                 <select>
-                     <option value="Nombre">NOMBRE</option>
-                     <option value="Apellido">APELLIDO</option>
-                     <option value="CURP">CURP</option>
-                     <option value="Puesto">PUESTO</option>
+                     <option value="Estado">Estado</option>
+                     <option value="Nuevo Leon">Nuevo Leon</option>
+                </select>
+                <select>
+                     <option value="Municipio">Municipio</option>
+                     <option value="Cadereyta Jimenez">Cadereyta Jimenez</option>
                 </select>
                 <button>Aceptar</button>                      
             </div>
@@ -62,23 +110,19 @@ and open the template in the editor.
             <div class="TABLA_ER">
                 <table>
                
-                  <tr><th>FOTO</th><th>NOMBRE COMPLETO</th><th>PUESTO</th><th>SUCURSAL</th> <th>RFC</th> <th>Editar</th> <th>Eliminar</th></tr>
+                  <tr><th>NOMBRE</th><th>MUNICIPIO</th><th>ESTADO</th><th>Editar</th><th>Eliminar</th></tr>
                   <tr>
-                      <td><img src="images/ImagePerson/foto1.jpg" alt="Producto" width="50"></td> 
                       <td> Julia Martinez Vega</td>
-                      <td>Cajero</td> 
-                      <td>Fundidora</td> 
-                      <td>XXXXX</td> 
+                      <td>Cadereyta Jimenez</td> 
+                      <td>Nuevo Leon</td>  
                       <td><a href="">Editar</a></td> 
                       <td><a href="">Eliminar</a></td> 
                   </tr>
                   
                  <tr>
-                     <td><img src="images/ImagePerson/foto2.png" alt="Producto" width="50"></td> 
                      <td> Aarón Martinez Hernández</td>
-                     <td>Manager</td> 
-                     <td>Fundidora</td> 
-                     <td>XXXXX</td> 
+                     <td>Guadalupe</td> 
+                     <td>Nuevo Leon</td>  
                       <td><a href="">Editar</a></td> 
                       <td><a href="">Eliminar</a></td> 
                  </tr>
