@@ -126,7 +126,7 @@ h4{
     margin-left: 10px;
 }
 
-td {
+#Tabla td {
     padding: 3px;
     text-align: left;
     font-family:  Arial bold;
@@ -215,6 +215,10 @@ ul, ol {
     list-style-position: inside;
 }
 
+.navo > li{
+    float: left;
+}
+
 .navo li a{
     text-decoration: none;
     padding:10px 15px;
@@ -226,15 +230,11 @@ ul, ol {
     background-color: white;
     color: black;
 }
-
-.navo > li{
-    float: left;
-}
-
 .navo li ul{
     display:none;
     position:absolute;
     padding: 10px;
+    min-width: 120px;
 }
 
 .navo li:hover > ul{
@@ -244,6 +244,11 @@ ul, ol {
 
 .navo li ul li{
     position: relative;
+}
+
+.navo li ul li ul {
+    right:-120px;
+    top:0px;
 }
 
 hr{
@@ -279,6 +284,99 @@ hr{
     font-size: 10pt;
     
 }
+
+/*////////////////////////Personal/////////////////////////////////////*/
+#AgregarP{
+    width: 200px;
+    height: 30px;
+    float: left;
+    margin: 55px 20px 20px 90px;
+}
+
+.Busca {
+    width: 700px;
+    padding: 5px 5px 30px 5px;
+    margin: 100px 5px 5px 60px;
+}
+
+.Busca input{
+    margin-left: 10px;
+    
+}
+
+.Busca label{
+    margin-left: 20px;
+    padding: 10px;
+    font-family: "Cambria", Arial;
+    font-size: 12pt;
+    
+}
+
+.Busca select{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.Busca button{
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    margin-left: 10px;
+   
+}
+
+/*TABLA DATOS EMPLEADOS Y ARTICULOS*/
+.TABLA_ER{
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
+.TABLA_ER table {
+    width: 100%;
+    border: 1px;  
+    
+}
+
+.TABLA_ER table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: "Cambria", Arial;
+    text-align: center;
+    padding: 1px;
+}
+
+.TABLA_ER td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: "Cambria", Arial;
+    text-align: center;
+    padding: 1px;
+}
+
+.TABLA_ER th{
+    background-color: #868686;
+    color: white;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: "Cambria", Arial;
+    text-align: center;
+    padding: 1px;
+} 
+
+.TABLA_ER tr:nth-child(odd){
+    background-color: #bbe8ff;
+}
+
+.TABLA_ER tr:nth-child(even){
+    background-color: #e9e9e9 ;
+}
+
+.TABLA_ER table tr:hover {
+    background-color: #c8c8c8;
+}
+
 /*////////////////////////AgregarPersonal/////////////////////////////////////*/
 .cajita{
     width: 650px;
@@ -321,66 +419,7 @@ hr{
     box-shadow: 5px 5px 5px #888888;
     
 }
-/*////////////////////////BusquedaPersonal////////////////////////////////////*/
-.Busca {
-    width: 600px;
-    padding: 10px 10px 30px 10px;
-    margin: 100px 20px 20px 60px;
-}
 
-.Busca label{
-    padding-left: 10px;
-    padding-top: 50px;
-    margin: 20px 20px 20px 20px;
-    font-family: "Cambria", Arial;
-    font-size: 12pt;
-}
-
-.Busca button{
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    margin-left: 40px;
-}
-
-/*TABLA DATOS EMPLEADOS Y ARTICULOS*/
-.TABLA_ER{
-    width: 1100px;
-    margin: 0 auto;
-    margin-top: 40px;
-    margin-bottom: 200px;
-}
-
-.TABLA_ER table {
-    width: 100%;
-    border: 1px;  
-    
-}
-
-.TABLA_ER table,th,td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    font-family: "Cambria", Arial;
-    text-align: center;
-    padding: 1px;
-}
-
-.TABLA_ER th{
-    background-color: #868686;
-    color: white;
-}
-
-.TABLA_ER tr:nth-child(odd){
-    background-color: #bbe8ff;
-}
-
-.TABLA_ER tr:nth-child(even){
-    background-color: #e9e9e9 ;
-}
-
-.TABLA_ER table tr:hover {
-    background-color: #c8c8c8;
-}
 /*////////////////////////Inventario////////////////////////////////////*/
 
 .Inv{
