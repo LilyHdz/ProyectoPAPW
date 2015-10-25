@@ -419,11 +419,11 @@ hr{
     box-shadow: 5px 5px 5px #888888;
     
 }
-/*////////////////////////AgregarSucursal/////////////////////////////////////*/
+/*//////////////////AgregarSucursal-Departamento-Articulo/////////////////////*/
 .cajitaSuc{
     width: 600px;
     height: 200px;
-    margin: 20px 20px 20px 50px;
+    margin: 20px 20px 60px 50px;
     padding:  20px 20px 20px 10px;
     display: none;
 }
@@ -459,7 +459,7 @@ hr{
 /*////////////////////////Inventario////////////////////////////////////*/
 
 .Inv{
-    margin: 100px 10px 10px 20px;
+    margin: 270px 10px 10px 20px;
     padding: 20px 20px 20px 80px;
 }
 
@@ -500,7 +500,21 @@ hr{
     margin-left: 20px;
     margin-right: 20px;
 }
+/*////////////////////////Inventario////////////////////////////////////*/
 
+.merca{
+    
+}
 
+.merca table{
+    padding-top: 10px;
+}
 
+.merca table td{
+    font-family: "Cambria", Arial;
+    font-size: 12pt;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 50px;
+}
 

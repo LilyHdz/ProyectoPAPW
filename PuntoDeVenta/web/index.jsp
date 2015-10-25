@@ -10,7 +10,7 @@
 <head>
     <title>Bienvenido</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>
@@ -23,7 +23,7 @@
     
     <div class="Login">
         
-        <form action="PaginaInicio.html">
+        <form action="jsp/PaginaInicio.html">
          
             <h4>Iniciar Sesión</h4>
             <table id="Tabla">

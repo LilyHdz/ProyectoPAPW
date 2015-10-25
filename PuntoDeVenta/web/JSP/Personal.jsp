@@ -17,7 +17,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-         <link rel="stylesheet" type="text/css" href="style.css">
+         <link rel="stylesheet" type="text/css" href="../css/style.css">
     </head>
     
     <body>
@@ -25,7 +25,7 @@ and open the template in the editor.
         
         <header id="Encabezado">  
             
-         <img id="Letrero" src="images/Logo_Tienda3.png" alt="MercaTodo" >
+         <img id="Letrero" src="../images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
          <a id="Salir" href="index.jsp" >Cerrar Sesión</a>
         </header>
@@ -33,12 +33,12 @@ and open the template in the editor.
            <div id="Nav">
             
             <ul class="navo">
-            <li><a href="PaginaAdministracion.html">Administración</a>
+            <li><a href="">Administración</a>
                   <ul>
                         <li><a href="Personal.jsp">Personal</a></li>
                         <li><a href="Sucursales.jsp">Sucursales</a></li>
                         <li><a href="Departamentos.jsp">Departamentos</a></li>
-                        <li><a href="Articulos.html">Articulos</a></li>
+                        
                     </ul>
             </li>
             <li><a href="PaginaMarketing.html">Marketing</a></li>
@@ -48,7 +48,7 @@ and open the template in the editor.
              <hr>
          </div>
             
-            <button id="AgregarP" onclick="window.location.href='AgregarEmpleado.html' "">Agregar Nuevo Empleado</button>
+            <button id="AgregarP" onclick="window.location.href='AgregarEmpleado.html' ">Agregar Nuevo Empleado</button>
             <div class="Busca"> 
                 <label>Buscar personal por: </label>
                 <select>

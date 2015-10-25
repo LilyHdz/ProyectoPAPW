@@ -17,7 +17,21 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-         <link rel="stylesheet" type="text/css" href="style.css">
+         <link rel="stylesheet" type="text/css" href="../css/style.css">
+         
+         <script>
+             function esconde_div(){
+                 var elemento = document.getElementById('esconder');
+                 elemento.style.display = 'none';
+             }
+             
+             function visible_div(){
+                 var elemento = document.getElementById('esconder');
+                 elemento.style.display='block';
+             }
+    
+          </script>
+          
     </head>
     
     <body>
@@ -25,20 +39,20 @@ and open the template in the editor.
         
         <header id="Encabezado">  
             
-         <img id="Letrero" src="images/Logo_Tienda3.png" alt="MercaTodo" >
+         <img id="Letrero" src="../images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
-         <a id="Salir" href="index.jsp" >Cerrar Sesión</a>
+         <a id="Salir" href="../index.jsp" >Cerrar Sesión</a>
         </header>
             
            <div id="Nav">
             
             <ul class="navo">
-            <li><a href="PaginaAdministracion.html">Administración</a>
+            <li><a href="">Administración</a>
                   <ul>
                         <li><a href="Personal.jsp">Personal</a></li>
                         <li><a href="Sucursales.jsp">Sucursales</a></li>
                         <li><a href="Departamentos.jsp">Departamentos</a></li>
-                        <li><a href="Articulos.html">Articulos</a></li>
+                       
                     </ul>
             </li>
             <li><a href="PaginaMarketing.html">Marketing</a></li>
@@ -47,38 +61,51 @@ and open the template in the editor.
             </ul>
              <hr>
          </div>
+            
+            <button id="AgregarP" onclick="visible_div();">Agregar Departamento</button>
+            
+            <div class="cajitaSuc" id="esconder">
+            <form action="" method="POST">
+                <fieldset >
+                    <legend>Ingrese Nuevo Departamento:</legend>
+		
+                        <table>
+                    
+                            <tr>
+                                <td><label>Nombre(s):</label></td>
+                                <td><input type="text" style="width:200px; height: 20px;"><br></td>
+                            </tr>
+                            
+                        </table>
+                    <br>
+                
+                    <input type="submit" name="nameFacul" class="AgreButton" value="Guardar">
+                    <input type="submit" name="Cancelar" class="AgreButton" value="Cancelar">
+                </fieldset>
+            </form>
+        </div>
                      
             <div class="Busca">
-                <label>Buscar personal por: </label>
-                <select>
-                     <option value="Nombre">NOMBRE</option>
-                     <option value="Apellido">APELLIDO</option>
-                     <option value="CURP">CURP</option>
-                     <option value="Puesto">PUESTO</option>
-                </select>
-                <button>Aceptar</button>                      
+                <form method="post">
+                <label>Buscar: </label>
+                <input type="text"/>
+                <input type="submit" value="Aceptar"/>
+               </form>
+                                     
             </div>
             
             <div class="TABLA_ER">
                 <table>
                
-                  <tr><th>FOTO</th><th>NOMBRE COMPLETO</th><th>PUESTO</th><th>SUCURSAL</th> <th>RFC</th> <th>Editar</th> <th>Eliminar</th></tr>
+                  <tr><th>Departamento</th></tr>
                   <tr>
-                      <td><img src="images/ImagePerson/foto1.jpg" alt="Producto" width="50"></td> 
-                      <td> Julia Martinez Vega</td>
-                      <td>Cajero</td> 
-                      <td>Fundidora</td> 
-                      <td>XXXXX</td> 
+                      <td>Frutas y Verduras</td>
                       <td><a href="">Editar</a></td> 
                       <td><a href="">Eliminar</a></td> 
                   </tr>
                   
-                 <tr>
-                     <td><img src="images/ImagePerson/foto2.png" alt="Producto" width="50"></td> 
-                     <td> Aarón Martinez Hernández</td>
-                     <td>Manager</td> 
-                     <td>Fundidora</td> 
-                     <td>XXXXX</td> 
+                 <tr> 
+                     <td>Electrodomesticos</td>
                       <td><a href="">Editar</a></td> 
                       <td><a href="">Eliminar</a></td> 
                  </tr>

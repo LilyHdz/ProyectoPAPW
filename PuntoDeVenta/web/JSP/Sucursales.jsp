@@ -17,7 +17,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-         <link rel="stylesheet" type="text/css" href="style.css">
+         <link rel="stylesheet" type="text/css" href="../css/style.css">
          
          <script>
              function esconde_div(){
@@ -38,20 +38,20 @@ and open the template in the editor.
         
         <header id="Encabezado">  
             
-         <img id="Letrero" src="images/Logo_Tienda3.png" alt="MercaTodo" >
+         <img id="Letrero" src="../images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
-         <a id="Salir" href="index.jsp" >Cerrar Sesión</a>
+         <a id="Salir" href="../index.jsp" >Cerrar Sesión</a>
         </header>
             
            <div id="Nav">
             
             <ul class="navo">
-            <li><a href="PaginaAdministracion.html">Administración</a>
+            <li><a href="">Administración</a>
                   <ul>
                         <li><a href="Personal.jsp">Personal</a></li>
                         <li><a href="Sucursales.jsp">Sucursales</a></li>
                         <li><a href="Departamentos.jsp">Departamentos</a></li>
-                        <li><a href="Articulos.html">Articulos</a></li>
+                       
                     </ul>
             </li>
             <li><a href="PaginaMarketing.html">Marketing</a></li>
