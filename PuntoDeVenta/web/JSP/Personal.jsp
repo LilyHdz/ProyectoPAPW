@@ -17,7 +17,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-         <link rel="stylesheet" type="text/css" href="../css/style.css">
+         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
     
     <body>
@@ -27,7 +27,7 @@ and open the template in the editor.
             
          <img id="Letrero" src="../images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
-         <a id="Salir" href="index.jsp" >Cerrar Sesión</a>
+         <a id="Salir" href="../index.jsp" >Cerrar Sesión</a>
         </header>
             
            <div id="Nav">
@@ -66,7 +66,7 @@ and open the template in the editor.
                
                   <tr><th>FOTO</th><th>NOMBRE COMPLETO</th><th>PUESTO</th><th>SUCURSAL</th> <th>RFC</th> <th>Editar</th> <th>Eliminar</th></tr>
                   <tr>
-                      <td><img src="images/ImagePerson/foto1.jpg" alt="Producto" width="50"></td> 
+                      <td><img src="../images/ImagePerson/foto1.jpg" alt="Producto" width="50"></td> 
                       <td> Julia Martinez Vega</td>
                       <td>Cajero</td> 
                       <td>Fundidora</td> 
@@ -76,7 +76,7 @@ and open the template in the editor.
                   </tr>
                   
                  <tr>
-                     <td><img src="images/ImagePerson/foto2.png" alt="Producto" width="50"></td> 
+                     <td><img src="../images/ImagePerson/foto2.png" alt="Producto" width="50"></td> 
                      <td> Aarón Martinez Hernández</td>
                      <td>Manager</td> 
                      <td>Fundidora</td> 
