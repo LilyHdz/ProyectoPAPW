@@ -26,23 +26,32 @@
         <form action="JSP/PaginaInicio.html">
          
             <h4>Iniciar Sesión</h4>
+           
             <table id="Tabla">
                 <tr>
-                    <td><label>No. Empleado </label></td>
+                    <td><label>No. Empleado               
+                            <select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" >
+                                <option value="M" id="M">Manager</option>
+                                <option value="C" id="C">Cajero</option>
+                            </select></label>
+                    </td>
                 </tr>
                 <tr>
-                    <td><input type="text"  size="35" ></td>
+                    <td><input type="text"  size="35" name="nomina" value=""></td>
                 </tr>
                 <tr>
                     <td><label>Contraseña </label></td>
                 </tr>
                  <tr>
-                    <td><input type="password" size="35"> </td>
+                    <td><input type="password" size="35" name="contra" value=""> </td>
                 </tr>
             </table>
+            
+          
             <input  type="submit" value="Entrar" class="Botones">
             <input  type="submit" value="Cancelar" class="Botones"> 
-            <br><a href="" id="OlvidoContra">Olvido su contraseña?</a>
+            <br>
+             
         </form>
         
     </div>

@@ -43,32 +43,40 @@ and open the template in the editor.
          </div>
                      
         <div class="cajita">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <fieldset >
                     <legend>Ingrese la información:</legend>
 		
                         <table>
                             <tr>
-                                <td><label>Foto de Empleado:</label></td><td><input type="file" /></td>
+                                <td><label>Foto de Empleado:</label></td><td><input type="file" name="foto"/></td>
                             </tr>
                             <tr>
                                 <td><label>Nombre(s):</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="nombre"><br></td>
                             </tr>
                             
                              <tr>
                                 <td><label>Apellido Paterno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="apP"><br></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><label>Contrasena:</label></td>
+                                <td><input type="password" style="width:200px; height: 20px;" name="contra"><br></td>
                             </tr>
                             
                              <tr>
                                 <td><label>Apellido Materno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="apM"><br></td>
                             </tr>
                             
                             <tr>
                                 <td><label>Puesto:</label></td>
-                                <td><input type="text" name="nameFacul" style="width:200px; height: 20px;"><br></td>                      
+                                <td><select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
+                                <option value="M" id="M">Manager</option>
+                                <option value="C" id="C">Cajero</option>
+                            </select><br></td>                      
                              </tr>
                     
                             <tr>
@@ -79,12 +87,7 @@ and open the template in the editor.
                     
                             <tr>
                                 <td><label>Fecha de Nacimiento:</label></td>
-                                <td><input type="date" style="width:200px; height: 25px;"><br></td>
-                            </tr>
-                
-                             <tr>
-                                <td><label>Edad:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;"><br></td>
+                                <td><input type="date" style="width:200px; height: 25px;" name="fecha"><br></td>
                             </tr>
  
                             <tr>
@@ -101,38 +104,48 @@ and open the template in the editor.
                             </tr>
                 
                             <tr>
-                                <td><label>Calle y numero</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;"><br></td>     
+                                <td><label>Calle</label></td>
+                                <td><input type="text" style="width:200px; height: 25px;" name="calle"><br></td>     
+                            </tr>  
+                            
+                             <tr>
+                                <td><label>Numero</label></td>
+                                <td><input type="text" style="width:200px; height: 25px;" name="calle_num"><br></td>     
                             </tr>  
                             
                             <tr>
+                                <td><label>Codigo Postal</label></td>
+                                <td><input type="text" style="width:200px; height: 25px;" name="postal"><br></td>     
+                            </tr>
+                            
+                            <tr>
                                 <td><label>Colonia</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="colonia"><br></td>     
                             </tr>
                     
                             <tr>
                                 <td><label>Ciudad</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="ciudad"><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>Estado</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="estado"><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>RFC:</label></td>
-                                <td><input type="text" name="nameFacul" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" name="rfc" style="width:200px; height: 20px;"><br></td>                      
                              </tr>
                     
                              <tr>
                                 <td><label>CURP:</label></td>
-                                <td><input type="text" name="nameFacul" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" name="curp" style="width:200px; height: 20px;"><br></td>                      
                              </tr>
                              
                              <tr>
                                 <td><label>Numero de Nómina:</label></td>
-                                <td><input type="text" name="nameFacul" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" name="nomina" style="width:200px; height: 20px;"><br></td>                      
                              </tr>
                         </table>
                     <br>
