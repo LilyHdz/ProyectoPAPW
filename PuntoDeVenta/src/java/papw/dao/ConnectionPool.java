@@ -24,7 +24,7 @@ public class ConnectionPool {
         try {
             InitialContext ic = new InitialContext();
             dataSource = (DataSource) 
-                    ic.lookup("java:/comp/env/jdbc/testdb");
+                    ic.lookup("java:/comp/env/jdbc/papw");
         } catch (Exception e) {
             e.printStackTrace();
         }

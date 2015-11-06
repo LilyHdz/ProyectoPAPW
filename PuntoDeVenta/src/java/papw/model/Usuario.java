@@ -5,6 +5,7 @@
  */
 package papw.model;
 
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -22,6 +23,10 @@ public class Usuario {
     private String rfc;
     private String curp;
     private int nomina;
+
+    private String fotoUbicacion;
+    private InputStream fotostream;
+    
     private String fechaN;
     private String calle;
     private int numero;
@@ -31,8 +36,7 @@ public class Usuario {
     private int postal;
     private String contrasena;
 
-    public Usuario(int id, String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina, String fechaN, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena) {
-        this.id = id;
+    public Usuario(String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena) {
         this.nombre = nombre;
         this.apePaterno = apePaterno;
         this.apeMaterno = apeMaterno;
@@ -42,7 +46,6 @@ public class Usuario {
         this.rfc = rfc;
         this.curp = curp;
         this.nomina = nomina;
-        this.fechaN = fechaN;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
@@ -50,9 +53,8 @@ public class Usuario {
         this.estado = estado;
         this.postal = postal;
         this.contrasena = contrasena;
-       
     }
-
+    
     public int getId() {
         return id;
     }
@@ -197,7 +199,21 @@ public class Usuario {
         this.contrasena = contrasena;
     }
     
-    
+        public String getFotoUbicacion() {
+        return fotoUbicacion;
+    }
+
+    public void setFotoUbicacion(String fotoUbicacion) {
+        this.fotoUbicacion = fotoUbicacion;
+    }
+
+    public InputStream getFotostream() {
+        return fotostream;
+    }
+
+    public void setFotostream(InputStream fotostream) {
+        this.fotostream = fotostream;
+    }
     
     
     

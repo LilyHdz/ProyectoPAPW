@@ -72,16 +72,13 @@ public class UpdateUsu extends HttpServlet  {
             nomina = Integer.parseInt(strNomina);
         }
         
-        
-        
-        
-        Usuario usuario = new Usuario(id,nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina, strFecha, strCalle, calle_num, strColonia, idciudad, idestado,postal, strContrasena);
+        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,strCalle, calle_num, strColonia,idciudad, idestado,postal,strContrasena);
    
             UsuarioDao.insertar(usuario);
  
         
         ServletContext sc = getServletContext();
-        RequestDispatcher disp = sc.getRequestDispatcher("/lista");
+         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Personal.jsp");
         disp.forward(request, response);
     }
 
