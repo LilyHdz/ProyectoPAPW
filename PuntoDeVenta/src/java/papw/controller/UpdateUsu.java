@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,9 +24,35 @@ import javax.servlet.http.Part;
  * @author Owner
  */
 public class UpdateUsu extends HttpServlet  {
+   
+    private final String directorio = "archivos"; 
     
+     private String extractExtension(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                String filename = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                return filename.substring(filename.indexOf(".") - 1, filename.length());
+            }
+        }
+        return "";
+    }
+     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String uploadPath = getServletContext().getRealPath("/" + directorio + "/");
+        System.out.println("PATH: " + uploadPath);
+        
+        File fdir = new File(uploadPath);
+        if (!fdir.exists()) {
+            fdir.mkdir();
+        }
+        
+        Part filePart = request.getPart("foto");
+        
+        InputStream inputStream = filePart.getInputStream();
         
         String nombre = request.getParameter("nombre");
         String apePaterno = request.getParameter("apP");
@@ -72,14 +99,16 @@ public class UpdateUsu extends HttpServlet  {
             nomina = Integer.parseInt(strNomina);
         }
         
-        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,strCalle, calle_num, strColonia,idciudad, idestado,postal,strContrasena);
+        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,strContrasena);
    
             UsuarioDao.insertar(usuario);
  
         
         ServletContext sc = getServletContext();
-         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Personal.jsp");
-        disp.forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+         RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
+        //disp.forward(request, response);
+        response.sendRedirect("/PuntoDeVenta/JSP/Personal.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

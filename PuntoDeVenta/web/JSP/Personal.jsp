@@ -48,7 +48,7 @@ and open the template in the editor.
              <hr>
          </div>
             
-            <button id="AgregarP" onclick="window.location.href='AgregarEmpleado.html' ">Agregar Nuevo Empleado</button>
+            <button id="AgregarP" onclick="window.location.href='AgregarPersonal.jsp' ">Agregar Nuevo Empleado</button>
             <div class="Busca"> 
                 <label>Buscar personal por: </label>
                 <select>

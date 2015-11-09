@@ -6,6 +6,11 @@
     <servlet>
         <servlet-name>UpdateUsu</servlet-name>
         <servlet-class>papw.controller.UpdateUsu</servlet-class>
+        <multipart-config>
+            <max-file-size>-1</max-file-size>
+            <max-request-size>-1</max-request-size>
+            <file-size-threshold>52428800</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateUsu</servlet-name>

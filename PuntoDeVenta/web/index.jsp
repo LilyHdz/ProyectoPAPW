@@ -29,11 +29,7 @@
            
             <table id="Tabla">
                 <tr>
-                    <td><label>No. Empleado               
-                            <select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" >
-                                <option value="M" id="M">Manager</option>
-                                <option value="C" id="C">Cajero</option>
-                            </select></label>
+                    <td><label>No. Empleado</label>
                     </td>
                 </tr>
                 <tr>
