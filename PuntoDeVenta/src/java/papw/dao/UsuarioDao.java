@@ -9,6 +9,7 @@ import papw.model.Usuario;
 import java.util.Date;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -51,4 +52,5 @@ public class UsuarioDao {
             pool.freeConnection(conn);
         }
     }
+        
 }

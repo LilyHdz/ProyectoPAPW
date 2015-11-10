@@ -106,9 +106,9 @@ public class UpdateUsu extends HttpServlet  {
         
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
-         RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
-        //disp.forward(request, response);
-        response.sendRedirect("/PuntoDeVenta/JSP/Personal.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
+        disp.forward(request, response);
+        //response.sendRedirect("");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

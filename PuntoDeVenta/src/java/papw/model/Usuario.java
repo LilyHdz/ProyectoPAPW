@@ -36,25 +36,6 @@ public class Usuario {
     private int postal;
     private String contrasena;
 
-//    public Usuario(String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena) {
-//        this.nombre = nombre;
-//        this.apePaterno = apePaterno;
-//        this.apeMaterno = apeMaterno;
-//        this.Puesto = Puesto;
-//        this.sexo = sexo;
-//        this.NivelEstudio = NivelEstudio;
-//        this.rfc = rfc;
-//        this.curp = curp;
-//        this.nomina = nomina;
-//        this.calle = calle;
-//        this.numero = numero;
-//        this.colonia = colonia;
-//        this.municipio = municipio;
-//        this.estado = estado;
-//        this.postal = postal;
-//        this.contrasena = contrasena;
-//    }
-
     public Usuario(String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,InputStream fotostream, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena) {
         this.nombre = nombre;
         this.apePaterno = apePaterno;

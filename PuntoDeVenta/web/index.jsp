@@ -10,20 +10,21 @@
 <head>
     <title>Bienvenido</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <meta http-equiv="Content-Type" content="text/html">
+    <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
 
 </head>
 <body>
     <div class="main">
         <header id="Encabezado">  
             
-            <img id="Letrero" src="images/Logo_Tienda3.png" alt="MercaTodo" >
+            <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
             <h3>"Donde encuentra de todo"</h3>
         </header>
     
     <div class="Login">
         
-        <form action="JSP/PaginaInicio.html">
+        <form action="/PuntoDeVenta/login" method="POST">
          
             <h4>Iniciar Sesión</h4>
            
@@ -45,10 +46,13 @@
             
           
             <input  type="submit" value="Entrar" class="Botones">
-            <input  type="submit" value="Cancelar" class="Botones"> 
+            <input  type="reset" value="Cancelar" class="Botones"> 
             <br>
-             
         </form>
+        
+          <% if (request.getAttribute("mensaje") != null) { %>
+            <div style="color: red"><%= request.getAttribute("mensaje") %> </div>
+        <% } %>
         
     </div>
         

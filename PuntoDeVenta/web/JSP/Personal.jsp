@@ -17,7 +17,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-         <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+         <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
     </head>
     
     <body>
@@ -25,25 +25,25 @@ and open the template in the editor.
         
         <header id="Encabezado">  
             
-         <img id="Letrero" src="../images/Logo_Tienda3.png" alt="MercaTodo" >
+         <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
-         <a id="Salir" href="../index.jsp" >Cerrar Sesión</a>
+         <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
         </header>
             
            <div id="Nav">
             
             <ul class="navo">
-            <li><a href="">Administración</a>
+            <li><a href="">Administraci&oacute;n</a>
                   <ul>
-                        <li><a href="Personal.jsp">Personal</a></li>
-                        <li><a href="Sucursales.jsp">Sucursales</a></li>
-                        <li><a href="Departamentos.jsp">Departamentos</a></li>
+                        <li><a href="/PuntoDeVenta/JSP/Personal.jsp">Personal</a></li>
+                        <li><a href="/PuntoDeVenta/JSP/Sucursales.jsp">Sucursales</a></li>
+                        <li><a href="/PuntoDeVenta/JSP/Departamentos.jsp">Departamentos</a></li>
                         
                     </ul>
             </li>
-            <li><a href="PaginaMarketing.html">Marketing</a></li>
-            <li><a href="PaginaInventario.html">Inventario</a></li>
-            <li><a href="PaginaReportes.html">Reportes</a></li>
+            <li><a href="/PuntoDeVenta/JSP/PaginaMarketing.html">Marketing</a></li>
+            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.html">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/JSP/PaginaReportes.html">Reportes</a></li>
             </ul>
              <hr>
          </div>
