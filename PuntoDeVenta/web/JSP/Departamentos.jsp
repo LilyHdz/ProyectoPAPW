@@ -49,15 +49,15 @@ and open the template in the editor.
             <ul class="navo">
             <li><a href="">Administraci&oacute;n</a>
                   <ul>
-                        <li><a href="/PuntoDeVenta/JSP/Personal.jsp">Personal</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrar">Personal</a></li>
                         <li><a href="/PuntoDeVenta/JSP/Sucursales.jsp">Sucursales</a></li>
                         <li><a href="/PuntoDeVenta/JSP/Departamentos.jsp">Departamentos</a></li>
                        
                     </ul>
             </li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaMarketing.html">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.html">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaReportes.html">Reportes</a></li>
+            <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
+            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
             </ul>
              <hr>
          </div>

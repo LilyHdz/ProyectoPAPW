@@ -71,6 +71,7 @@ public class UpdateUsu extends HttpServlet  {
         String strCurp = request.getParameter("curp");
         String strNomina = request.getParameter("nomina");
         String strContrasena = request.getParameter("contra");
+        String strSucursal = request.getParameter("Suc");
         
         int id = 0;
        
@@ -99,7 +100,11 @@ public class UpdateUsu extends HttpServlet  {
             nomina = Integer.parseInt(strNomina);
         }
         
-        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,strContrasena);
+        int idsucursal = 0;
+        if (strSucursal != null && !strSucursal.equals("")) {
+            idsucursal = Integer.parseInt(strSucursal);
+        }
+        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,strContrasena,idsucursal);
    
             UsuarioDao.insertar(usuario);
  

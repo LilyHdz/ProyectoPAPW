@@ -35,8 +35,12 @@ public class Usuario {
     private int estado;
     private int postal;
     private String contrasena;
+    private int idSucursal;
 
-    public Usuario(String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,InputStream fotostream, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena) {
+    public Usuario(String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, 
+            String NivelEstudio, String rfc, String curp, int nomina,InputStream fotostream, String calle,
+            int numero, String colonia, int municipio, int estado, int postal, String contrasena, int idSucursal) {
+        
         this.nombre = nombre;
         this.apePaterno = apePaterno;
         this.apeMaterno = apeMaterno;
@@ -54,6 +58,50 @@ public class Usuario {
         this.estado = estado;
         this.postal = postal;
         this.contrasena = contrasena;
+        this.idSucursal = idSucursal;
+    }
+    
+    public Usuario(int id, String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,InputStream fotostream, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apePaterno = apePaterno;
+        this.apeMaterno = apeMaterno;
+        this.Puesto = Puesto;
+        this.sexo = sexo;
+        this.NivelEstudio = NivelEstudio;
+        this.rfc = rfc;
+        this.curp = curp;
+        this.nomina = nomina;
+        this.fotostream = fotostream;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.municipio = municipio;
+        this.estado = estado;
+        this.postal = postal;
+        this.contrasena = contrasena;
+    }
+    
+    public Usuario(int id, String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,InputStream fotostream, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena, int idSucursal) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apePaterno = apePaterno;
+        this.apeMaterno = apeMaterno;
+        this.Puesto = Puesto;
+        this.sexo = sexo;
+        this.NivelEstudio = NivelEstudio;
+        this.rfc = rfc;
+        this.curp = curp;
+        this.nomina = nomina;
+        this.fotostream = fotostream;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.municipio = municipio;
+        this.estado = estado;
+        this.postal = postal;
+        this.contrasena = contrasena;
+        this.idSucursal = idSucursal;
     }
     
     public int getId() {
@@ -214,6 +262,14 @@ public class Usuario {
 
     public void setFotostream(InputStream fotostream) {
         this.fotostream = fotostream;
+    }
+
+    public int getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(int idSucursal) {
+        this.idSucursal = idSucursal;
     }
     
     

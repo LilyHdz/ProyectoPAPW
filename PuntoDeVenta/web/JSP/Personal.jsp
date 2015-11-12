@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="papw.model.Usuario"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="papw.model.Login"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -20,14 +25,14 @@ and open the template in the editor.
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
     </head>
     
-    <body>
+    <body >
         <div class="main">
         
         <header id="Encabezado">  
             
          <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
-         <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
+         <a id="Salir" href="<%= request.getServletContext().getContextPath()%>/index?accion=borrar" >Cerrar Sesi&oacute;n</a>
         </header>
             
            <div id="Nav">
@@ -35,20 +40,20 @@ and open the template in the editor.
             <ul class="navo">
             <li><a href="">Administraci&oacute;n</a>
                   <ul>
-                        <li><a href="/PuntoDeVenta/JSP/Personal.jsp">Personal</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrar">Personal</a></li>
                         <li><a href="/PuntoDeVenta/JSP/Sucursales.jsp">Sucursales</a></li>
                         <li><a href="/PuntoDeVenta/JSP/Departamentos.jsp">Departamentos</a></li>
                         
                     </ul>
             </li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaMarketing.html">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.html">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaReportes.html">Reportes</a></li>
+            <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
+            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
             </ul>
              <hr>
          </div>
             
-            <button id="AgregarP" onclick="window.location.href='AgregarPersonal.jsp' ">Agregar Nuevo Empleado</button>
+            <button id="AgregarP" onclick="window.location.href='/PuntoDeVenta/JSP/AgregarPersonal.jsp' ">Agregar Nuevo Empleado</button>
             <div class="Busca"> 
                 <label>Buscar personal por: </label>
                 <select>
@@ -65,25 +70,24 @@ and open the template in the editor.
                 <table>
                
                   <tr><th>FOTO</th><th>NOMBRE COMPLETO</th><th>PUESTO</th><th>SUCURSAL</th> <th>RFC</th> <th>Editar</th> <th>Eliminar</th></tr>
-                  <tr>
-                      <td><img src="../images/ImagePerson/foto1.jpg" alt="Producto" width="50"></td> 
-                      <td> Julia Martinez Vega</td>
-                      <td>Cajero</td> 
-                      <td>Fundidora</td> 
-                      <td>XXXXX</td> 
-                      <td><a href="">Editar</a></td> 
-                      <td><a href="">Eliminar</a></td> 
-                  </tr>
+                   <%
+                    List<Usuario> usu = (List<Usuario>) request.getAttribute("usuario");
+                    if (usu != null) {
+                    for (Usuario emp : usu) {
+                    %>
                   
-                 <tr>
-                     <td><img src="../images/ImagePerson/foto2.png" alt="Producto" width="50"></td> 
-                     <td> Aarón Martinez Hernández</td>
-                     <td>Manager</td> 
-                     <td>Fundidora</td> 
-                     <td>XXXXX</td> 
-                      <td><a href="">Editar</a></td> 
-                      <td><a href="">Eliminar</a></td> 
-                 </tr>
+                  <tr>
+                      <td><img src="<%= request.getServletContext().getContextPath() + "/imagen?id=" + emp.getId() %>" alt="Producto" width="50"></td> 
+                      <td> <%= emp.getNombre() + ' ' + emp.getApePaterno() + ' ' +emp.getApeMaterno() %></td>
+                      <td><%= emp.getPuesto() %></td> 
+                      <td>Fundidora</td> 
+                      <td><%= emp.getRfc() %></td> 
+                      <td><a href="<%= request.getServletContext().getContextPath()%>/mostrar?accion=borrar&id=<%= emp.getId() %>">Eliminar</a></td> 
+                      <td><a href="<%= request.getServletContext().getContextPath()%>/mostrar?accion=editar&id=<%= emp.getId() %>">Editar</a></td> 
+                  </tr>
+                  <%      }
+                }
+            %>
               </table>
             </div>
         

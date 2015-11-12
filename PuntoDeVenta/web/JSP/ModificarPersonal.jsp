@@ -49,7 +49,9 @@ and open the template in the editor.
 		
                         <table>
                             <tr>
-                                <td><label>Foto de Empleado:</label></td><td><input type="file" name="foto"/></td>
+                                <td><label>Foto de Empleado:</label></td>
+                                <td><img src="" alt="Producto" width="50"></td>
+                                <td><input type="file" name="foto"/></td>
                             </tr>
                             <tr>
                                 <td><label>Nombre(s):</label></td>
@@ -67,7 +69,7 @@ and open the template in the editor.
                             
                             <tr>
                                 <td><label>Sucursal:</label></td>
-                                <td><select id="Suc" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
+                                <td><select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
                                 <option value="M" id="1">Sucursal 1</option>
                                 <option value="C" id="2">Sucursal 2</option>
                             </select><br></td>                      
