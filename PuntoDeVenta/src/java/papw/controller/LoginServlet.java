@@ -59,8 +59,9 @@ public class LoginServlet extends HttpServlet{
                 if(user.getPuesto().equalsIgnoreCase("C")){
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
-                    RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/CobroArticulo.html");
-                    disp.forward(request, response);
+                   // RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/CobroArticulo.jsp");
+                    //disp.forward(request, response);
+                    response.sendRedirect("JSP/CobroArticulo.jsp");
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
