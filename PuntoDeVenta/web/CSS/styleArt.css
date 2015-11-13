@@ -148,6 +148,7 @@ caption{
    margin-top: 11px;
    margin-left: 100px;
    margin-bottom: 100px;
+   
    float:left;
    
 }
@@ -156,7 +157,7 @@ caption{
     border:4px solid black;
     border-style: double;
     margin-left: 15px;
-    
+    margin-top: 50px;
 }
 
 .ImProducto table caption{

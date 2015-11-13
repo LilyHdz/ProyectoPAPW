@@ -5,7 +5,9 @@
  */
 package papw.model;
 
+import java.io.InputStream;
 import java.sql.Blob;
+import javax.websocket.Decoder;
 
 /**
  *
@@ -21,7 +23,8 @@ public class Articulo extends Ticket {
     private int idUnidadMedida;
     private String aplicaImpuesto;
     private int descuento;
-    private Blob imagenArticulo;
+    private InputStream imagenArticulo;
+    private int existencia;
 
     public int getIdDepartamento() {
         return idDepartamento;
@@ -79,7 +82,7 @@ public class Articulo extends Ticket {
         this.descuento = descuento;
     }
     
-    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,Blob imageArticulo,String aplicaImpuesto,int descuento){
+    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento,int existencia){
         this.idArticulo=idArticulo;
     this.idDepartamento=idDepartamento;
     this.descripcionCorta=descripcionCorta;
@@ -89,6 +92,19 @@ public class Articulo extends Ticket {
     this.aplicaImpuesto=aplicaImpuesto;
     this.descuento=descuento;
     this.imagenArticulo=imageArticulo;
+    this.existencia=existencia;
+    }
+     public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento){
+     this.idArticulo=idArticulo;
+    this.idDepartamento=idDepartamento;
+    this.descripcionCorta=descripcionCorta;
+    this.desCripcionLarga=descripcionLarga;
+    this.precio=precio;
+    this.idUnidadMedida=idUnidadMedida;
+    this.aplicaImpuesto=aplicaImpuesto;
+    this.descuento=descuento;
+    this.imagenArticulo=imageArticulo;
+
     }
     public Articulo()
     {
@@ -103,11 +119,19 @@ public class Articulo extends Ticket {
         this.idArticulo = idArticulo;
     }
 
-    public Blob getImagenArticulo() {
+    public InputStream getImagenArticulo() {
         return imagenArticulo;
     }
 
-    public void setImagenArticulo(Blob imagenArticulo) {
+    public void setImagenArticulo(InputStream imagenArticulo) {
         this.imagenArticulo = imagenArticulo;
+    }
+
+    public int getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(int existencia) {
+        this.existencia = existencia;
     }
 }

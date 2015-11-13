@@ -22,6 +22,16 @@
         <servlet-class>papw.controller.VentaServlet</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>ImagenServletArticulo</servlet-name>
+        <servlet-class>papw.controller.ImagenServletArticulo</servlet-class>
+    </servlet>
+        <servlet-mapping>
+        <servlet-name>ImagenServletArticulo</servlet-name>
+        <url-pattern>/ImagenArticulo</url-pattern>
+    </servlet-mapping>
+    
+    
     <servlet-mapping>
         <servlet-name>UpdateUsu</servlet-name>
         <url-pattern>/update</url-pattern>

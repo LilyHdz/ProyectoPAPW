@@ -6,6 +6,8 @@
 package papw.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import papw.dao.ArticuloDao;
+import papw.dao.UsuarioDao;
 import papw.dao.VentaDao;
 import papw.dao.VentaDetalleDao;
 import papw.model.Articulo;
@@ -54,6 +57,15 @@ public class VentaServlet extends HttpServlet {
             String agregar = request.getParameter("agregar");
             String eliminar = request.getParameter("eliminar");
             String finalizar=request.getParameter("finalizar");
+            String limpiarTicket=request.getParameter("LimpiarTicket");
+            
+            if(!"".equals(limpiarTicket)&&limpiarTicket!=null)
+            {
+                ticket.removeAll(ticket);
+                session.removeAttribute("Ticket");    
+            }
+            
+
             
             if(!"".equals(finalizar)&&finalizar!=null)
             {
@@ -105,6 +117,7 @@ public class VentaServlet extends HttpServlet {
                disp.forward(request, response);
                
            }
+           
            if(!"".equals(busqueda)&& busqueda!=null)
            {
 
@@ -127,22 +140,45 @@ public class VentaServlet extends HttpServlet {
                   String Cantidad = request.getParameter("cantidad");
                   Articulo articulo =ArticuloDao.obtenerArticulo(idArticulo) ;
                   articulo.setCantidad(Integer.parseInt(Cantidad));
+                  
+                int existencia =0;
+                for(Articulo ticketL :ticket)
+                {
+                    if(ticketL.getDescripcionCorta().equals(articulo.getDescripcionCorta()))
+                    {
+                    existencia += ticketL.getCantidad();
+                    }
+                }             
+
+                existencia += articulo.getCantidad();
+                int articuloExistencia = articulo.getExistencia();
+                 if(existencia <= articuloExistencia)
+                {
                   ticket.add(articulo);
+                }
                   session.setAttribute("Ticket", ticket);
                   request.setAttribute("Ticket", ticket);
+                 
                }
                else
                {
                 String idArticulo =request.getParameter("idProducto");
                 String Cantidad = request.getParameter("cantidad");
                 ticket = new ArrayList<Articulo>();
+                
                 Articulo articulo =ArticuloDao.obtenerArticulo(idArticulo) ;
                 articulo.setCantidad(Integer.parseInt(Cantidad));
-                ticket.add(articulo);
+                
+                int existencia = 0;
 
+                existencia=articulo.getCantidad();
+                int articuloExistencia = articulo.getExistencia();
+                if(existencia <= articuloExistencia)
+                {
+                ticket.add(articulo);
+                }
                 session.setAttribute("Ticket", ticket);
                 request.setAttribute("Ticket", ticket);
-                   
 
                }
                

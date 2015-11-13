@@ -46,6 +46,9 @@
         </div>
             
          <hr> 
+         <form>
+             <input type="submit" action="/PuntoDeVenta/VentaArticulo" method ="post" name="LimpiarTicket" value="Borrar Ticket" class="AgreButton">
+         </form>
  
          <div class="Ticket">
              <table width="100%" border="1">
@@ -87,7 +90,7 @@
                  <form name="_Eliminar" action="/PuntoDeVenta/VentaArticulo" method="POST">
                     <tr class="ProductList">
 
-                        <td><input type="submit" action="/PuntoDeVenta/VentaArticulo" method ="post" name="eliminar" class="AgreButton"  value="<%= index %>"></td>
+                        <td><input type="image" action="/PuntoDeVenta/VentaArticulo" method ="post"  name="eliminar" class="AgreButton"  value="<%= index %>" src="/PuntoDeVenta/images/cross.png"></td>
                         <td><%= ticketL.getCantidad() %>  </td>
                         <td><%= ticketL.getDescripcionCorta() %></td> 
                         <td><%= ticketL.getPrecio() %></td>
@@ -130,26 +133,30 @@
                  <input type="text" value="" name="Codigo">
              </form>
             </div> 
-             
+             <% if(articulo!=null){ %> 
              <table >
                  <caption>Producto</caption>
-                 <tr><td><img src="/PuntoDeVenta/images/ImageProduct/barraDePan.jpg" alt="Producto" id="ImagenProducto"></td></tr>
+                 
+                 <tr><td><img src="<%= request.getServletContext().getContextPath() + "/ImagenArticulo?id=" + articulo.getIdArticulo() %>" alt="Producto" id="ImagenProducto"></td></tr>
+
+
              </table>
-             
+                              <%}
+                
+                 %>
              <form name="_Agregar" action="/PuntoDeVenta/VentaArticulo" method ="POST">
              <table> 
                  <% if(articulo!=null){ %> 
                  <tr>
                      <td>
-                         <input type="text" enable="false" visible="false" name="idProducto" value="<%= articulo.getIdArticulo()  %>"> </input>
+                         <input type="text" hidden="false" enable="false" visible="false" name="idProducto" value="<%= articulo.getIdArticulo()  %>"> </input>
                          <label > Producto:</label>
                      </td>
                      <td>
                          <label id="lblDescripcionCorta" name="DescripcionCorta"> 
                            
                              <%= articulo.getDescripcionCorta() %>
-                         <%}
-                             %>
+                         
                          </label>
                      </td>
                  </tr> 
@@ -163,10 +170,12 @@
                  </tr>
                  <tr>
                      <td>
-                             <input type="submit" name="agregar" class="AgreButton"  value="Agrega">                 
+                             <input type="submit" name="agregar" class="AgreButton"  value="Agrega" >                 
                      </td>
                      
                  </tr>
+                 <%}
+                             %>
              </table>
             </form>
              
@@ -188,9 +197,6 @@
                              <input type="text" placeholder="CodigoBarras o NombreProducto" name="busqueda"  method="POST">
                              <input type="submit" value="Buscar">
                          </td>
-                         
-                         <td><label>Eliminar Producto : </label></td> 
-                         <td><input type="text" placeholder="N°Articulo"></td></tr>
                  </table>
              </form>
              
@@ -198,13 +204,14 @@
                   <tr class="ProductList"><th>ARTICULO</th><th>NOMBRE</th><th>PRE. UNIT</th> <th>DESCRIPCION</th><th>CODIGO</th></tr>
             <%
                 List<Articulo> Articulos = (List<Articulo>) request.getAttribute("listArticulos");
+                int index2=0;
                 if (Articulos != null) {
                     for (Articulo articuloL : Articulos) {
                         
             %>              
                  <tr class="ProductList">
                     
-                     <td><img src="/PuntoDeVenta/images/ImageProduct/medias_noches.jpg" alt="Producto" width="100"></td> 
+                     <td><img src="<%= request.getServletContext().getContextPath() + "/ImagenArticulo?id=" + articuloL.getIdArticulo() %>" alt="Producto" width="100"></td> 
                      <td><%= articuloL.getDescripcionCorta() %> </td> 
                      <td><%= articuloL.getPrecio() %></td> 
                      <td><%= articuloL.getDesCripcionLarga() %></td>
@@ -212,7 +219,8 @@
                  </tr>
                  
                   
-            <%      }
+            <%      index2++;
+                    }
                 }
             %>
                   
