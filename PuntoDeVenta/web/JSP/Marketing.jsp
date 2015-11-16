@@ -34,9 +34,9 @@ and open the template in the editor.
             <ul class="navo">
                 <li><a href="">Administraci&oacute;n</a>
                        <ul>
-                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrar">Personal</a></li>
-                        <li><a href="/PuntoDeVenta/JSP/Sucursales.jsp">Sucursales</a></li>
-                        <li><a href="/PuntoDeVenta/JSP/Departamentos.jsp">Departamentos</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%> /mostrar">Personal</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc">Sucursales</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrardepa">Departamentos</a></li>
                        </ul>
                 </li>
                 <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>

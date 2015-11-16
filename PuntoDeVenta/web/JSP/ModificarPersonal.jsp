@@ -1,9 +1,15 @@
+
+<%@page import="papw.model.Usuario"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
 <html>
     <head>
         <title>ADMINISTRACION</title>
@@ -30,8 +36,8 @@ and open the template in the editor.
             <li><a href="">Administraci&oacute;n</a>
                      <ul>
                         <li><a href="<%= request.getServletContext().getContextPath()%>/mostrar">Personal</a></li>
-                        <li><a href="/PuntoDeVenta/JSP/Sucursales.jsp">Sucursales</a></li>
-                        <li><a href="/PuntoDeVenta/JSP/Departamentos.jsp">Departamentos</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc">Sucursales</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrardepa">Departamentos</a></li>
                         
                     </ul>
             </li>
@@ -42,8 +48,44 @@ and open the template in the editor.
              <hr>
          </div>
                      
-        <div class="cajita">
-            <form enctype="multipart/form-data" action="/PuntoDeVenta/update" method="POST" >
+        <%
+            Usuario persona = (Usuario) request.getAttribute("usuario");
+            int id = 0;
+            String nombre = "";
+            String apePaterno = "";
+            String apeMaterno = "";
+            String Puesto = "";
+            String sexo = "";
+            String NivelEstudio = "";
+            String rfc = "";
+            String curp = "";
+            int nomina = 0;
+            
+            String calle = "";
+            int numero = 0;
+            String colonia = "";
+            int municipio = 0;
+            int estado = 0;
+            int postal = 0;
+            String contrasena = "";
+            int idsuc = 0;
+            
+            int deptoId = 0;
+            
+            if (persona != null) {
+                id = persona.getId();
+                nombre = persona.getNombre() != null ? persona.getNombre() : "";
+                apePaterno = persona.getApePaterno() != null ? persona.getApePaterno() : "";
+                apeMaterno = persona.getApeMaterno() != null ? persona.getApeMaterno() : "";
+                sexo = persona.getSexo();
+                Puesto = persona.getPuesto() != null ? persona.getPuesto() : "";
+                
+            }
+        %>
+         
+         
+         <div class="cajita">
+            <form enctype="multipart/form-data" action="<%= request.getServletContext().getContextPath()%>/update?accion=modificar&id=<%= persona.getId() %>" method="POST" >
                 <fieldset >
                     <legend>Ingrese la informaci&oacute;n:</legend>
 		
@@ -55,16 +97,16 @@ and open the template in the editor.
                             </tr>
                             <tr>
                                 <td><label>Nombre(s):</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="nombre"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="nombre" value="<%= nombre %>" ><br></td>
                             </tr>
                             
                              <tr>
                                 <td><label>Apellido Paterno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="apP"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="apP" value="<%= nombre %>"><br></td>
                             </tr>
                              <tr>
                                 <td><label>Apellido Materno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="apM"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="apM" value="<%= nombre %>"><br></td>
                             </tr>
                             
                             <tr>
@@ -96,7 +138,7 @@ and open the template in the editor.
                             
                             <tr>
                                 <td><label>Contrasena:</label></td>
-                                <td><input type="password" style="width:200px; height: 20px;" name="contra"><br></td>
+                                <td><input type="password" style="width:200px; height: 20px;" name="contra" value="<%= nombre %>"><br></td>
                             </tr>
  
                             <tr>
@@ -114,48 +156,44 @@ and open the template in the editor.
                 
                             <tr>
                                 <td><label>Calle</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="calle"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="calle" value="<%= nombre %>"><br></td>     
                             </tr>  
                             
                              <tr>
                                 <td><label>Numero</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="calle_num"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="calle_num" value="<%= nombre %>"><br></td>     
                             </tr>  
                             
                             <tr>
                                 <td><label>C&oacute;digo Postal</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="postal"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="postal" value="<%= nombre %>"><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>Colonia</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="colonia"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="colonia" value="<%= nombre %>"><br></td>     
                             </tr>
                     
                             <tr>
                                 <td><label>Ciudad</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="ciudad"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="ciudad" value="<%= nombre %>"><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>Estado</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="estado"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="estado"> value="<%= nombre %>"<br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>RFC:</label></td>
-                                <td><input type="text" name="rfc" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" name="rfc" style="width:200px; height: 20px;" value="<%= nombre %>"><br></td>                      
                              </tr>
                     
                              <tr>
                                 <td><label>CURP:</label></td>
-                                <td><input type="text" name="curp" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" name="curp" style="width:200px; height: 20px;" value="<%= nombre %>"><br></td>                      
                              </tr>
                              
-                             <tr>
-                                <td><label>Numero de N&oacute;mina:</label></td>
-                                <td><input type="text" name="nomina" style="width:200px; height: 20px;"><br></td>                      
-                             </tr>
                         </table>
                     <br>
                 

@@ -30,8 +30,8 @@ and open the template in the editor.
             <li><a href="">Administraci&oacute;n</a>
                      <ul>
                         <li><a href="<%= request.getServletContext().getContextPath()%>/mostrar">Personal</a></li>
-                        <li><a href="/PuntoDeVenta/JSP/Sucursales.jsp">Sucursales</a></li>
-                        <li><a href="/PuntoDeVenta/JSP/Departamentos.jsp">Departamentos</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc">Sucursales</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrardepa">Departamentos</a></li>
                         
                     </ul>
             </li>
@@ -152,22 +152,4 @@ and open the template in the editor.
                              
                              <tr>
                                 <td><label>Numero de N&oacute;mina:</label></td>
-                                <td><input type="text" name="nomina" style="width:200px; height: 20px;"><br></td>                      
-                             </tr>
-                        </table>
-                    <br>
-                
-                    <input type="submit" name="nameFacul" class="AgreButton" value="Guardar">
-                    <input type="reset" name="Cancelar" class="AgreButton" value="Cancelar">
-                </fieldset>
-            </form>
-        </div>
-        
-        <div id="inferior">
-            <h4 id="inferior_1">MercaTodo &reg; S.A de C.V  Miguel Hidalgo 2405 Col. Obispado Monterrey, N.L. 64060</h4>  
-        </div>
-        
-            <div style="clear:both"></div>
-    </div>
-    </body>
-</html>
+                                <td><input type="text" name="nomina" style="width:200px; height: 20px;"><br></td>  

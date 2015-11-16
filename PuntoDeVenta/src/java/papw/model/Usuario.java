@@ -104,7 +104,27 @@ public class Usuario {
         this.idSucursal = idSucursal;
     }
     
-    public int getId() {
+    public Usuario(int id, String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena, int idSucursal) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apePaterno = apePaterno;
+        this.apeMaterno = apeMaterno;
+        this.Puesto = Puesto;
+        this.sexo = sexo;
+        this.NivelEstudio = NivelEstudio;
+        this.rfc = rfc;
+        this.curp = curp;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.municipio = municipio;
+        this.estado = estado;
+        this.postal = postal;
+        this.contrasena = contrasena;
+        this.idSucursal = idSucursal;
+    }
+    
+     public int getId() {
         return id;
     }
 

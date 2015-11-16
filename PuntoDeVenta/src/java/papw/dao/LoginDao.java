@@ -22,7 +22,7 @@ public class LoginDao {
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
-            cs = connection.prepareCall("{ call validarLogin(?, ?) }");
+            cs = connection.prepareCall("{ call sp_validarLogin(?, ?) }");
             cs.setInt(1, num);
             cs.setString(2, password);
             rs = cs.executeQuery();

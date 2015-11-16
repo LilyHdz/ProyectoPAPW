@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import papw.controller.Encriptar;
 
 /**
  *
@@ -27,7 +28,7 @@ public class UsuarioDao {
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{ call sp_agregarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call sp_agregarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, e.getNombre());
             cs.setString(2, e.getApePaterno());
             cs.setString(3, e.getApeMaterno());
@@ -36,7 +37,6 @@ public class UsuarioDao {
             cs.setString(6, e.getNivelEstudio());
             cs.setString(7, e.getRfc());
             cs.setString(8, e.getCurp());
-            cs.setInt(9, e.getNomina());
             cs.setBlob(10, e.getFotostream());
             cs.setString(11, e.getCalle());
             cs.setInt(12, e.getNumero());
@@ -63,10 +63,16 @@ public class UsuarioDao {
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
+             Encriptar enc = new Encriptar();
+        
+            
             List<Usuario> usuario = new ArrayList();
-            cs = connection.prepareCall("{ call buscar_todos() }");
+            cs = connection.prepareCall("{ call sp_buscarTodos() }");
             rs = cs.executeQuery();
             while (rs.next()) {
+                
+                String desContra =  enc.desencp(rs.getString("Contaseña"));
+                
                 Usuario user = new Usuario(
                         rs.getInt("idUsuario"),
                         rs.getString("NombreUsuario"), 
@@ -84,7 +90,8 @@ public class UsuarioDao {
                         rs.getInt("idmunicipio"),
                         rs.getInt("idEstado"),
                         rs.getInt("CodigoPostal"),
-                        rs.getString("Contasena"));
+                        desContra
+                        );
                 
                 usuario.add(user);
             }
@@ -106,7 +113,7 @@ public class UsuarioDao {
         CallableStatement cs = null;
         ResultSet rs = null;
         try { 
-            cs = connection.prepareCall("{ call imagen(?) }");
+            cs = connection.prepareCall("{ call sp_imagen(?) }");
             cs.setInt(1, id);
             rs = cs.executeQuery();
             if (rs.next()) {
@@ -150,7 +157,7 @@ public class UsuarioDao {
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
-            cs = connection.prepareCall("{ call buscar_persona(?) }");
+            cs = connection.prepareCall("{ call sp_buscarPersona(?) }");
             cs.setInt(1, id);
             rs = cs.executeQuery();
             if (rs.next()) {
@@ -166,12 +173,13 @@ public class UsuarioDao {
                         rs.getString("CurpUsuario"),
                         rs.getInt("NumeroNominaUsuario"),
                         rs.getBinaryStream("FotoUsuario"),
-                        rs.getString("Calle"),rs.getInt("numero"), 
+                        rs.getString("Calle"),
+                       rs.getInt("numero"), 
                         rs.getString("Colonia"),
                         rs.getInt("idmunicipio"),
                         rs.getInt("idEstado"),
                         rs.getInt("CodigoPostal"),
-                        rs.getString("Contasena"),
+                        rs.getString("Contaseña"),
                         rs.getInt("idSucursal"));
                 //Departamento d = new Departamento(rs.getInt("departamento_id"));
                 //emp.setDepartamento(d);
@@ -186,6 +194,40 @@ public class UsuarioDao {
             DBUtil.closeResultSet(rs);
             DBUtil.closeStatement(cs);
             pool.freeConnection(connection);
+        }
+    }
+        
+        public static void editar(Usuario e) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        try {
+            cs = conn.prepareCall("{call sp_modificarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs.setInt(1, e.getId());
+            cs.setString(2, e.getNombre());
+            cs.setString(3, e.getApePaterno());
+            cs.setString(4, e.getApeMaterno());
+            cs.setString(5, e.getPuesto());
+            cs.setString(6, e.getSexo());
+            cs.setString(7, e.getNivelEstudio());
+            cs.setString(8, e.getRfc());
+            cs.setString(9, e.getCurp());
+            cs.setString(10, e.getCalle());
+            cs.setInt(11, e.getNumero());
+            cs.setString(12, e.getColonia());
+            cs.setInt(13, e.getMunicipio());
+            cs.setInt(14, e.getEstado());
+            cs.setInt(15, e.getPostal());
+            cs.setString(16, e.getContrasena());
+            cs.setInt(17, e.getIdSucursal());
+
+            int res = cs.executeUpdate();   
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
         }
     }
         

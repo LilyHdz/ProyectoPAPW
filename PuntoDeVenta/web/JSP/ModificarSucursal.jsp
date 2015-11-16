@@ -1,18 +1,17 @@
 <%-- 
-    Document   : Personal
-    Created on : 11/10/2015, 11:18:24 PM
-    Author     : Liliana
+    Document   : ModificarSucursal
+    Created on : Nov 15, 2015, 6:28:03 PM
+    Author     : Owner
 --%>
+
 <%@page import="papw.model.Sucursal"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.OutputStream"%>
 <%@page import="papw.model.Login"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <title>ADMINISTRACION</title>
@@ -21,18 +20,7 @@ and open the template in the editor.
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
          
-         <script>
-             function esconde_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display = 'none';
-             }
-             
-             function visible_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display='block';
-             }
-    
-          </script>
+
     </head>
     
     <body>
@@ -63,10 +51,22 @@ and open the template in the editor.
              <hr>
          </div>
                      
-            <button id="AgregarP" onclick="visible_div();">Agregar Sucursal</button>
+        <%
+            Sucursal suc = (Sucursal) request.getAttribute("sucursal");
+            int id = 0;
+            String nombre = "";
+            int  ciudad = 0;
+
+            if (suc != null) {
+                id = suc.getId();
+                nombre = suc.getNombre() != null ? suc.getNombre() : "";
+                
+                
+            }
+        %>
             
-            <div class="cajitaSuc" id="esconder">
-            <form action="/PuntoDeVenta/sucursal" method="POST">
+            <div class="cajitaSuc" id="esconder" style="display: block">
+            <form action="<%= request.getServletContext().getContextPath()%>/sucursal?accion=modificar&id=<%= suc.getId() %>" method="POST">
                 <fieldset >
                     <legend>Ingrese Nueva Sucursal:</legend>
 		
@@ -74,12 +74,12 @@ and open the template in the editor.
                     
                             <tr>
                                 <td><label>Nombre(s):</label></td>
-                                <td><input name="nameSuc" type="text" style="width:200px; height: 20px;"><br></td>
+                                <td><input name="nameSuc" type="text" style="width:200px; height: 20px;" value="<%= nombre %>"><br></td>
                             </tr>
                             
                              <tr>
                        
-                                 <td><select name="sucMun">
+                                 <td> <select name="sucMun">
                                     <option value="0">Municipio</option>
                                     <option value="1">Cadereyta Jimenez</option>
                                     </select></td>
@@ -93,44 +93,7 @@ and open the template in the editor.
                 </fieldset>
             </form>
         </div>
-            
-            <div class="Busca">
-                <label>Buscar sucursal: </label>
-                <select>
-                     <option value="Estado">Estado</option>
-                     <option value="Nuevo Leon">Nuevo Leon</option>
-                </select>
-                <select>
-                     <option value="0">Municipio</option>
-                     <option value="1">Cadereyta Jimenez</option>
-                </select>
-                <button>Aceptar</button>                      
-            </div>
-            
-            <div class="TABLA_ER">
-                <table>
-               
-                  <tr><th>NOMBRE</th><th>MUNICIPIO</th><th>ESTADO</th><th>Editar</th><th>Eliminar</th></tr>
-                   <%
-                    List<Sucursal> sucu = (List<Sucursal>) request.getAttribute("sucu");
-                    if (sucu != null) {
-                    for (Sucursal sucursal : sucu) {
-                    %>
-                  <tr>
-                      <td> <%= sucursal.getNombre()%></td>
-                      <td><%= sucursal.getMunicipio() %></td> 
- 
-                      <td><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc?accion=editar&id=<%= sucursal.getId() %>">Editar</a></td> 
-                      <td><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc?accion=borrar&id=<%= sucursal.getId() %>">Eliminar</a></td> 
-                  </tr>
-                  
-                   <%      }
-                }
-            %>
-                  
-              </table>
-            </div>
-        
+             
         <div id="inferior">
         <h4 id="inferior_1">MercaTodo &reg; S.A de C.V  Miguel Hidalgo 2405 Col. Obispado Monterrey, N.L. 64060</h4>  
         </div>

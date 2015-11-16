@@ -7,6 +7,7 @@
 package papw.controller;
 
 import papw.dao.UsuarioDao;
+import papw.controller.Encriptar;
 import papw.model.Usuario;
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +43,15 @@ public class UpdateUsu extends HttpServlet  {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+    String accion = request.getParameter("accion");
+         
+    String strId = request.getParameter("id");
+        
+         int id = 0;
+            if (strId != null && !strId.equals("")) {
+                id = Integer.parseInt(strId);
+            }
+            
         String uploadPath = getServletContext().getRealPath("/" + directorio + "/");
         System.out.println("PATH: " + uploadPath);
         
@@ -73,7 +83,6 @@ public class UpdateUsu extends HttpServlet  {
         String strContrasena = request.getParameter("contra");
         String strSucursal = request.getParameter("Suc");
         
-        int id = 0;
        
         int idestado = 0;
         if (strEstado != null && !strEstado.equals("")) {
@@ -104,15 +113,27 @@ public class UpdateUsu extends HttpServlet  {
         if (strSucursal != null && !strSucursal.equals("")) {
             idsucursal = Integer.parseInt(strSucursal);
         }
-        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,strContrasena,idsucursal);
-   
-            UsuarioDao.insertar(usuario);
- 
         
+        Encriptar enc = new Encriptar();
+        
+        String encripContra =  enc.Encrip(strContrasena);
+        
+        if ("modificar".equals(accion)) {
+        Usuario usuario = new Usuario(id,nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
+        UsuarioDao.editar(usuario);
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
         disp.forward(request, response);
+         } else {
+        Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
+        UsuarioDao.insertar(usuario);
+        ServletContext sc = getServletContext();
+        response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
+        disp.forward(request, response);
+        
+         }
         //response.sendRedirect("");
     }
 
