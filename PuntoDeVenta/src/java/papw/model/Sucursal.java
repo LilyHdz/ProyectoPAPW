@@ -14,12 +14,14 @@ public class Sucursal {
     int id;
     int idempresa;
     int municipio;
+    String nombreM;
     int estado;
 
-    public Sucursal(String nombre, int id, int idempresa, int municipio) {
+    public Sucursal(int id, String nombre, String nombreM, int idempresa) {
         this.nombre = nombre;
         this.id = id;
-        this.municipio = municipio;
+        this.nombreM = nombreM;
+        this.idempresa = idempresa;
     }
 
     public Sucursal(int id,String nombre, int municipio) {
@@ -33,6 +35,15 @@ public class Sucursal {
         this.nombre = nombre;
         this.municipio = municipio;
     }
+
+    public String getNombreM() {
+        return nombreM;
+    }
+
+    public void setNombreM(String nombreM) {
+        this.nombreM = nombreM;
+    }
+    
     
     public String getNombre() {
         return nombre;

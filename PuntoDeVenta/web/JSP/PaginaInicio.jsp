@@ -29,9 +29,8 @@ and open the template in the editor.
          <h3>"Donde encuentra de todo"</h3>
         
         <div id="Salir"><a  href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a></div>
-        </header>
-            
-         <div id="Nav">
+              
+        <div id="Nav">
             
             <ul class="navo">
             <li><a href="">Administraci&oacute;n</a>
@@ -49,6 +48,10 @@ and open the template in the editor.
             </ul>
              <hr>
          </div>
+        
+        </header>
+            
+
             <div class="index">
                 <p>El mejor supermercado del pais MERCATODO :D</p>
                  <img id="ima1" src="/PuntoDeVenta/images/supermarket.jpg" alt="MercaTodo" >

@@ -25,7 +25,16 @@ public class Articulo extends Ticket {
     private int descuento;
     private InputStream imagenArticulo;
     private int existencia;
+    private int sucursal;
 
+    public int getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(int sucursal) {
+        this.sucursal = sucursal;
+    }
+    
     public int getIdDepartamento() {
         return idDepartamento;
     }
@@ -83,29 +92,48 @@ public class Articulo extends Ticket {
     }
     
     public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento,int existencia){
+        
         this.idArticulo=idArticulo;
-    this.idDepartamento=idDepartamento;
-    this.descripcionCorta=descripcionCorta;
-    this.desCripcionLarga=descripcionLarga;
-    this.precio=precio;
-    this.idUnidadMedida=idUnidadMedida;
-    this.aplicaImpuesto=aplicaImpuesto;
-    this.descuento=descuento;
-    this.imagenArticulo=imageArticulo;
-    this.existencia=existencia;
+        this.idDepartamento=idDepartamento;
+        this.descripcionCorta=descripcionCorta;
+        this.desCripcionLarga=descripcionLarga;
+        this.precio=precio;
+        this.idUnidadMedida=idUnidadMedida;
+        this.aplicaImpuesto=aplicaImpuesto;
+        this.descuento=descuento;
+        this.imagenArticulo=imageArticulo;
+        this.existencia=existencia;
     }
-     public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento){
-     this.idArticulo=idArticulo;
-    this.idDepartamento=idDepartamento;
-    this.descripcionCorta=descripcionCorta;
-    this.desCripcionLarga=descripcionLarga;
-    this.precio=precio;
-    this.idUnidadMedida=idUnidadMedida;
-    this.aplicaImpuesto=aplicaImpuesto;
-    this.descuento=descuento;
-    this.imagenArticulo=imageArticulo;
+    
+    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento){
+     
+        this.idArticulo=idArticulo;
+        this.idDepartamento=idDepartamento;
+        this.descripcionCorta=descripcionCorta;
+        this.desCripcionLarga=descripcionLarga;
+        this.precio=precio;
+        this.idUnidadMedida=idUnidadMedida;
+        this.aplicaImpuesto=aplicaImpuesto;
+        this.descuento=descuento;
+        this.imagenArticulo=imageArticulo;
 
     }
+
+    public Articulo(int sucursal,int idDepartamento, String descripcionCorta, String desCripcionLarga, int precio, int idUnidadMedida, String aplicaImpuesto, int descuento, InputStream imagenArticulo, int existencia) {
+        
+        this.sucursal = sucursal;
+        this.idDepartamento = idDepartamento;
+        this.descripcionCorta = descripcionCorta;
+        this.desCripcionLarga = desCripcionLarga;
+        this.precio = precio;
+        this.idUnidadMedida = idUnidadMedida;
+        this.aplicaImpuesto = aplicaImpuesto;
+        this.descuento = descuento;
+        this.imagenArticulo = imagenArticulo;
+        this.existencia = existencia;
+    }
+     
+     
     public Articulo()
     {
         

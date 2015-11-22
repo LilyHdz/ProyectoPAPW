@@ -43,8 +43,7 @@ and open the template in the editor.
          <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
          <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
-        </header>
-            
+         
            <div id="Nav">
             
             <ul class="navo">
@@ -57,13 +56,16 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.html">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
             <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
             </ul>
              <hr>
          </div>
-                     
-            <button id="AgregarP" onclick="visible_div();">Agregar Sucursal</button>
+        </header>
+            
+         
+    <div class="cajita">     
+           <button id="AgregarP" onclick="visible_div();">Agregar Sucursal</button>
             
             <div class="cajitaSuc" id="esconder">
             <form action="/PuntoDeVenta/sucursal" method="POST">
@@ -130,6 +132,7 @@ and open the template in the editor.
                   
               </table>
             </div>
+    </div>
         
         <div id="inferior">
         <h4 id="inferior_1">MercaTodo &reg; S.A de C.V  Miguel Hidalgo 2405 Col. Obispado Monterrey, N.L. 64060</h4>  

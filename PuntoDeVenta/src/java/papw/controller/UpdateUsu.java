@@ -75,7 +75,7 @@ public class UpdateUsu extends HttpServlet  {
         String strCalle_num = request.getParameter("calle_num");
         String strColonia = request.getParameter("colonia");
         String strPostal = request.getParameter("postal");
-        String strCiudad = request.getParameter("ciudad");
+        String strCiudad = request.getParameter("muni");
         String strEstado = request.getParameter("estado");
         String strRfc = request.getParameter("rfc");
         String strCurp = request.getParameter("curp");
@@ -123,14 +123,14 @@ public class UpdateUsu extends HttpServlet  {
         UsuarioDao.editar(usuario);
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrar");
         disp.forward(request, response);
          } else {
         Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
         UsuarioDao.insertar(usuario);
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrar");
         disp.forward(request, response);
         
          }

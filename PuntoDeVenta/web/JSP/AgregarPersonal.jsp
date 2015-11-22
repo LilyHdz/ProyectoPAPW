@@ -1,16 +1,34 @@
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<%@page import="papw.model.Usuario"%>
+<%@page import="papw.model.Sucursal"%>
+<%@page import="papw.model.Estado"%>
+<%@page import="java.util.List"%>
+
+<!DOCTYPE html>
 <html>
     <head>
         <title>ADMINISTRACION</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
+ 
+       <script type="text/javascript" src="js/jquery-latest.min.js"></script>
         
-         <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
+       <script type="text/javascript" >
+        function mostrar_estado(){
+            
+            $("#rfc").val("1");
+            $.post("/PuntoDeVenta/JSP/ComboboxMunicipio.jsp",$("#dataf").serialize(), function(dataf){ $("#muni").html(dataf);});
+        }
+       
+        </script>
+        
     </head>
     
     <body>
@@ -18,12 +36,11 @@ and open the template in the editor.
         
         <header id="Encabezado">  
             
-         <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
+        <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
         
          <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
-        </header>
-            
+        
          <div id="Nav">
             
             <ul class="navo">
@@ -41,10 +58,12 @@ and open the template in the editor.
             </ul>
              <hr>
          </div>
-                     
+         
+        </header>
+                       
         <div class="cajita">
-            <form enctype="multipart/form-data" action="/PuntoDeVenta/update" method="POST" >
-                <fieldset >
+            <form enctype="multipart/form-data" action="/PuntoDeVenta/update" method="POST" id="dataf" >
+                <fieldset>
                     <legend>Ingrese la informaci&oacute;n:</legend>
 		
                         <table>
@@ -67,15 +86,26 @@ and open the template in the editor.
                             
                             <tr>
                                 <td><label>Sucursal:</label></td>
-                                <td><select id="Suc" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
-                                <option value="M" id="1">Sucursal 1</option>
-                                <option value="C" id="2">Sucursal 2</option>
+                                <td><select id="Suc" style="width:200px; height: 25px;" name="Suc" >
+                                    <option value="" selected>------------Selecciona-----------</option>    
+                                    <%
+                                            List<Sucursal> sucursal = (List<Sucursal>) request.getAttribute("sucursal");
+                                                if (sucursal != null) {
+                                                for (Sucursal sucu : sucursal) {
+                                    %>
+                                     <option value="<%= sucu.getId() %>" ><%= sucu.getNombre() + "-" + sucu.getNombreM() %>  </option>
+
+                                        <%
+                                                    }
+                                                }
+                                        %>
+                                
                             </select><br></td>                      
                              </tr>
                              
                              <tr>
                                 <td><label>Puesto:</label></td>
-                                <td><select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
+                                <td><select id="_puesto" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
                                 <option value="M" id="M">Manager</option>
                                 <option value="C" id="C">Cajero</option>
                             </select><br></td>                      
@@ -100,6 +130,7 @@ and open the template in the editor.
                             <tr>
                                 <td> <label>Nivel de Estudios:</label></td>
                                 <td><select name="study" style="width:200px; height: 25px;">
+                                        <option value="" selected>---------Selecciona--------</option>
                                         <option value="Primaria" selected>Primaria</option>
                                         <option value="Secundaria">Secundaria</option>
                                         <option value="Preparatoria">Preparatoria</option>
@@ -129,20 +160,35 @@ and open the template in the editor.
                                 <td><label>Colonia</label></td>
                                 <td><input type="text" style="width:200px; height: 25px;" name="colonia"><br></td>     
                             </tr>
-                    
-                            <tr>
-                                <td><label>Ciudad</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="ciudad"><br></td>     
-                            </tr>
                             
                             <tr>
                                 <td><label>Estado</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="estado"><br></td>     
+                                <td><select name="estado" style="width:200px; height: 25px;" id="esta" onchange="mostrar_estado()" >
+                                         <option value="" selected>---------Selecciona--------</option>
+                                        <%
+                                            List<Estado> estado = (List<Estado>) request.getAttribute("estado");
+                                                if (estado != null) {
+                                                for (Estado est : estado) {
+                                         %>
+                                        <option value="<%= est.getId() %>" ><%= est.getNombre() %>  </option>
+
+                                        <%
+                                                    }
+                                                }
+                                        %>
+                                        </select></td>    
                             </tr>
                             
+                             <tr>
+                                <td><label>Municipio</label></td>
+                                <td><select  id="muni" name="muni" >
+                                    <option value="" selected>---------Selecciona--------</option>
+                                   </select></td>   
+                            </tr>
+                             
                             <tr>
                                 <td><label>RFC:</label></td>
-                                <td><input type="text" name="rfc" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" id="rfc" name="rfc" style="width:200px; height: 20px;"><br></td>                      
                              </tr>
                     
                              <tr>
@@ -153,3 +199,23 @@ and open the template in the editor.
                              <tr>
                                 <td><label>Numero de N&oacute;mina:</label></td>
                                 <td><input type="text" name="nomina" style="width:200px; height: 20px;"><br></td>  
+                             </tr>
+                        </table>
+                                        
+                         <br>
+                        <input type="submit" name="nameFacul" class="AgreButton" value="Guardar">
+                        <input type="reset" name="Cancelar" class="AgreButton" value="Cancelar">
+
+                </fieldset>
+            </form>
+        </div>
+                                        
+        <div id="inferior">
+        <h4 id="inferior_1">MercaTodo &reg; S.A de C.V  Miguel Hidalgo 2405 Col. Obispado Monterrey, N.L. 64060</h4>  
+        </div>
+           
+        <div style="clear:both"></div>
+     </div>
+                                        
+    </body>
+</html>

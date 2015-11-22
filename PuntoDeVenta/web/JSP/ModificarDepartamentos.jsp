@@ -34,9 +34,8 @@ and open the template in the editor.
          <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
          <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
-        </header>
-            
-           <div id="Nav">
+        
+         <div id="Nav">
             
             <ul class="navo">
             <li><a href="">Administraci&oacute;n</a>
@@ -53,6 +52,10 @@ and open the template in the editor.
             </ul>
              <hr>
          </div>
+         
+        </header>
+            
+
                                  
         <%
             Departamento depa = (Departamento) request.getAttribute("departamento");

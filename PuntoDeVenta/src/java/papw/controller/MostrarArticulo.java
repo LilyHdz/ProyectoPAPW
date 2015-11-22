@@ -5,11 +5,6 @@
  */
 package papw.controller;
 
-import papw.dao.SucursalDao;
-import papw.model.Sucursal;
-import papw.model.Estado;
-import papw.model.Usuario;
-import papw.dao.UsuarioDao;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -18,44 +13,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-/**
- *
- * @author Owner
- */
-public class MostrarServlet extends HttpServlet{
-    
-      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+import papw.dao.ArticuloDao;
+import papw.model.Articulo;
+
+
+public class MostrarArticulo extends HttpServlet  {
+   
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) { 
+            
             String accion = request.getParameter("accion");
             String strId = request.getParameter("id");
+            
             int id = 0;
             if (strId != null && !strId.equals("")) {
                 id = Integer.parseInt(strId);
             }
             
             if ("borrar".equals(accion) && id > 0) {
-                UsuarioDao.borrar(Integer.parseInt(strId));
-                request.setAttribute("mensaje", "Registro borrado exitosamente!");
-
-                List<Usuario> usuario = UsuarioDao.buscarPersonal();
-                request.setAttribute("usuario", usuario);
-
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo");
-                disp.forward(request, response);
+//                UsuarioDao.borrar(Integer.parseInt(strId));
+//                request.setAttribute("mensaje", "Registro borrado exitosamente!");
+//
+//                List<Usuario> usuario = UsuarioDao.buscarPersonal();
+//                request.setAttribute("usuario", usuario);
+//
+//                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo");
+//                disp.forward(request, response);
                 
             } else if (("editar".equals(accion) && id > 0) || "agregar".equals(accion)) {
                 
 
                 if ("editar".equals(accion)) {
-                    List<Estado> estado = UsuarioDao.buscarEstados();
-                    List<Sucursal> sucursal =SucursalDao.buscarSucursales();
-                    Usuario usuario = UsuarioDao.buscarPersona(id);
-                    request.setAttribute("usuario", usuario); 
-                    request.setAttribute("sucursal", sucursal);
-                    request.setAttribute("estado_", estado);
+//                    List<Estado> estado = UsuarioDao.buscarEstados();
+//                    List<Sucursal> sucursal =SucursalDao.buscarSucursales();
+//                    Usuario usuario = UsuarioDao.buscarPersona(id);
+//                    request.setAttribute("usuario", usuario); 
+//                    request.setAttribute("sucursal", sucursal);
+//                    request.setAttribute("estado_", estado);
                 }
 
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarPersonal.jsp");
@@ -69,20 +66,20 @@ public class MostrarServlet extends HttpServlet{
                 idE = Integer.parseInt(strIdE);
                 }
             
-                List<Estado> estado = UsuarioDao.buscarEstados();
-                List<Sucursal> sucursal =SucursalDao.buscarSucursales();
+//                List<Estado> estado = UsuarioDao.buscarEstados();
+//                List<Sucursal> sucursal =SucursalDao.buscarSucursales();
 
-                request.setAttribute("sucursal", sucursal);
-                request.setAttribute("estado", estado);
+//                request.setAttribute("sucursal", sucursal);
+//                request.setAttribute("estado", estado);
                 
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/AgregarPersonal.jsp");
                 disp.forward(request, response);
                 
             } else {
-                List<Usuario> usuario = UsuarioDao.buscarPersonal();
-                request.setAttribute("usuario", usuario);
+                List<Articulo> arti = ArticuloDao.obtenerArticulos();
+                request.setAttribute("arti", arti);
             
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/PaginaInventario.jsp");
                 disp.forward(request, response);
             }
             
@@ -127,4 +124,5 @@ public class MostrarServlet extends HttpServlet{
     public String getServletInfo() {
         return "Short description";
     }// </editor-f
+    
 }

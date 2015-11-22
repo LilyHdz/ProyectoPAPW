@@ -22,9 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Owner
  */
-public class MostrarServlet extends HttpServlet{
-    
-      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+public class MostrarInfo extends HttpServlet {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
@@ -36,49 +35,6 @@ public class MostrarServlet extends HttpServlet{
                 id = Integer.parseInt(strId);
             }
             
-            if ("borrar".equals(accion) && id > 0) {
-                UsuarioDao.borrar(Integer.parseInt(strId));
-                request.setAttribute("mensaje", "Registro borrado exitosamente!");
-
-                List<Usuario> usuario = UsuarioDao.buscarPersonal();
-                request.setAttribute("usuario", usuario);
-
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo");
-                disp.forward(request, response);
-                
-            } else if (("editar".equals(accion) && id > 0) || "agregar".equals(accion)) {
-                
-
-                if ("editar".equals(accion)) {
-                    List<Estado> estado = UsuarioDao.buscarEstados();
-                    List<Sucursal> sucursal =SucursalDao.buscarSucursales();
-                    Usuario usuario = UsuarioDao.buscarPersona(id);
-                    request.setAttribute("usuario", usuario); 
-                    request.setAttribute("sucursal", sucursal);
-                    request.setAttribute("estado_", estado);
-                }
-
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarPersonal.jsp");
-                disp.forward(request, response);
-
-            } else if ("llenar".equals(accion)) {
-                
-                String strIdE = request.getParameter("idE");
-                int idE = 0;
-                if (strIdE != null && !strIdE.equals("")) {
-                idE = Integer.parseInt(strIdE);
-                }
-            
-                List<Estado> estado = UsuarioDao.buscarEstados();
-                List<Sucursal> sucursal =SucursalDao.buscarSucursales();
-
-                request.setAttribute("sucursal", sucursal);
-                request.setAttribute("estado", estado);
-                
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/AgregarPersonal.jsp");
-                disp.forward(request, response);
-                
-            } else {
                 List<Usuario> usuario = UsuarioDao.buscarPersonal();
                 request.setAttribute("usuario", usuario);
             
@@ -87,7 +43,6 @@ public class MostrarServlet extends HttpServlet{
             }
             
         }
-      }
     
       // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -127,4 +82,5 @@ public class MostrarServlet extends HttpServlet{
     public String getServletInfo() {
         return "Short description";
     }// </editor-f
+    
 }

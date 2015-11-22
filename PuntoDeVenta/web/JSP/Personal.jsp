@@ -33,9 +33,8 @@ and open the template in the editor.
          <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
         <h3>"Donde encuentra de todo"</h3>
          <a id="Salir" href="<%= request.getServletContext().getContextPath()%>/index?accion=borrar" >Cerrar Sesi&oacute;n</a>
-        </header>
-            
-           <div id="Nav">
+        
+         <div id="Nav">
             
             <ul class="navo">
             <li><a href="">Administraci&oacute;n</a>
@@ -52,8 +51,12 @@ and open the template in the editor.
             </ul>
              <hr>
          </div>
+        
+        </header>
             
-            <button id="AgregarP" onclick="window.location.href='/PuntoDeVenta/JSP/AgregarPersonal.jsp' ">Agregar Nuevo Empleado</button>
+          
+       <div class="cajita">   
+           <button id="AgregarP" onclick="window.location.href='<%= request.getServletContext().getContextPath()%>/mostrar?accion=llenar'" >Agregar Nuevo Empleado</button>
             <div class="Busca"> 
                 <label>Buscar personal por: </label>
                 <select>
@@ -90,6 +93,7 @@ and open the template in the editor.
             %>
               </table>
             </div>
+       </div>
         
         <div id="inferior">
         <h4 id="inferior_1">MercaTodo &reg; S.A de C.V  Miguel Hidalgo 2405 Col. Obispado Monterrey, N.L. 64060</h4>  

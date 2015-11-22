@@ -7,6 +7,8 @@ package papw.dao;
 
 import java.io.InputStream;
 import papw.model.Usuario;
+import papw.model.Estado;
+import papw.model.Municipio;
 import java.util.Date;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -28,7 +30,7 @@ public class UsuarioDao {
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{ call sp_agregarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call sp_agregarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, e.getNombre());
             cs.setString(2, e.getApePaterno());
             cs.setString(3, e.getApeMaterno());
@@ -37,6 +39,7 @@ public class UsuarioDao {
             cs.setString(6, e.getNivelEstudio());
             cs.setString(7, e.getRfc());
             cs.setString(8, e.getCurp());
+            cs.setInt(9, e.getNomina());
             cs.setBlob(10, e.getFotostream());
             cs.setString(11, e.getCalle());
             cs.setInt(12, e.getNumero());
@@ -138,10 +141,8 @@ public class UsuarioDao {
         try {
             cs = connection.prepareCall("{ call sp_eliminarUsuario(?) }");
             cs.setInt(1, id);
-            //cs.registerOutParameter(2, Types.BIT);
+          
             cs.execute();
-            //byte res = cs.getByte(2);
-            //System.out.println("[Borrar] Resultado=" + res);
             
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -228,6 +229,69 @@ public class UsuarioDao {
         } finally {
             DBUtil.closeStatement(cs);
             pool.freeConnection(conn);
+        }
+    }
+      
+    public static List<Estado> buscarEstados() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            
+            List<Estado> nombre  = new ArrayList();
+            cs = connection.prepareCall("{ call sp_buscarEstados() }");
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                
+                Estado user = new Estado(
+                        rs.getInt("idEstado"),
+                        rs.getString("estado")
+                        );
+                
+                nombre.add(user);
+            }
+            return nombre;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+            
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
+    }
+         
+    public static List<Estado> buscarMunicipios(int id) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try { 
+            List<Estado> nombre  = new ArrayList();
+            cs = connection.prepareCall("{ call sp_buscarMunicipios(?) }");
+            cs.setInt(1, id);
+            rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                
+                Estado user = new Estado(
+                        rs.getInt("idmunicipio"),
+                        rs.getString("nombreMunicipio")
+                        );
+                
+                nombre.add(user);
+            }
+            return nombre;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+            
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
         }
     }
         

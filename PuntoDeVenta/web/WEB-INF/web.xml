@@ -12,6 +12,17 @@
             <file-size-threshold>52428800</file-size-threshold>
         </multipart-config>
     </servlet>
+    
+    <servlet>
+        <servlet-name>ArticuloServlet</servlet-name>
+        <servlet-class>papw.controller.ArticuloServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>-1</max-file-size>
+            <max-request-size>-1</max-request-size>
+            <file-size-threshold>52428800</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>papw.controller.LoginServlet</servlet-class>
@@ -36,10 +47,6 @@
         <servlet-name>ImagenServletArticulo</servlet-name>
         <servlet-class>papw.controller.ImagenServletArticulo</servlet-class>
     </servlet>
-        <servlet-mapping>
-        <servlet-name>ImagenServletArticulo</servlet-name>
-        <url-pattern>/ImagenArticulo</url-pattern>
-    </servlet-mapping>
     
      <servlet>
         <servlet-name>DepartamentoServlet</servlet-name>
@@ -60,11 +67,22 @@
         <servlet-name>MostrarSucursales</servlet-name>
         <servlet-class>papw.controller.MostrarSucursales</servlet-class>
     </servlet>
+    
+    <servlet>      
+        <servlet-name>MostrarInfo</servlet-name>
+        <servlet-class>papw.controller.MostrarInfo</servlet-class>
+    </servlet>
    
     <servlet-mapping>
         <servlet-name>UpdateUsu</servlet-name>
         <url-pattern>/update</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ArticuloServlet</servlet-name>
+        <url-pattern>/articulo</url-pattern>
+    </servlet-mapping>    
+    
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -86,6 +104,11 @@
     </servlet-mapping>
     
     <servlet-mapping>
+        <servlet-name>ImagenServletArticulo</servlet-name>
+        <url-pattern>/ImagenArticulo</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
         <servlet-name>DepartamentoServlet</servlet-name>
         <url-pattern>/departamento</url-pattern>
     </servlet-mapping>  
@@ -103,6 +126,11 @@
     <servlet-mapping>     
         <servlet-name>MostrarSucursales</servlet-name> 
         <url-pattern>/mostrarsuc</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>     
+        <servlet-name>MostrarInfo</servlet-name> 
+        <url-pattern>/mostrarinfo</url-pattern>
     </servlet-mapping>
     
     <session-config>

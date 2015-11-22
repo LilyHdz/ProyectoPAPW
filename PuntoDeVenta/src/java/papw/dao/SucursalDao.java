@@ -54,9 +54,10 @@ public class SucursalDao {
             while (rs.next()) {
                 
                 Sucursal suc = new Sucursal(
-                        rs.getInt("idSucursal"),
-                        rs.getString("NombreSucursal"),
-                        rs.getInt("idmunicipio")
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("municipio"),
+                        rs.getInt("idempresa")
                         );
                 
                 sucursal.add(suc);
@@ -79,7 +80,7 @@ public class SucursalDao {
         Connection connection = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = connection.prepareCall("{ call sp_sp_eliminarSucursal(?) }");
+            cs = connection.prepareCall("{ call sp_eliminarSucursal(?) }");
             cs.setInt(1, id);
          
             cs.execute();

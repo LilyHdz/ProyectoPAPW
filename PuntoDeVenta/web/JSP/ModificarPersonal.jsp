@@ -1,6 +1,8 @@
 
 <%@page import="papw.model.Usuario"%>
 <%@page import="java.util.List"%>
+<%@page import="papw.model.Sucursal"%>
+<%@page import="papw.model.Estado"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
@@ -17,6 +19,16 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
+         <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+        
+       <script type="text/javascript" >
+        function mostrar_estado(){
+            
+            $("#rfc").val("1");
+            $.post("/PuntoDeVenta/JSP/ComboboxMunicipio.jsp",$("#dataf").serialize(), function(dataf){ $("#muni").html(dataf);});
+        }
+       
+        </script>
     </head>
     
     <body>
@@ -28,9 +40,8 @@ and open the template in the editor.
         <h3>"Donde encuentra de todo"</h3>
         
          <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
-        </header>
-            
-         <div id="Nav">
+         
+        <div id="Nav">
             
             <ul class="navo">
             <li><a href="">Administraci&oacute;n</a>
@@ -47,6 +58,10 @@ and open the template in the editor.
             </ul>
              <hr>
          </div>
+                        
+        </header>
+            
+
                      
         <%
             Usuario persona = (Usuario) request.getAttribute("usuario");
@@ -85,7 +100,7 @@ and open the template in the editor.
          
          
          <div class="cajita">
-            <form enctype="multipart/form-data" action="<%= request.getServletContext().getContextPath()%>/update?accion=modificar&id=<%= persona.getId() %>" method="POST" >
+            <form enctype="multipart/form-data" action="<%= request.getServletContext().getContextPath()%>/update?accion=modificar&id=<%= persona.getId() %>" method="POST" id="dataf" >
                 <fieldset >
                     <legend>Ingrese la informaci&oacute;n:</legend>
 		
@@ -111,15 +126,26 @@ and open the template in the editor.
                             
                             <tr>
                                 <td><label>Sucursal:</label></td>
-                                <td><select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
-                                <option value="M" id="1">Sucursal 1</option>
-                                <option value="C" id="2">Sucursal 2</option>
+                                <td><select id="Suc" style="width:200px; height: 25px;" name="Suc" >
+                                    <option value="" selected>------------Selecciona-----------</option>    
+                                    <%
+                                            List<Sucursal> sucursal = (List<Sucursal>) request.getAttribute("sucursal");
+                                                if (sucursal != null) {
+                                                for (Sucursal sucu : sucursal) {
+                                    %>
+                                     <option value="<%= sucu.getId() %>" ><%= sucu.getNombre() + "-" + sucu.getNombreM() %>  </option>
+
+                                        <%
+                                                    }
+                                                }
+                                        %>
+                                
                             </select><br></td>                      
                              </tr>
                              
                              <tr>
                                 <td><label>Puesto:</label></td>
-                                <td><select id="PUESTO" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
+                                <td><select id="_puesto" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
                                 <option value="M" id="M">Manager</option>
                                 <option value="C" id="C">Cajero</option>
                             </select><br></td>                      
@@ -174,19 +200,34 @@ and open the template in the editor.
                                 <td><input type="text" style="width:200px; height: 25px;" name="colonia" value="<%= nombre %>"><br></td>     
                             </tr>
                     
-                            <tr>
-                                <td><label>Ciudad</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="ciudad" value="<%= nombre %>"><br></td>     
+                           <tr>
+                                <td><label>Estado</label></td>
+                                <td><select name="estado" style="width:200px; height: 25px;" id="esta" onchange="mostrar_estado()" >
+                                         <option value="" selected>---------Selecciona--------</option>
+                                        <%
+                                            List<Estado> estados = (List<Estado>) request.getAttribute("estado_");
+                                                if (estados != null) {
+                                                for (Estado est : estados) {
+                                         %>
+                                        <option value="<%= est.getId() %>" ><%= est.getNombre() %>  </option>
+
+                                        <%
+                                                    }
+                                                }
+                                        %>
+                                        </select></td>    
                             </tr>
                             
                             <tr>
-                                <td><label>Estado</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="estado"> value="<%= nombre %>"<br></td>     
+                                <td><label>Municipio</label></td>
+                                <td><select  id="muni" name="muni" >
+                                    <option value="" selected>---------Selecciona--------</option>
+                                   </select></td>   
                             </tr>
                             
                             <tr>
                                 <td><label>RFC:</label></td>
-                                <td><input type="text" name="rfc" style="width:200px; height: 20px;" value="<%= nombre %>"><br></td>                      
+                                <td><input type="text" name="rfc" style="width:200px; height: 20px;" value="<%= nombre %>" id="rfc" ><br></td>                      
                              </tr>
                     
                              <tr>

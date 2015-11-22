@@ -204,10 +204,14 @@ div.Vision h2{
 
 /*/////////////Menu/////////////////////*/
 #Nav {
-     overflow: hidden;
+     position: fixed;
+     top: 17%;
+     overflow: visible;
      background-color: #0f4e5d;
      width:100%;
      font-family: "Lucida Sans", "Arial Black",Arial;
+     left: 0;
+    
  }
  
 ul, ol {
@@ -459,7 +463,7 @@ hr{
 /*////////////////////////Inventario////////////////////////////////////*/
 
 .Inv{
-    margin: 270px 10px 10px 20px;
+    margin: 350px 10px 10px 20px;
     padding: 20px 20px 20px 80px;
 }
 
