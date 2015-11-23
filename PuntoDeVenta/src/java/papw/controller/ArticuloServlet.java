@@ -94,12 +94,16 @@ public class ArticuloServlet extends HttpServlet {
         }
         
         if ("modificar".equals(accion)) {
-//        Articulo usuario = new Articulo(id,nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
-//        UsuarioDao.editar(usuario);
-//        ServletContext sc = getServletContext();
-//        response.setContentType("text/html;charset=UTF-8");
-//        RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrar");
-//        disp.forward(request, response);
+            
+        Articulo articulo = new Articulo(id,iDdepartamento, strdesC, strdesL, Precio, iDunidad, strImpuesto ,descuento,Existencia);
+        articulo.setSucursal(sucursal);
+        ArticuloDao.editar(articulo);
+        
+        ServletContext sc = getServletContext();
+        response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrararti");
+        disp.forward(request, response);
+        
          } else {
             
         Articulo arti = new Articulo(sucursal ,iDdepartamento, strdesC, strdesL, Precio, iDunidad, strImpuesto ,descuento ,inputStream, Existencia);
@@ -107,7 +111,7 @@ public class ArticuloServlet extends HttpServlet {
         
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrar");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrararti");
         disp.forward(request, response);
         
          }

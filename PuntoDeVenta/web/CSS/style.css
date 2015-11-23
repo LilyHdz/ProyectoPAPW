@@ -426,9 +426,9 @@ hr{
 /*//////////////////AgregarSucursal-Departamento-Articulo/////////////////////*/
 .cajitaSuc{
     width: 600px;
-    height: 200px;
+    //height: 200px;
     margin: 20px 20px 60px 50px;
-    padding:  20px 20px 20px 10px;
+    padding:  50px 20px 20px 10px;
     display: none;
 }
 
@@ -485,8 +485,8 @@ hr{
 }
 
 #filtro{
-     float: left;
-    margin: 1px 20px 20px 100px;
+    float: left;
+    margin: 1px 1px 20px 100px;
 }
 
 #filtro label{

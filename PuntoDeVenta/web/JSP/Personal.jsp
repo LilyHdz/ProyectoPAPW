@@ -46,7 +46,7 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
             <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
             </ul>
              <hr>
@@ -82,7 +82,7 @@ and open the template in the editor.
                   <tr>
                       <td><img src="<%= request.getServletContext().getContextPath() + "/imagen?id=" + emp.getId() %>" alt="Producto" width="50"></td> 
                       <td> <%= emp.getNombre() + ' ' + emp.getApePaterno() + ' ' +emp.getApeMaterno() %></td>
-                      <td><%= emp.getContrasena() %></td> 
+                      <td><%= emp.getPuesto() %></td> 
                       <td>Fundidora</td> 
                       <td><%= emp.getRfc() %></td> 
                       <td><a href="<%= request.getServletContext().getContextPath()%>/mostrar?accion=borrar&id=<%= emp.getId() %>">Eliminar</a></td> 

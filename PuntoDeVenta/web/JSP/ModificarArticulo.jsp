@@ -67,15 +67,40 @@ and open the template in the editor.
              <hr>
          </div>
         </header>
+                    
+          <%
+            Articulo articulo = (Articulo) request.getAttribute("articulo");
+            int id = 0;
+            String nombre = "";
+            String descripcion = "";
+            String descripcionLarga = "";
+            int precio = 0;
+            String nombreMedida = "";
+            String nombreDepartamento = "";
+            String aplicaImpuesto = "";
+            int descuento = 0;
+            int existencia = 0;
+            String nombreSucursal = "";
+
+            if (articulo != null) {
+                
+                id = articulo.getIdArticulo();
+                nombre = articulo.getDescripcionCorta() != null ? articulo.getDescripcionCorta() : "";
+                descripcion = articulo.getDesCripcionLarga() != null ? articulo.getDesCripcionLarga() : "";
+                precio = articulo.getPrecio();
+                nombreMedida = articulo.getNombreMedida() != null ? articulo.getNombreMedida() : "";
+                nombreDepartamento = articulo.getNombreDepartamento() != null ? articulo.getNombreDepartamento() : "";
+                aplicaImpuesto = articulo.getAplicaImpuesto() != null ? articulo.getAplicaImpuesto() : "";
+                descuento = articulo.getDescuento();
+                existencia = articulo.getExistencia();
+                nombreSucursal = articulo.getNombreSucursal() != null ? articulo.getNombreSucursal() : "" ;  
+            }
+        %>
             
-         
-        <div class="cajita">
-            <button id="AgregarP" onclick="visible_div();">Agregar Articulo</button>
-            
-            <div class="cajitaSuc" id="esconder">
-            <form enctype="multipart/form-data"  action="/PuntoDeVenta/articulo" method="POST">
+            <div class="cajitaSuc" id="esconder" style="display: block">
+            <form enctype="multipart/form-data"  action="<%= request.getServletContext().getContextPath()%>/articulo?accion=modificar&id=<%= articulo.getIdArticulo() %>" method="POST">
                 <fieldset >
-                    <legend>Ingrese Nuevo Articulo:</legend>
+                    <legend>Articulo:a Editar</legend>
 		
                         <table>
                             <tr>
@@ -85,7 +110,7 @@ and open the template in the editor.
                             <tr>
                                 
                                 <td><label>Nombre(s):</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="nombreP"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="nombreP" value="<%= nombre %>"><br></td>
                             </tr>
                             
                             <tr>
@@ -107,13 +132,13 @@ and open the template in the editor.
                             <tr>
                                 
                                 <td><label>Descripci&oacute;n Larga:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="descripcion" ><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="descripcion" value="<%= descripcion %>"><br></td>
                             </tr>
                             
                             <tr>
                                 
                                 <td><label>Precio Unitario:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="precio" ><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="precio" value="<%= precio %>"><br></td>
                             </tr>
                             
                             <tr>
@@ -137,7 +162,7 @@ and open the template in the editor.
                             <tr>
                                 
                                 <td><label>Cantidad:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="existencia"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="existencia" value="<%= existencia %>"><br></td>
                             </tr>
                             
                             <tr>      
@@ -180,75 +205,17 @@ and open the template in the editor.
                 </fieldset>
             </form>
         </div>
-                     
-          <div class="Inv">
-                <label>Seleccione Sucursal: </label>
-                <select>
-                     <option value="1">Sucursal 1</option>
-                     <option value="2">Sucursal 2</option>
-                     <option value="3">Sucursal 3</option>
-                     <option value="4">Sucursal 4</option>
-                </select>
-                <button>Aceptar</button>             
-            </div>
-            
-            <div id="filtro">
-                <label>Filtar por: </label>
-                <select>
-                     <option value="1">Nombre</option>
-                     <option value="2">Departamento</option>
-                     <option value="3">Codigo</option>
-                     
-                </select>
-                 
-                 <input type="text"><button>Aceptar</button>
-            </div>
-            
-            
-            <div class="TABLA_ER">
-                <table>
-               
-                <tr><th>CODIGO</th><th>FOTO</th><th>ARTICULO</th><th>DEPARTAMENTO</th><th>DESCRIPCION</th> <th>PRECIO PUBLICO</th> <th>U. M.</th> <th>EXISTENCIA</th> <th>SUCURSAL</th> <th>Editar</th> <th>Eliminar</th></tr>
-                  
-                    <%
-                    List<Articulo> articulo = (List<Articulo>) request.getAttribute("arti");
-                    if (articulo != null) {
-                    for (Articulo arti : articulo) {
-                    %>
-                    
-                <tr> 
-                      <td><%= arti.getIdArticulo() %></td>
-                      <td><img src="<%= request.getServletContext().getContextPath() + "/ImagenArticulo?id=" + arti.getIdArticulo() %>" alt="Producto" width="50"></td>
-                      <td><%= arti.getDescripcionCorta() %></td> 
-                      <td><%= arti.getNombreDepartamento() %></td> 
-                      <td><%= arti.getDesCripcionLarga() %></td> 
-                      <td> $ <%= arti.getPrecio() %></td> 
-                      <td><%= arti.getNombreMedida() %></td> 
-                      <td><%= arti.getExistencia() %></td> 
-                      <td><%= arti.getNombreSucursal() %></td> 
-                      <td><a href="<%= request.getServletContext().getContextPath()%>/mostrararti?accion=editar&id=<%= arti.getIdArticulo() %>">Editar</a></td> 
-                      <td><a href="<%= request.getServletContext().getContextPath()%>/mostrararti?accion=borrar&id=<%= arti.getIdArticulo()  %>">Eliminar</a></td>
-                     
-                </tr>
-                
-                <%      }
-                }
-            %>
-
-              </table>
-
-            </div>
-        </div>
-            
-        <div style="clear:both"></div>
-            
+                                        
         <div id="inferior">
             <h4 id="inferior_1">MercaTodo &reg; S.A de C.V  Miguel Hidalgo 2405 Col. Obispado Monterrey, N.L. 64060</h4>  
         </div>
-            
+                                        
+        <div style="clear:both"></div>
+        
     </div>
     </body>
 </html>
+
 
 
 

@@ -20,6 +20,10 @@ public class Departamento {
         
     }
    
+      public Departamento() {
+        
+    }
+   
       public Departamento(String nombre) {
       
         this.nombre = nombre;

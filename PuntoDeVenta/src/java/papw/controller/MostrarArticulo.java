@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import papw.dao.ArticuloDao;
+import papw.dao.DepartamentoDao;
+import papw.dao.SucursalDao;
 import papw.model.Articulo;
+import papw.model.Departamento;
+import papw.model.Sucursal;
 
 
 public class MostrarArticulo extends HttpServlet  {
@@ -34,51 +38,43 @@ public class MostrarArticulo extends HttpServlet  {
             }
             
             if ("borrar".equals(accion) && id > 0) {
-//                UsuarioDao.borrar(Integer.parseInt(strId));
-//                request.setAttribute("mensaje", "Registro borrado exitosamente!");
-//
-//                List<Usuario> usuario = UsuarioDao.buscarPersonal();
-//                request.setAttribute("usuario", usuario);
-//
-//                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo");
-//                disp.forward(request, response);
+                ArticuloDao.borrar(Integer.parseInt(strId));
+                request.setAttribute("mensaje", "Registro borrado exitosamente!");
+
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo?accion=articulo");
+                disp.forward(request, response);
                 
             } else if (("editar".equals(accion) && id > 0) || "agregar".equals(accion)) {
                 
 
                 if ("editar".equals(accion)) {
-//                    List<Estado> estado = UsuarioDao.buscarEstados();
-//                    List<Sucursal> sucursal =SucursalDao.buscarSucursales();
-//                    Usuario usuario = UsuarioDao.buscarPersona(id);
-//                    request.setAttribute("usuario", usuario); 
-//                    request.setAttribute("sucursal", sucursal);
-//                    request.setAttribute("estado_", estado);
+                    List<Departamento> departamento = DepartamentoDao.buscarDepartamentos();
+                    List<Sucursal> sucursal =SucursalDao.buscarSucursales();
+                    List<Articulo> unidad = ArticuloDao.obtenerMedida();
+                    
+                    Articulo articulo = ArticuloDao.buscarArticulo(id);
+                    
+                    request.setAttribute("sucursal", sucursal);
+                    request.setAttribute("departamento", departamento);
+                    request.setAttribute("articulo", articulo);
+                    request.setAttribute("unidad", unidad);
                 }
 
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarPersonal.jsp");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarArticulo.jsp");
                 disp.forward(request, response);
 
-            } else if ("llenar".equals(accion)) {
-                
-                String strIdE = request.getParameter("idE");
-                int idE = 0;
-                if (strIdE != null && !strIdE.equals("")) {
-                idE = Integer.parseInt(strIdE);
-                }
-            
-//                List<Estado> estado = UsuarioDao.buscarEstados();
-//                List<Sucursal> sucursal =SucursalDao.buscarSucursales();
-
-//                request.setAttribute("sucursal", sucursal);
-//                request.setAttribute("estado", estado);
-                
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/AgregarPersonal.jsp");
-                disp.forward(request, response);
-                
             } else {
+                
                 List<Articulo> arti = ArticuloDao.obtenerArticulos();
+                List<Departamento> departamento = DepartamentoDao.buscarDepartamentos();
+                List<Sucursal> sucursal =SucursalDao.buscarSucursales();
+                List<Articulo> unidad = ArticuloDao.obtenerMedida();
+
+                request.setAttribute("sucursal", sucursal);
+                request.setAttribute("departamento", departamento);
                 request.setAttribute("arti", arti);
-            
+                request.setAttribute("unidad", unidad);
+                        
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/PaginaInventario.jsp");
                 disp.forward(request, response);
             }

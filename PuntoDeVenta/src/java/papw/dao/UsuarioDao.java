@@ -198,7 +198,7 @@ public class UsuarioDao {
         }
     }
         
-        public static void editar(Usuario e) {
+public static void editar(Usuario e) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;

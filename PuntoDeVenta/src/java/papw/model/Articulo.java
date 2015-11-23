@@ -25,7 +25,122 @@ public class Articulo extends Ticket {
     private int descuento;
     private InputStream imagenArticulo;
     private int existencia;
+    
     private int sucursal;
+    private String nombreSucursal;
+    private String nombreMedida;
+    private String nombreDepartamento;
+
+    
+    
+    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento,int existencia){
+        
+        this.idArticulo=idArticulo;
+        this.idDepartamento=idDepartamento;
+        this.descripcionCorta=descripcionCorta;
+        this.desCripcionLarga=descripcionLarga;
+        this.precio=precio;
+        this.idUnidadMedida=idUnidadMedida;
+        this.aplicaImpuesto=aplicaImpuesto;
+        this.descuento=descuento;
+        this.imagenArticulo=imageArticulo;
+        this.existencia=existencia;
+    }
+    
+    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento){
+     
+        this.idArticulo=idArticulo;
+        this.idDepartamento=idDepartamento;
+        this.descripcionCorta=descripcionCorta;
+        this.desCripcionLarga=descripcionLarga;
+        this.precio=precio;
+        this.idUnidadMedida=idUnidadMedida;
+        this.aplicaImpuesto=aplicaImpuesto;
+        this.descuento=descuento;
+        this.imagenArticulo=imageArticulo;
+
+    }
+
+    public Articulo(int sucursal,int idDepartamento, String descripcionCorta, String desCripcionLarga, int precio, int idUnidadMedida, String aplicaImpuesto, int descuento, InputStream imagenArticulo, int existencia) {
+        
+        this.sucursal = sucursal;
+        this.idDepartamento = idDepartamento;
+        this.descripcionCorta = descripcionCorta;
+        this.desCripcionLarga = desCripcionLarga;
+        this.precio = precio;
+        this.idUnidadMedida = idUnidadMedida;
+        this.aplicaImpuesto = aplicaImpuesto;
+        this.descuento = descuento;
+        this.imagenArticulo = imagenArticulo;
+        this.existencia = existencia;
+    }
+     
+    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,String aplicaImpuesto,int descuento,int existencia){
+        
+        this.idArticulo=idArticulo;
+        this.idDepartamento=idDepartamento;
+        this.descripcionCorta=descripcionCorta;
+        this.desCripcionLarga=descripcionLarga;
+        this.precio=precio;
+        this.idUnidadMedida=idUnidadMedida;
+        this.aplicaImpuesto=aplicaImpuesto;
+        this.descuento=descuento;
+        this.existencia=existencia;
+    }
+     
+    public Articulo()
+    {
+        
+    }
+
+    public int getIdArticulo() {
+        return idArticulo;
+    }
+
+    public void setIdArticulo(int idArticulo) {
+        this.idArticulo = idArticulo;
+    }
+
+    public InputStream getImagenArticulo() {
+        return imagenArticulo;
+    }
+
+    public void setImagenArticulo(InputStream imagenArticulo) {
+        this.imagenArticulo = imagenArticulo;
+    }
+
+    public int getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(int existencia) {
+        this.existencia = existencia;
+    }
+    
+    public String getNombreSucursal() {
+        return nombreSucursal;
+    }
+
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
+    }
+
+    public String getNombreMedida() {
+        return nombreMedida;
+    }
+
+    public void setNombreMedida(String nombreMedida) {
+        this.nombreMedida = nombreMedida;
+    }
+
+    public String getNombreDepartamento() {
+        return nombreDepartamento;
+    }
+
+    public void setNombreDepartamento(String nombreDepartamento) {
+        this.nombreDepartamento = nombreDepartamento;
+    }
+    
 
     public int getSucursal() {
         return sucursal;
@@ -89,77 +204,5 @@ public class Articulo extends Ticket {
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
-    }
-    
-    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento,int existencia){
-        
-        this.idArticulo=idArticulo;
-        this.idDepartamento=idDepartamento;
-        this.descripcionCorta=descripcionCorta;
-        this.desCripcionLarga=descripcionLarga;
-        this.precio=precio;
-        this.idUnidadMedida=idUnidadMedida;
-        this.aplicaImpuesto=aplicaImpuesto;
-        this.descuento=descuento;
-        this.imagenArticulo=imageArticulo;
-        this.existencia=existencia;
-    }
-    
-    public Articulo (int idArticulo,int idDepartamento, String descripcionCorta, String descripcionLarga,int precio,int idUnidadMedida,InputStream imageArticulo,String aplicaImpuesto,int descuento){
-     
-        this.idArticulo=idArticulo;
-        this.idDepartamento=idDepartamento;
-        this.descripcionCorta=descripcionCorta;
-        this.desCripcionLarga=descripcionLarga;
-        this.precio=precio;
-        this.idUnidadMedida=idUnidadMedida;
-        this.aplicaImpuesto=aplicaImpuesto;
-        this.descuento=descuento;
-        this.imagenArticulo=imageArticulo;
-
-    }
-
-    public Articulo(int sucursal,int idDepartamento, String descripcionCorta, String desCripcionLarga, int precio, int idUnidadMedida, String aplicaImpuesto, int descuento, InputStream imagenArticulo, int existencia) {
-        
-        this.sucursal = sucursal;
-        this.idDepartamento = idDepartamento;
-        this.descripcionCorta = descripcionCorta;
-        this.desCripcionLarga = desCripcionLarga;
-        this.precio = precio;
-        this.idUnidadMedida = idUnidadMedida;
-        this.aplicaImpuesto = aplicaImpuesto;
-        this.descuento = descuento;
-        this.imagenArticulo = imagenArticulo;
-        this.existencia = existencia;
-    }
-     
-     
-    public Articulo()
-    {
-        
-    }
-
-    public int getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(int idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public InputStream getImagenArticulo() {
-        return imagenArticulo;
-    }
-
-    public void setImagenArticulo(InputStream imagenArticulo) {
-        this.imagenArticulo = imagenArticulo;
-    }
-
-    public int getExistencia() {
-        return existencia;
-    }
-
-    public void setExistencia(int existencia) {
-        this.existencia = existencia;
     }
 }

@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import papw.dao.ArticuloDao;
+import papw.dao.DepartamentoDao;
+import papw.model.Articulo;
+import papw.model.Departamento;
 /**
  *
  * @author Owner
@@ -35,11 +39,36 @@ public class MostrarInfo extends HttpServlet {
                 id = Integer.parseInt(strId);
             }
             
+            switch(accion){
+                case "personal":                
+                    
                 List<Usuario> usuario = UsuarioDao.buscarPersonal();
                 request.setAttribute("usuario", usuario);
             
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Personal.jsp");
                 disp.forward(request, response);
+                
+                break;
+                    
+                case "articulo":
+                    
+                List<Articulo> arti = ArticuloDao.obtenerArticulos();
+                List<Departamento> departamento = DepartamentoDao.buscarDepartamentos();
+                List<Sucursal> sucursal =SucursalDao.buscarSucursales();
+                List<Articulo> unidad = ArticuloDao.obtenerMedida();
+
+                request.setAttribute("sucursal", sucursal);
+                request.setAttribute("departamento", departamento);
+                request.setAttribute("arti", arti);
+                request.setAttribute("unidad", unidad);
+                
+                RequestDispatcher dispp = getServletContext().getRequestDispatcher("/JSP/PaginaInventario.jsp");
+                dispp.forward(request, response);
+                    
+                    break;
+            }
+            
+
             }
             
         }

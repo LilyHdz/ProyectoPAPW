@@ -69,6 +69,11 @@
     </servlet>
     
     <servlet>      
+        <servlet-name>MostrarArticulo</servlet-name>
+        <servlet-class>papw.controller.MostrarArticulo</servlet-class>
+    </servlet>
+    
+    <servlet>      
         <servlet-name>MostrarInfo</servlet-name>
         <servlet-class>papw.controller.MostrarInfo</servlet-class>
     </servlet>
@@ -111,21 +116,26 @@
     <servlet-mapping>
         <servlet-name>DepartamentoServlet</servlet-name>
         <url-pattern>/departamento</url-pattern>
-    </servlet-mapping>  
-
+    </servlet-mapping> 
+     
+    <servlet-mapping>     
+        <servlet-name>SucursalServlet</servlet-name> 
+        <url-pattern>/sucursal</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>MostrarDepartamentos</servlet-name>
         <url-pattern>/mostrardepa</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>     
-        <servlet-name>SucursalServlet</servlet-name> 
-        <url-pattern>/sucursal</url-pattern>
+        <servlet-name>MostrarSucursales</servlet-name> 
+        <url-pattern>/mostrarsuc</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>     
-        <servlet-name>MostrarSucursales</servlet-name> 
-        <url-pattern>/mostrarsuc</url-pattern>
+        <servlet-name>MostrarArticulo</servlet-name> 
+        <url-pattern>/mostrararti</url-pattern>
     </servlet-mapping>
     
      <servlet-mapping>     

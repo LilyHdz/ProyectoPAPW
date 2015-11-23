@@ -43,7 +43,7 @@ public class MostrarServlet extends HttpServlet{
                 List<Usuario> usuario = UsuarioDao.buscarPersonal();
                 request.setAttribute("usuario", usuario);
 
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrarinfo?accion=personal");
                 disp.forward(request, response);
                 
             } else if (("editar".equals(accion) && id > 0) || "agregar".equals(accion)) {

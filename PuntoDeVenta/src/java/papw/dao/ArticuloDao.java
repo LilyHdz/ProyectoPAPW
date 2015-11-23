@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
 import papw.model.Articulo;
-import papw.model.Departamento;
 
 /**
  *
@@ -22,7 +21,7 @@ import papw.model.Departamento;
  */
 public class ArticuloDao {
     
-     public static void insertar(Articulo e) {
+public static void insertar(Articulo e) {
         
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -45,7 +44,7 @@ public class ArticuloDao {
             
             ar.setSucursal(e.getSucursal());
             ar.setIdUnidadMedida(e.getIdUnidadMedida());
-            ar.setCantidad(e.getExistencia());
+            ar.setExistencia(e.getExistencia());
             
             existencia(ar);
             
@@ -57,7 +56,7 @@ public class ArticuloDao {
         }
     }
      
-     public static void existencia(Articulo e) {
+public static void existencia(Articulo e) {
         
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -116,6 +115,81 @@ public static Articulo Codigo()
        
     }
      
+public static void editar(Articulo e) {
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        CallableStatement cs2 = null;
+        try {
+            cs = conn.prepareCall("{ call sp_modificarArticulo(?,?,?,?,?,?,?,?) }");
+            cs.setInt(1, e.getIdArticulo() );
+            cs.setInt(2, e.getIdDepartamento());
+            cs.setString(3,e.getDescripcionCorta() );
+            cs.setString(4, e.getDesCripcionLarga());
+            cs.setInt(5, e.getPrecio());
+            cs.setInt(6, e.getIdUnidadMedida());
+            cs.setString(7, e.getAplicaImpuesto());
+            cs.setInt(8, e.getDescuento());
+         
+            int res = cs.executeUpdate();  
+            
+            Articulo ar = Codigo();
+            
+            ar.setSucursal(e.getSucursal());
+            ar.setIdUnidadMedida(e.getIdUnidadMedida());
+            ar.setExistencia(e.getExistencia());
+            
+            editarExistencia(ar);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+
+public static void editarExistencia(Articulo e) {
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        try {
+            cs = conn.prepareCall("{ call sp_modificarExistencia(?,?,?) }");
+            cs.setInt(1, e.getExistencia());
+            cs.setInt(2, e.getIdArticulo());
+            cs.setInt(3, e.getSucursal());
+            
+            int res = cs.executeUpdate();  
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+           DBUtil.closeStatement(cs);
+           pool.freeConnection(conn);
+        }
+    }
+
+public static void borrar(int id) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        try {
+            cs = connection.prepareCall("{ call sp_eliminarExistencia(?) }");
+            cs.setInt(1, id);
+         
+            cs.execute();
+   
+    
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
+    }
 
 public static List<Articulo> consultaArticulo(String Buscar)
     {
@@ -154,7 +228,7 @@ public static List<Articulo> consultaArticulo(String Buscar)
         
     }
     
-    public static Articulo obtenerArticulo(String Codigo)
+public static Articulo obtenerArticulo(String Codigo)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -189,6 +263,41 @@ public static List<Articulo> consultaArticulo(String Buscar)
         }
     }
     
+public static Articulo buscarArticulo(int Codigo)
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+         try {
+           Articulo articulos =new Articulo();
+            cs = conn.prepareCall("{ call sp_buscarArticulo('"+Codigo+"') }");
+            rs = cs.executeQuery();
+            while (rs.next()) {           
+                        articulos.setIdArticulo(rs.getInt("Codigo"));
+                        articulos.setDescripcionCorta(rs.getString("Nombre"));
+                        articulos.setDesCripcionLarga(rs.getString("Descripcion"));
+                        articulos.setPrecio(rs.getInt("Precio"));
+                        articulos.setImagenArticulo(rs.getBinaryStream("ImagenArticulo"));
+                        articulos.setNombreDepartamento(rs.getString("Departamento"));
+                        articulos.setNombreMedida(rs.getString("TipoMedida"));
+                        articulos.setAplicaImpuesto(rs.getString("AplicaImpuesto"));                      
+                        articulos.setDescuento(rs.getInt("Descuento"));
+                        articulos.setExistencia(rs.getInt("Existencia"));
+                        articulos.setNombreSucursal(rs.getString("Sucursal"));
+            }
+            return articulos;
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+   }
+
 public static List<Articulo> obtenerArticulos()
     {
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -200,16 +309,49 @@ public static List<Articulo> obtenerArticulos()
             cs = conn.prepareCall("{ call sp_buscarArticulos() }");
             rs = cs.executeQuery();
             while (rs.next()) {
-                Articulo articulo = new Articulo(
-                        rs.getInt("Codigo"), 
-                        rs.getInt("Departamento"),
-                        rs.getString("Nombre"),
-                        rs.getString("Descripcion"),
-                        rs.getInt("Precio"),
-                        rs.getInt("idUnidadMedida"),
-                        rs.getBinaryStream("ImagenArticulo"),
-                        rs.getString("AplicaImpuesto") ,
-                        rs.getInt("Descuento"));
+                Articulo articulo = new Articulo();
+              
+                        articulo.setIdArticulo(rs.getInt("Codigo"));
+                        articulo.setDescripcionCorta(rs.getString("Nombre"));
+                        articulo.setDesCripcionLarga(rs.getString("Descripcion"));
+                        articulo.setPrecio(rs.getInt("Precio"));
+                        articulo.setImagenArticulo(rs.getBinaryStream("ImagenArticulo"));
+                        articulo.setNombreDepartamento(rs.getString("Departamento"));
+                        articulo.setNombreMedida(rs.getString("TipoMedida"));
+                        articulo.setAplicaImpuesto(rs.getString("AplicaImpuesto"));                      
+                        articulo.setDescuento(rs.getInt("Descuento"));
+                        articulo.setExistencia(rs.getInt("Existencia"));
+                        articulo.setNombreSucursal(rs.getString("Sucursal"));
+
+                Articulos.add(articulo);
+            }
+            return Articulos;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+            
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+
+public static List<Articulo> obtenerMedida()
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+         try {
+            List<Articulo> Articulos = new ArrayList<Articulo>();
+            cs = conn.prepareCall("{ call sp_buscarMedida() }");
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                Articulo articulo = new Articulo();
+              
+                        articulo.setIdUnidadMedida(rs.getInt("IdUnidadMedida"));
+                        articulo.setNombreMedida(rs.getString("TipoMedida"));
 
                 Articulos.add(articulo);
             }

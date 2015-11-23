@@ -53,7 +53,7 @@ public class MostrarDepartamentos extends HttpServlet{
                     request.setAttribute("departamento", departamento);
                 }
 
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarDepartamento.jsp");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarDepartamentos.jsp");
                 disp.forward(request, response);
 
             } else {
