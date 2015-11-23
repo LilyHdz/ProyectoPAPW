@@ -12,4 +12,25 @@ package papw.model;
 public class Existencia {
     private int idArticulo;
     private int cantidadExistencia;
+
+    public int getIdArticulo() {
+        return idArticulo;
+    }
+
+    public void setIdArticulo(int idArticulo) {
+        this.idArticulo = idArticulo;
+    }
+
+    public int getCantidadExistencia() {
+        return cantidadExistencia;
+    }
+
+    public void setCantidadExistencia(int cantidadExistencia) {
+        this.cantidadExistencia = cantidadExistencia;
+    }
+    public Existencia(int idArticulo, int cantidadExistencia)
+    {
+        this.cantidadExistencia=cantidadExistencia;
+        this.idArticulo=idArticulo;
+    }
 }

@@ -4,6 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
 <html>
     <head>
         <title>Punto de Venta</title>
@@ -11,6 +12,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/styleArt.css">
+         <script language="javascript" src="js/jquery-1.2.6.min.js"></script>
     </head>
     
     <body>
@@ -75,9 +77,16 @@ and open the template in the editor.
              
          </div>
          
-          <div class="Videos">
+          <div id="video" class="Videos">
              <table id="_Video">
-                 <tr><td><video src="../images/Cucaracha_mtv.mp4" width="480"></video></td></tr>
+                        <tr>
+                            <td>
+                                <video  width="480"  autoplay loop muted>
+                                    <source src="../images/Cucaracha_mtv.mp4" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                            </td>
+                        </tr>
              </table>
              
          </div>
@@ -85,7 +94,7 @@ and open the template in the editor.
          <div class="BusquedaProducto">
              <form name="_Busqueda">
                  <table width="100%">
-                     <tr><td><label>Búsqueda de Producto : </label></td> <td><input type="text" placeholder="&CodigoBarras o NombreProducto"></td><td><label>Eliminar Producto : </label></td> <td><input type="text" placeholder="N°Articulo"></td></tr>
+                     <tr><td><label>Búsqueda de Producto : </label></td> <td><input type="text" placeholder="CodigoBarras o NombreProducto"></td><td><label>Eliminar Producto : </label></td> <td><input type="text" placeholder="N°Articulo"></td></tr>
                  </table>
              </form>
              

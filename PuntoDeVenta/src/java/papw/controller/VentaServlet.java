@@ -6,8 +6,6 @@
 package papw.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import papw.dao.ArticuloDao;
-import papw.dao.UsuarioDao;
+import papw.dao.ExistenciaDao;
 import papw.dao.VentaDao;
 import papw.dao.VentaDetalleDao;
 import papw.model.Articulo;
+import papw.model.Existencia;
 import papw.model.Login;
 import papw.model.Ticket;
 import papw.model.Venta;
@@ -58,6 +57,7 @@ public class VentaServlet extends HttpServlet {
             String eliminar = request.getParameter("eliminar");
             String finalizar=request.getParameter("finalizar");
             String limpiarTicket=request.getParameter("LimpiarTicket");
+            String salir = request.getParameter("salir");
             
             if(!"".equals(limpiarTicket)&&limpiarTicket!=null)
             {
@@ -83,7 +83,9 @@ public class VentaServlet extends HttpServlet {
                 for(Articulo ticketL :ticket)
                 {
                     VentaDetalle ventaDetalle= new VentaDetalle(idVenta,ticketL.getIdArticulo(),ticketL.getCantidad());
+                    Existencia existencia = new Existencia(ventaDetalle.getIdArticulo(), ventaDetalle.getCantidad());
                     VentaDetalleDao.insertarVentaDetalle(ventaDetalle);
+                    ExistenciaDao.modificarExistencia(existencia);
                 }
                 
                 ticket.removeAll(ticket);

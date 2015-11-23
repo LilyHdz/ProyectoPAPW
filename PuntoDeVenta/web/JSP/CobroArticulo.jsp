@@ -181,9 +181,16 @@
              
          </div>
          
-          <div class="Videos">
+        <div id="video" class="Videos">
              <table id="_Video">
-                 <tr><td><video src="/PuntoDeVenta/images/Cucaracha_mtv.mp4" width="480" ></video></td></tr>
+                        <tr>
+                            <td>
+                                <video  width="480"  autoplay loop muted>
+                                    <source src="/PuntoDeVenta/images/Cucaracha_mtv.mp4" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                            </td>
+                        </tr>
              </table>
              
          </div>
