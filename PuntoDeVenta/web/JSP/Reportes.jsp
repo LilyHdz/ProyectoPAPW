@@ -4,6 +4,12 @@
     Author     : Owner
 --%>
 
+<%@page import="papw.model.Reporte"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="papw.model.Sucursal"%>
+<%@page import="papw.model.Departamento"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -31,8 +37,9 @@ and open the template in the editor.
                  var elemento2 = document.getElementById("fecha2");
                  var elemento3 = document.getElementById("fecha_aceptar");
                  
-                 var elemento4 = document.getElementById("_texto");
+                 var elemento4 = document.getElementById("_departamento");
                  var elemento5 = document.getElementById("texto_aceptar");
+                 var elemento6 = document.getElementById("_sucursal");
                  
                  var numero = document.getElementById("rango").options.selectedIndex;
                  
@@ -44,15 +51,16 @@ and open the template in the editor.
                          elemento3.style.display='initial';
                          elemento4.style.display='none';
                          elemento5.style.display='none';
-
+                         elemento6.style.display='none';
                          break;
                          
                      case 1:
                          elemento1.style.display='none';
                          elemento2.style.display='none';
                          elemento3.style.display='none';
-                         elemento4.style.display='initial';
+                         elemento4.style.display='none';
                          elemento5.style.display='initial';
+                         elemento6.style.display='initial';
                          break;
                          
                      case 2:
@@ -61,11 +69,18 @@ and open the template in the editor.
                          elemento3.style.display='none';
                          elemento4.style.display='initial';
                          elemento5.style.display='initial';
+                         elemento6.style.display='none';
                          break;
                  }
              }
 
           </script>
+          
+          <%    
+              List<Departamento> listDepartamento= (List<Departamento>) request.getAttribute("listDepartamento");
+              List<Sucursal> listSucursal = (List<Sucursal>) request.getAttribute("listSucursal");
+              List<Reporte> listReporte = (List<Reporte>)request.getAttribute("listReporte");
+          %>
           
     </head>
     
@@ -109,64 +124,79 @@ and open the template in the editor.
                      <option value="3" id="D">Departamentos</option>
                      
                 </select>
-                 
-                <input type="date" id="fecha1" style="display:visible;"> <input type="date" id="fecha2" style="display:visible;" > <button style="display:visible;" id="fecha_aceptar" onclick="myFunction();" > Aceptar </button>
-                <input type="text" id="_texto" style="display:none;"> <button id="texto_aceptar" style="display:none;"> Aceptar </button>
+                <form>
+                <input type="date" name="fecha1" id="fecha1" style="display:visible;">
+                <input type="date" name="fecha2" id="fecha2" style="display:visible;"  >
+                <button style="display:visible;"  name="fecha" id="fecha_aceptar" action="/PuntoDeVenta/ReporteServlet"  > Aceptar </button>
+                <select name="departamento"  id="_departamento" style="display:none;">
+                    <option name="idDepartamento">Selecciona un departamento</option>
+                    <%
+                        for(Departamento dep :listDepartamento)
+                        {
+                    %>
+                    <option value="<%= dep.getId() %>"  name="idDepartamento" > <%= dep.getNombre() %></option>
+                    <%
+                        }
+                    %>
+                </select>
+                    
+                <select name="sucursal" id="_sucursal" style="display:none;">
+                    <option name="idSucursal">Selecciona una sucursal</option>
+                    <%
+                        for(Sucursal suc:listSucursal)
+                        {
+                    %>
+                    <option value="<%= suc.getId() %>" id="idSucursal" name="idSucursal"> <%= suc.getNombre() %> </option>
+                    <%
+                        }
+                    %>
+                    
+                </select>
+                    
+                <button id="texto_aceptar" name="buscar" action="/PuntoDeVenta/ReporteServlet" style="display:none;"> Aceptar </button>
+                </form>
             </div>
-           
+                    
             <div class="TABLA_RE">
                 <table>
                
-                    <tr><th></th> <th>FECHA DE VENTA</th><th>SUCURSAL</th><th>DEPARTAMENTO</th><th>CAJERO</th><th>ARTICULO</th> <th>DESCRIPCION</th> <th>CANTIDAD</th> <th>PRECIO V.</th> <th>DESCUENTO</th> <th>IMPUESTO</th> <th>SUBTOTAL</th> <th>METODO DE PAGO</th></tr>
-                  <tr> 
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td>dfsfsfsdfdsf</td> 
-                      <td></td> 
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                  </tr>
+                    <tr>
+                        <th>FECHA DE VENTA</th>
+                        <th>SUCURSAL</th>
+                        <th>DEPARTAMENTO</th>
+                        <th>CAJERO</th>
+                        <th>ARTICULO</th> 
+                        <th>CANTIDAD</th>  
+                        <th>DESCUENTO</th> 
+                        <th>IMPUESTO</th>  
+                        <th>METODO DE PAGO</th>
+                    </tr>
                   
-                 <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                      
-                 </tr>
+                      <% 
+                        double subtotal=0;
+                        if(listReporte!=null){
+                        for(Reporte rep: listReporte)  
+                      { 
+                        double impuesto=0;  
+                        %>
+                     <tr> 
+                      <td><%= rep.getFechaVenta() %></td>
+                      <td><%= rep.getNombreSucursal() %></td>
+                      <td><%= rep.getNombreDepartamento() %></td>
+                      <td><%= rep.getNombreUsuario() %></td> 
+                      <td><%= rep.getDescripcionCorta() %></td> 
+                      <td><%= rep.getCantidadProducto() %></td> 
+                      <td><%= rep.getDescuento() %></td> 
+                      <td><%= impuesto %></td> 
+                      <td><%= rep.getFormaPago()  %></td>
+                    </tr>
+                      <% }
+                        } %>
+                  
+                  
+
                  
-                  <tr>
-                      <th>TOTAL</th>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td> 
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                      
-                 </tr>
+
               </table>
                 
                 <label style="margin-top: 50px; ">TOTAL DE VENTA : $</label>

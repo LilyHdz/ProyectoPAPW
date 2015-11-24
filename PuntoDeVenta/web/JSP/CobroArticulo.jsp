@@ -15,9 +15,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% 
-        String limpiarCampo="";
-    %>
     <head>
         <title>Punto de Venta</title>
         <meta charset="UTF-8">

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" 
-         xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
         <servlet-name>UpdateUsu</servlet-name>
         <servlet-class>papw.controller.UpdateUsu</servlet-class>
@@ -12,7 +9,6 @@
             <file-size-threshold>52428800</file-size-threshold>
         </multipart-config>
     </servlet>
-    
     <servlet>
         <servlet-name>ArticuloServlet</servlet-name>
         <servlet-class>papw.controller.ArticuloServlet</servlet-class>
@@ -22,127 +18,110 @@
             <file-size-threshold>52428800</file-size-threshold>
         </multipart-config>
     </servlet>
-    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>papw.controller.LoginServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>MostrarServlet</servlet-name>
         <servlet-class>papw.controller.MostrarServlet</servlet-class>
-   </servlet>
-  
-    <servlet>  
+    </servlet>
+    <servlet>
         <servlet-name>ImagenServlet</servlet-name>
         <servlet-class>papw.controller.ImagenServlet</servlet-class>
     </servlet>
- 
     <servlet>
         <servlet-name>VentaServlet</servlet-name>
         <servlet-class>papw.controller.VentaServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>ImagenServletArticulo</servlet-name>
         <servlet-class>papw.controller.ImagenServletArticulo</servlet-class>
     </servlet>
-    
-     <servlet>
+    <servlet>
         <servlet-name>DepartamentoServlet</servlet-name>
         <servlet-class>papw.controller.DepartamentoServlet</servlet-class>
-     </servlet>
-    
-    <servlet> 
+    </servlet>
+    <servlet>
         <servlet-name>MostrarDepartamentos</servlet-name>
         <servlet-class>papw.controller.MostrarDepartamentos</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>SucursalServlet</servlet-name>
         <servlet-class>papw.controller.SucursalServlet</servlet-class>
-     </servlet>
- 
-    <servlet>      
+    </servlet>
+    <servlet>
         <servlet-name>MostrarSucursales</servlet-name>
         <servlet-class>papw.controller.MostrarSucursales</servlet-class>
     </servlet>
-    
-    <servlet>      
+    <servlet>
         <servlet-name>MostrarArticulo</servlet-name>
         <servlet-class>papw.controller.MostrarArticulo</servlet-class>
     </servlet>
-    
-    <servlet>      
+    <servlet>
         <servlet-name>MostrarInfo</servlet-name>
         <servlet-class>papw.controller.MostrarInfo</servlet-class>
     </servlet>
-   
+    <servlet>
+        <servlet-name>ReporteServlet</servlet-name>
+        <servlet-class>papw.controller.ReporteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UpdateUsu</servlet-name>
         <url-pattern>/update</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>ArticuloServlet</servlet-name>
         <url-pattern>/articulo</url-pattern>
-    </servlet-mapping>    
-    
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>VentaServlet</servlet-name>
         <url-pattern>/VentaArticulo</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>     
-        <servlet-name>MostrarServlet</servlet-name>  
+    <servlet-mapping>
+        <servlet-name>MostrarServlet</servlet-name>
         <url-pattern>/mostrar</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
-         <servlet-name>ImagenServlet</servlet-name>
-         <url-pattern>/imagen</url-pattern>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/imagen</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ImagenServletArticulo</servlet-name>
         <url-pattern>/ImagenArticulo</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>DepartamentoServlet</servlet-name>
         <url-pattern>/departamento</url-pattern>
-    </servlet-mapping> 
-     
-    <servlet-mapping>     
-        <servlet-name>SucursalServlet</servlet-name> 
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SucursalServlet</servlet-name>
         <url-pattern>/sucursal</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>MostrarDepartamentos</servlet-name>
         <url-pattern>/mostrardepa</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>     
-        <servlet-name>MostrarSucursales</servlet-name> 
+    <servlet-mapping>
+        <servlet-name>MostrarSucursales</servlet-name>
         <url-pattern>/mostrarsuc</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>     
-        <servlet-name>MostrarArticulo</servlet-name> 
+    <servlet-mapping>
+        <servlet-name>MostrarArticulo</servlet-name>
         <url-pattern>/mostrararti</url-pattern>
     </servlet-mapping>
-    
-     <servlet-mapping>     
-        <servlet-name>MostrarInfo</servlet-name> 
+    <servlet-mapping>
+        <servlet-name>MostrarInfo</servlet-name>
         <url-pattern>/mostrarinfo</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ReporteServlet</servlet-name>
+        <url-pattern>/ReporteServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -53,8 +53,9 @@ and open the template in the editor.
                 <label>Programaci&oacute;n de Promocionales</label>
                 <table>
                     <tr>
-                    <th>Video</th> <th>Hora</th> <th>Dia</th> <th>Mes</th> <th>Sucursak</th>
+                    <th>Video</th> <th>Hora</th> <th>Dia</th> <th>Mes</th> <th>Sucursal</th>
                     </tr>
+                    
                 </table>
             </div>
         
