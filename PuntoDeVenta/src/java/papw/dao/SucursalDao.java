@@ -56,10 +56,10 @@ public class SucursalDao {
                 Sucursal suc = new Sucursal(
                         rs.getInt("id"),
                         rs.getString("nombre"),
-                        rs.getString("municipio"),
+                        rs.getString("municipio"),                      
                         rs.getInt("idempresa")
                         );
-                
+                suc.setNombreE(rs.getString("estado"));  
                 sucursal.add(suc);
             }
             return sucursal;

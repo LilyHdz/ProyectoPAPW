@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import papw.model.Sucursal;
 import papw.dao.SucursalDao;
+import papw.dao.UsuarioDao;
+import papw.model.Estado;
 /**
  *
  * @author Owner
@@ -58,8 +60,11 @@ public class MostrarSucursales extends HttpServlet{
                 disp.forward(request, response);
 
             } else {
-               List<Sucursal> sucu = SucursalDao.buscarSucursales();
+                List<Sucursal> sucu = SucursalDao.buscarSucursales();
                 request.setAttribute("sucu", sucu);
+                
+                List<Estado> estado = UsuarioDao.buscarEstados();
+                request.setAttribute("estado_", estado);
 
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Sucursales.jsp");
                 disp.forward(request, response);

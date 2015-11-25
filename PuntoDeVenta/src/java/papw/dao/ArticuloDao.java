@@ -199,7 +199,7 @@ public static List<Articulo> consultaArticulo(String Buscar)
         ResultSet rs = null;
          try {
             List<Articulo> Articulos = new ArrayList<Articulo>();
-            cs = conn.prepareCall("{ call sp_buscarArticulo('"+Buscar+"') }");
+            cs = conn.prepareCall("{ call sp_buscarArticuli2('"+Buscar+"') }");
             rs = cs.executeQuery();
             while (rs.next()) {
                 Articulo articulo = new Articulo(

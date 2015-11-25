@@ -15,6 +15,7 @@ public class Sucursal {
     int idempresa;
     int municipio;
     String nombreM;
+    String nombreE;
     int estado;
 
     public Sucursal(int id, String nombre, String nombreM, int idempresa) {
@@ -39,6 +40,16 @@ public class Sucursal {
     public String getNombreM() {
         return nombreM;
     }
+
+    public String getNombreE() {
+        return nombreE;
+    }
+
+    public void setNombreE(String nombreE) {
+        this.nombreE = nombreE;
+    }
+    
+    
 
     public void setNombreM(String nombreM) {
         this.nombreM = nombreM;

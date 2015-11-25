@@ -2,6 +2,7 @@
 
 
 
+<%@page import="papw.model.Publicidad"%>
 <%@page import="papw.model.Ticket"%>
 <%@page import="papw.model.Articulo"%>
 <%@page import="javax.servlet.http.HttpSession"%>
@@ -26,14 +27,14 @@
 <body>
     
     <%          Articulo articulo = (Articulo) request.getAttribute("Articulo");
-                
+                Publicidad publicidad = (Publicidad) request.getAttribute("publicidad");
     %>
      
        <div class="main">
         
         <header id="Encabezado">      
             <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
-             <a id="Salir" href="" >Salir</a>
+             <a  id="Salir" href="/PuntoDeVenta/VentaArticulo?accion=salir" >Salir</a>
             <hr> 
         </header>
             
@@ -183,7 +184,18 @@
                         <tr>
                             <td>
                                 <video  width="480"  autoplay loop muted>
-                                    <source src="/PuntoDeVenta/images/Cucaracha_mtv.mp4" type="video/mp4">
+                                    <% if(publicidad != null) { %>
+                                    
+                                    <source src="/PuntoDeVenta/images/<%= publicidad.getPathPublicidad() %>" type="video/mp4">
+                                    <% 
+                                    }
+                                    else 
+                                    {%>
+                                       <source src="/PuntoDeVenta/images/Cucaracha_mtv.mp4" type="video/mp4">
+                                     
+                                    <% 
+                                    }%>
+                                    
                                     Your browser does not support HTML5 video.
                                 </video>
                             </td>

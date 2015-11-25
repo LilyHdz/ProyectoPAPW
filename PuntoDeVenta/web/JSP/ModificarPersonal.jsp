@@ -53,8 +53,8 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -69,31 +69,34 @@ and open the template in the editor.
             String nombre = "";
             String apePaterno = "";
             String apeMaterno = "";
+            String contra = "";
             String Puesto = "";
             String sexo = "";
             String NivelEstudio = "";
             String rfc = "";
             String curp = "";
             int nomina = 0;
-            
             String calle = "";
             int numero = 0;
             String colonia = "";
-            int municipio = 0;
-            int estado = 0;
             int postal = 0;
             String contrasena = "";
-            int idsuc = 0;
-            
-            int deptoId = 0;
-            
+            String fecha = " ";
+           
             if (persona != null) {
                 id = persona.getId();
                 nombre = persona.getNombre() != null ? persona.getNombre() : "";
                 apePaterno = persona.getApePaterno() != null ? persona.getApePaterno() : "";
                 apeMaterno = persona.getApeMaterno() != null ? persona.getApeMaterno() : "";
-                sexo = persona.getSexo();
-                Puesto = persona.getPuesto() != null ? persona.getPuesto() : "";
+                contra = persona.getContrasena() != null ? persona.getContrasena() : "";
+                calle = persona.getCalle() !=null ? persona.getCalle() : "";
+                numero = persona.getNumero();
+                postal = persona.getPostal();                
+                colonia = persona.getColonia() !=null ? persona.getColonia() : "";
+                nomina = persona.getNomina();
+                rfc = persona.getRfc() != null ? persona.getRfc() : "";
+                curp = persona.getCurp() != null ? persona.getCurp() : "";
+                fecha = persona.getFechaN() != null ? persona.getFechaN() : "";
                 
             }
         %>
@@ -107,8 +110,8 @@ and open the template in the editor.
                         <table>
                             <tr>
                                 <td><label>Foto de Empleado:</label></td>
-                                <td><img src="" alt="Producto" width="50"></td>
-                                <td><input type="file" name="foto"/></td>
+                                <td><img src="<%= request.getServletContext().getContextPath() + "/imagen?id=" + id %>" alt="Producto" width="80"></td>
+                              
                             </tr>
                             <tr>
                                 <td><label>Nombre(s):</label></td>
@@ -117,11 +120,11 @@ and open the template in the editor.
                             
                              <tr>
                                 <td><label>Apellido Paterno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="apP" value="<%= nombre %>"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="apP" value="<%= apePaterno  %>"><br></td>
                             </tr>
                              <tr>
                                 <td><label>Apellido Materno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="apM" value="<%= nombre %>"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" name="apM" value="<%= apeMaterno %>"><br></td>
                             </tr>
                             
                             <tr>
@@ -159,12 +162,12 @@ and open the template in the editor.
                     
                             <tr>
                                 <td><label>Fecha de Nacimiento:</label></td>
-                                <td><input type="date" style="width:200px; height: 25px;" name="fecha"><br></td>
+                                <td><input type="date" style="width:200px; height: 25px;" name="fecha" value="<%= fecha %> "><br></td>
                             </tr>
                             
                             <tr>
                                 <td><label>Contrasena:</label></td>
-                                <td><input type="password" style="width:200px; height: 20px;" name="contra" value="<%= nombre %>"><br></td>
+                                <td><input type="password" style="width:200px; height: 20px;" name="contra" value="<%= contra %>"><br></td>
                             </tr>
  
                             <tr>
@@ -182,22 +185,22 @@ and open the template in the editor.
                 
                             <tr>
                                 <td><label>Calle</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="calle" value="<%= nombre %>"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="calle" value="<%= calle %>"><br></td>     
                             </tr>  
                             
                              <tr>
                                 <td><label>Numero</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="calle_num" value="<%= nombre %>"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="calle_num" value="<%= numero %>"><br></td>     
                             </tr>  
                             
                             <tr>
                                 <td><label>C&oacute;digo Postal</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="postal" value="<%= nombre %>"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="postal" value="<%= postal %>"><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>Colonia</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="colonia" value="<%= nombre %>"><br></td>     
+                                <td><input type="text" style="width:200px; height: 25px;" name="colonia" value="<%= colonia %>"><br></td>     
                             </tr>
                     
                            <tr>
@@ -227,12 +230,12 @@ and open the template in the editor.
                             
                             <tr>
                                 <td><label>RFC:</label></td>
-                                <td><input type="text" name="rfc" style="width:200px; height: 20px;" value="<%= nombre %>" id="rfc" ><br></td>                      
+                                <td><input type="text" name="rfc" style="width:200px; height: 20px;" value="<%= rfc %>" id="rfc" ><br></td>                      
                              </tr>
                     
                              <tr>
                                 <td><label>CURP:</label></td>
-                                <td><input type="text" name="curp" style="width:200px; height: 20px;" value="<%= nombre %>"><br></td>                      
+                                <td><input type="text" name="curp" style="width:200px; height: 20px;" value="<%= curp %>"><br></td>                      
                              </tr>
                              
                         </table>

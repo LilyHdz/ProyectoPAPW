@@ -4,6 +4,7 @@
     Author     : Owner
 --%>
 
+<%@page import="papw.model.Estado"%>
 <%@page import="papw.model.Sucursal"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.io.OutputStream"%>
@@ -19,7 +20,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
-         
+         <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+        
+       <script type="text/javascript" >
+        function mostrar_estado(){
+            
+            $("#rfc").val("1");
+            $.post("/PuntoDeVenta/JSP/ComboboxMunicipio.jsp",$("#sucur").serialize(), function(sucur){ $("#muni").html(sucur);});
+        }
+       
+        </script>
 
     </head>
     
@@ -44,8 +54,8 @@
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.html">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -68,7 +78,7 @@
         %>
             
             <div class="cajitaSuc" id="esconder" style="display: block">
-            <form action="<%= request.getServletContext().getContextPath()%>/sucursal?accion=modificar&id=<%= suc.getId() %>" method="POST">
+            <form action="<%= request.getServletContext().getContextPath()%>/sucursal?accion=modificar&id=<%= suc.getId() %>" method="POST" id="sucur" >
                 <fieldset >
                     <legend>Ingrese Nueva Sucursal:</legend>
 		
@@ -80,12 +90,28 @@
                             </tr>
                             
                              <tr>
-                       
-                                 <td> <select name="sucMun">
-                                    <option value="0">Municipio</option>
-                                    <option value="1">Cadereyta Jimenez</option>
-                                    </select></td>
-      
+                                <td><label>Estado</label></td>
+                                <td><select name="estado" style="width:200px; height: 25px;" id="esta" onchange="mostrar_estado()" >
+                                         <option value="" selected>---------Selecciona--------</option>
+                                        <%
+                                            List<Estado> estados = (List<Estado>) request.getAttribute("estado_");
+                                                if (estados != null) {
+                                                for (Estado est : estados) {
+                                         %>
+                                        <option value="<%= est.getId() %>" ><%= est.getNombre() %>  </option>
+
+                                        <%
+                                                    }
+                                                }
+                                        %>
+                                        </select></td>    
+                            </tr>
+                            
+                            <tr>
+                                <td><label>Municipio</label></td>
+                                <td><select  id="muni" name="muni" >
+                                    <option value="" selected>---------Selecciona--------</option>
+                                   </select></td>   
                             </tr>
                         </table>
                     <br>

@@ -19,13 +19,41 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
  
        <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+       <script src="validCampoFranz.js"></script>
         
        <script type="text/javascript" >
+           
         function mostrar_estado(){
             
             $("#rfc").val("1");
             $.post("/PuntoDeVenta/JSP/ComboboxMunicipio.jsp",$("#dataf").serialize(), function(dataf){ $("#muni").html(dataf);});
         }
+        
+       function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
+   
+
+       $(document).ready(function (){
+          $(".solo-numero").keyup(function (){
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+          });
+        });
        
         </script>
         
@@ -53,8 +81,8 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -72,21 +100,21 @@ and open the template in the editor.
                             </tr>
                             <tr>
                                 <td><label>Nombre(s):</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="nombre"><br></td>
+                                <td><input type="text"  style="width:200px; height: 20px;" onkeypress="return soloLetras(event)" name="nombre" required=""><br></td>
                             </tr>
                             
                              <tr>
                                 <td><label>Apellido Paterno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="apP"><br></td>
+                                <td><input type="text"  style="width:200px; height: 20px;" onkeypress="return soloLetras(event)" name="apP"  required=""><br></td>
                             </tr>
                              <tr>
                                 <td><label>Apellido Materno:</label></td>
-                                <td><input type="text" style="width:200px; height: 20px;" name="apM"><br></td>
+                                <td><input type="text" style="width:200px; height: 20px;" onkeypress="return soloLetras(event)" name="apM"  required=""><br></td>
                             </tr>
                             
                             <tr>
                                 <td><label>Sucursal:</label></td>
-                                <td><select id="Suc" style="width:200px; height: 25px;" name="Suc" >
+                                <td><select id="Suc" style="width:200px; height: 25px;" name="Suc" required="">
                                     <option value="" selected>------------Selecciona-----------</option>    
                                     <%
                                             List<Sucursal> sucursal = (List<Sucursal>) request.getAttribute("sucursal");
@@ -105,7 +133,7 @@ and open the template in the editor.
                              
                              <tr>
                                 <td><label>Puesto:</label></td>
-                                <td><select id="_puesto" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto">
+                                <td><select id="_puesto" style="margin-left:50px; margin-top: 10px; width:100px" name="_puesto" required="">
                                 <option value="M" id="M">Manager</option>
                                 <option value="C" id="C">Cajero</option>
                             </select><br></td>                      
@@ -119,17 +147,17 @@ and open the template in the editor.
                     
                             <tr>
                                 <td><label>Fecha de Nacimiento:</label></td>
-                                <td><input type="date" style="width:200px; height: 25px;" name="fecha"><br></td>
+                                <td><input type="date" style="width:200px; height: 25px;" name="fecha" required=""><br></td>
                             </tr>
                             
                             <tr>
                                 <td><label>Contrasena:</label></td>
-                                <td><input type="password" style="width:200px; height: 20px;" name="contra"><br></td>
+                                <td><input type="password" style="width:200px; height: 20px;" name="contra" required=""><br></td>
                             </tr>
  
                             <tr>
                                 <td> <label>Nivel de Estudios:</label></td>
-                                <td><select name="study" style="width:200px; height: 25px;">
+                                <td><select name="study" style="width:200px; height: 25px;" required="">
                                         <option value="" selected>---------Selecciona--------</option>
                                         <option value="Primaria" selected>Primaria</option>
                                         <option value="Secundaria">Secundaria</option>
@@ -143,27 +171,27 @@ and open the template in the editor.
                 
                             <tr>
                                 <td><label>Calle</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="calle"><br></td>     
+                                <td><input type="text"  style="width:200px; height: 25px;" onkeypress="return soloLetras(event)" name="calle"  required=""><br></td>     
                             </tr>  
                             
                              <tr>
                                 <td><label>Numero</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="calle_num"><br></td>     
+                                <td><input  type="text"   class="solo-numero" style="width:200px; height: 25px;" name="calle_num" maxlength="4" required=""><br></td>     
                             </tr>  
                             
                             <tr>
                                 <td><label>C&oacute;digo Postal</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="postal"><br></td>     
+                                <td><input  type="text"   class="solo-numero" style="width:200px; height: 25px;" name="postal" id="postal" maxlength="5" required="" ><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>Colonia</label></td>
-                                <td><input type="text" style="width:200px; height: 25px;" name="colonia"><br></td>     
+                                <td><input type="text"  style="width:200px; height: 25px;" onkeypress="return soloLetras(event)" name="colonia"  required=""><br></td>     
                             </tr>
                             
                             <tr>
                                 <td><label>Estado</label></td>
-                                <td><select name="estado" style="width:200px; height: 25px;" id="esta" onchange="mostrar_estado()" >
+                                <td><select name="estado" style="width:200px; height: 25px;" id="esta" onchange="mostrar_estado()" required="">
                                          <option value="" selected>---------Selecciona--------</option>
                                         <%
                                             List<Estado> estado = (List<Estado>) request.getAttribute("estado");
@@ -181,24 +209,24 @@ and open the template in the editor.
                             
                              <tr>
                                 <td><label>Municipio</label></td>
-                                <td><select  id="muni" name="muni" >
+                                <td><select  id="muni" name="muni" required="" >
                                     <option value="" selected>---------Selecciona--------</option>
                                    </select></td>   
                             </tr>
                              
                             <tr>
                                 <td><label>RFC:</label></td>
-                                <td><input type="text" id="rfc" name="rfc" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" id="rfc" maxlength="14" name="rfc" style="width:200px; height: 20px;" required=""><br></td>                      
                              </tr>
                     
                              <tr>
                                 <td><label>CURP:</label></td>
-                                <td><input type="text" name="curp" style="width:200px; height: 20px;"><br></td>                      
+                                <td><input type="text" id="curp" maxlength="18" name="curp" style="width:200px; height: 20px;" required=""><br></td>                      
                              </tr>
                              
                              <tr>
                                 <td><label>Numero de N&oacute;mina:</label></td>
-                                <td><input type="text" name="nomina" style="width:200px; height: 20px;"><br></td>  
+                                <td><input  type="text"  class="solo-numero" name="nomina" style="width:200px; height: 20px;" required=""><br></td>  
                              </tr>
                         </table>
                                         

@@ -55,8 +55,7 @@ public class ReporteServlet extends HttpServlet {
             String idSucursal= request.getParameter("idSucursal");
             String fechaInicio=request.getParameter("fecha1");
             String fechaFin=request.getParameter("fecha2");
-            
-            
+
             if(!"".equals(reporteDepartamento)&&reporteDepartamento!=null)
             {
                 List<Reporte> listReporte;

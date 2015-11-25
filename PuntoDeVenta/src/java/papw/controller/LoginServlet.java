@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet{
                     session.setAttribute("user", user);
                    // RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/CobroArticulo.jsp");
                     //disp.forward(request, response);
-                    response.sendRedirect("JSP/CobroArticulo.jsp");
+                    response.sendRedirect("/PuntoDeVenta/VentaArticulo");
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);

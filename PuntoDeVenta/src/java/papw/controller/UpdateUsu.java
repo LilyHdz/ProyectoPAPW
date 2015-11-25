@@ -120,6 +120,7 @@ public class UpdateUsu extends HttpServlet  {
         
         if ("modificar".equals(accion)) {
         Usuario usuario = new Usuario(id,nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
+        usuario.setFechaN(strFecha);
         UsuarioDao.editar(usuario);
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
@@ -127,6 +128,7 @@ public class UpdateUsu extends HttpServlet  {
         disp.forward(request, response);
          } else {
         Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
+        usuario.setFechaN(strFecha);
         UsuarioDao.insertar(usuario);
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");

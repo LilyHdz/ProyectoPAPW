@@ -33,14 +33,14 @@ and open the template in the editor.
             <ul class="navo">
                 <li><a href="">Administraci&oacute;n</a>
                        <ul>
-                        <li><a href="<%= request.getServletContext().getContextPath()%> /mostrar">Personal</a></li>
+                        <li><a href="<%= request.getServletContext().getContextPath()%>/mostrar">Personal</a></li>
                         <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc">Sucursales</a></li>
                         <li><a href="<%= request.getServletContext().getContextPath()%>/mostrardepa">Departamentos</a></li>
                        </ul>
                 </li>
                 <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-                <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-                <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+                <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+                <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
             <hr>
          </div>
@@ -53,9 +53,25 @@ and open the template in the editor.
                 <label>Programaci&oacute;n de Promocionales</label>
                 <table>
                     <tr>
-                    <th>Video</th> <th>Hora</th> <th>Dia</th> <th>Mes</th> <th>Sucursal</th>
+                        <th>Eliminar</th>
+                        <th>Video</th> 
+                        <th>Hora</th> 
+                        <th>Dia</th> 
+                        <th>Mes</th> 
+                        <th>Sucursal</th>
                     </tr>
                     
+                    <tr>
+                        <th></th>
+                    </tr>
+                    
+                    <form>
+                    <tr>
+                        <th></th>
+                        <th><input> </th>
+                    </tr>
+                    </form>
+                        
                 </table>
             </div>
         

@@ -15,7 +15,7 @@ public class Existencia {
 
     public int getIdArticulo() {
         return idArticulo;
-    }
+}
 
     public void setIdArticulo(int idArticulo) {
         this.idArticulo = idArticulo;

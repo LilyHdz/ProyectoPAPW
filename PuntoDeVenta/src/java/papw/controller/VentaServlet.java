@@ -18,14 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import papw.dao.ArticuloDao;
 import papw.dao.ExistenciaDao;
+import papw.dao.PublicidadDao;
 import papw.dao.VentaDao;
 import papw.dao.VentaDetalleDao;
 import papw.model.Articulo;
 import papw.model.Existencia;
 import papw.model.Login;
 import papw.model.Ticket;
+import papw.model.Usuario;
 import papw.model.Venta;
 import papw.model.VentaDetalle;
+import papw.model.Publicidad;
 
 /**
  *
@@ -57,7 +60,21 @@ public class VentaServlet extends HttpServlet {
             String eliminar = request.getParameter("eliminar");
             String finalizar=request.getParameter("finalizar");
             String limpiarTicket=request.getParameter("LimpiarTicket");
-            String salir = request.getParameter("salir");
+            String salir = request.getParameter("accion");
+            
+            
+            
+            Login usuario = (Login)session.getAttribute("user");
+            int idUsuario =usuario.getId();
+            Publicidad publicidad = PublicidadDao.consultaPublicidad(idUsuario);
+            
+            request.setAttribute("publicidad", publicidad);
+            
+            if(!"".equals(salir)&&salir!=null)
+            {
+                session.removeAttribute("usser");
+                response.sendRedirect("/PuntoDeVenta/index.jsp");
+            }
             
             if(!"".equals(limpiarTicket)&&limpiarTicket!=null)
             {
@@ -65,7 +82,7 @@ public class VentaServlet extends HttpServlet {
                 session.removeAttribute("Ticket");    
             }
             
-
+            
             
             if(!"".equals(finalizar)&&finalizar!=null)
             {

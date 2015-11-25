@@ -205,7 +205,7 @@ div.Vision h2{
 /*/////////////Menu/////////////////////*/
 #Nav {
      position: fixed;
-     top: 17%;
+     top: 112px;
      overflow: visible;
      background-color: #0f4e5d;
      width:100%;
@@ -334,6 +334,7 @@ hr{
     width: 1100px;
     margin: 0 auto;
     margin-top: 40px;
+    text-align: center;
     margin-bottom: 200px;
 }
 
@@ -355,6 +356,7 @@ hr{
     border: 1px solid black;
     border-collapse: collapse;
     font-family: "Cambria", Arial;
+    font-size: 10pt;
     text-align: center;
     padding: 1px;
 }
@@ -365,6 +367,7 @@ hr{
     border: 1px solid black;
     border-collapse: collapse;
     font-family: "Cambria", Arial;
+    font-size: 5pt;
     text-align: center;
     padding: 1px;
 } 

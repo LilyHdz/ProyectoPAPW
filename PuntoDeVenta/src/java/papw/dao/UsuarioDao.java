@@ -30,7 +30,7 @@ public class UsuarioDao {
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{ call sp_agregarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call sp_agregarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, e.getNombre());
             cs.setString(2, e.getApePaterno());
             cs.setString(3, e.getApeMaterno());
@@ -41,14 +41,15 @@ public class UsuarioDao {
             cs.setString(8, e.getCurp());
             cs.setInt(9, e.getNomina());
             cs.setBlob(10, e.getFotostream());
-            cs.setString(11, e.getCalle());
-            cs.setInt(12, e.getNumero());
-            cs.setString(13, e.getColonia());
-            cs.setInt(14, e.getMunicipio());
-            cs.setInt(15, e.getEstado());
-            cs.setInt(16, e.getPostal());
-            cs.setString(17, e.getContrasena());
-            cs.setInt(18, e.getIdSucursal());
+            cs.setString(11, e.getFechaN());
+            cs.setString(12, e.getCalle());
+            cs.setInt(13, e.getNumero());
+            cs.setString(14, e.getColonia());
+            cs.setInt(15, e.getMunicipio());
+            cs.setInt(16, e.getEstado());
+            cs.setInt(17, e.getPostal());
+            cs.setString(18, e.getContrasena());
+            cs.setInt(19, e.getIdSucursal());
 
             int res = cs.executeUpdate();   
             
@@ -74,7 +75,7 @@ public class UsuarioDao {
             rs = cs.executeQuery();
             while (rs.next()) {
                 
-                String desContra =  enc.desencp(rs.getString("Contaseña"));
+                String desContra =  enc.desencp(rs.getString("Contrasenia"));
                 
                 Usuario user = new Usuario(
                         rs.getInt("idUsuario"),
@@ -88,13 +89,19 @@ public class UsuarioDao {
                         rs.getString("CurpUsuario"),
                         rs.getInt("NumeroNominaUsuario"),
                         rs.getBinaryStream("FotoUsuario"),
-                        rs.getString("Calle"),rs.getInt("numero"), 
+                        rs.getString("Calle"),
+                        rs.getInt("numero"), 
                         rs.getString("Colonia"),
                         rs.getInt("idmunicipio"),
                         rs.getInt("idEstado"),
                         rs.getInt("CodigoPostal"),
                         desContra
                         );
+                
+                user.setFechaN(rs.getString("FechaNacimientoUsuario"));
+                user.setNombreE(rs.getString("estado"));
+                user.setNombreM(rs.getString("municipio"));
+                user.setNombreS(rs.getString("Sucursal"));
                 
                 usuario.add(user);
             }
@@ -158,10 +165,16 @@ public class UsuarioDao {
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
+            
+            Encriptar enc = new Encriptar();
+
             cs = connection.prepareCall("{ call sp_buscarPersona(?) }");
             cs.setInt(1, id);
             rs = cs.executeQuery();
             if (rs.next()) {
+                
+               String desContra =  enc.desencp(rs.getString("Contaseña"));
+                
                Usuario user = new Usuario(
                         rs.getInt("idUsuario"),
                         rs.getString("NombreUsuario"), 
@@ -180,10 +193,11 @@ public class UsuarioDao {
                         rs.getInt("idmunicipio"),
                         rs.getInt("idEstado"),
                         rs.getInt("CodigoPostal"),
-                        rs.getString("Contaseña"),
+                        desContra,
                         rs.getInt("idSucursal"));
-                //Departamento d = new Departamento(rs.getInt("departamento_id"));
-                //emp.setDepartamento(d);
+               
+               user.setFechaN(rs.getString("FechaNacimientoUsuario"));
+              
                 return user;
             }
             return null;

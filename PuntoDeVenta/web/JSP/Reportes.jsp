@@ -104,8 +104,8 @@ and open the template in the editor.
                     </ul>
                 </li>
                 <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-                <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-                <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+                <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+                <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
             <hr>
          </div>
@@ -129,7 +129,7 @@ and open the template in the editor.
                 <input type="date" name="fecha2" id="fecha2" style="display:visible;"  >
                 <button style="display:visible;"  name="fecha" id="fecha_aceptar" action="/PuntoDeVenta/ReporteServlet"  > Aceptar </button>
                 <select name="departamento"  id="_departamento" style="display:none;">
-                    <option name="idDepartamento">Selecciona un departamento</option>
+                    <option value="" name="">Selecciona un departamento</option>
                     <%
                         for(Departamento dep :listDepartamento)
                         {
@@ -141,7 +141,7 @@ and open the template in the editor.
                 </select>
                     
                 <select name="sucursal" id="_sucursal" style="display:none;">
-                    <option name="idSucursal">Selecciona una sucursal</option>
+                    <option value="" name="">Selecciona una sucursal</option>
                     <%
                         for(Sucursal suc:listSucursal)
                         {

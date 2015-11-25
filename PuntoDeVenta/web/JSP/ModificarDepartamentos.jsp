@@ -47,8 +47,8 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>

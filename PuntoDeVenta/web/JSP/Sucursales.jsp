@@ -3,6 +3,7 @@
     Created on : 11/10/2015, 11:18:24 PM
     Author     : Liliana
 --%>
+<%@page import="papw.model.Estado"%>
 <%@page import="papw.model.Sucursal"%>
 <%@page import="papw.model.Login"%>
 <%@page import="java.util.List"%>
@@ -20,19 +21,28 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
-         
-         <script>
-             function esconde_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display = 'none';
-             }
-             
-             function visible_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display='block';
-             }
-    
-          </script>
+         <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+        
+       <script type="text/javascript" >
+        function mostrar_estado(){
+            
+            $("#rfc").val("1");
+            $.post("/PuntoDeVenta/JSP/ComboboxMunicipio.jsp",$("#sucur").serialize(), function(sucur){ $("#muni").html(sucur);});
+        }
+       
+        </script>
+          
+       <script type="text/javascript" >
+           
+	$(document).ready(function()
+	    {
+	    $("#AgregarP").on( "click", function() {	 
+	        $("#esconder").toggle();
+	         });
+	    });
+       
+        </script>
+
     </head>
     
     <body>
@@ -56,8 +66,8 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/JSP/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -65,10 +75,10 @@ and open the template in the editor.
             
          
     <div class="cajita">     
-           <button id="AgregarP" onclick="visible_div();">Agregar Sucursal</button>
+           <button id="AgregarP" >Agregar Sucursal</button>
             
             <div class="cajitaSuc" id="esconder">
-            <form action="/PuntoDeVenta/sucursal" method="POST">
+            <form action="/PuntoDeVenta/sucursal" method="POST" id="sucur">
                 <fieldset >
                     <legend>Ingrese Nueva Sucursal:</legend>
 		
@@ -79,14 +89,31 @@ and open the template in the editor.
                                 <td><input name="nameSuc" type="text" style="width:200px; height: 20px;"><br></td>
                             </tr>
                             
-                             <tr>
-                       
-                                 <td><select name="sucMun">
-                                    <option value="0">Municipio</option>
-                                    <option value="1">Cadereyta Jimenez</option>
-                                    </select></td>
-      
+                           <tr>
+                                <td><label>Estado</label></td>
+                                <td><select name="estado" style="width:200px; height: 25px;" id="esta" onchange="mostrar_estado()" >
+                                         <option value="" selected>---------Selecciona--------</option>
+                                        <%
+                                            List<Estado> estados = (List<Estado>) request.getAttribute("estado_");
+                                                if (estados != null) {
+                                                for (Estado est : estados) {
+                                         %>
+                                        <option value="<%= est.getId() %>" ><%= est.getNombre() %>  </option>
+
+                                        <%
+                                                    }
+                                                }
+                                        %>
+                                        </select></td>    
                             </tr>
+                            
+                            <tr>
+                                <td><label>Municipio</label></td>
+                                <td><select  id="muni" name="muni" >
+                                    <option value="" selected>---------Selecciona--------</option>
+                                   </select></td>   
+                            </tr>
+                            
                         </table>
                     <br>
                 
@@ -96,18 +123,7 @@ and open the template in the editor.
             </form>
         </div>
             
-            <div class="Busca">
-                <label>Buscar sucursal: </label>
-                <select>
-                     <option value="Estado">Estado</option>
-                     <option value="Nuevo Leon">Nuevo Leon</option>
-                </select>
-                <select>
-                     <option value="0">Municipio</option>
-                     <option value="1">Cadereyta Jimenez</option>
-                </select>
-                <button>Aceptar</button>                      
-            </div>
+  
             
             <div class="TABLA_ER">
                 <table>
@@ -121,6 +137,7 @@ and open the template in the editor.
                   <tr>
                       <td> <%= sucursal.getNombre()%></td>
                       <td><%= sucursal.getMunicipio() %></td> 
+                      <td><%= sucursal.getNombreE() %></td> 
  
                       <td><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc?accion=editar&id=<%= sucursal.getId() %>">Editar</a></td> 
                       <td><a href="<%= request.getServletContext().getContextPath()%>/mostrarsuc?accion=borrar&id=<%= sucursal.getId() %>">Eliminar</a></td> 

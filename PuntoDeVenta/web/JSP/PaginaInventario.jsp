@@ -23,21 +23,19 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
-         
-         <script>
-                   
-             function esconde_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display = 'none';
-             }
-             
-             function visible_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display='block';
-             }
-             
-          </script>
-          
+         <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+        
+       <script type="text/javascript" >
+           
+	$(document).ready(function()
+	    {
+	    $("#AgregarP").on( "click", function() {	 
+	        $("#esconder").toggle();
+	         });
+	    });
+       
+        </script>
+       
     </head>
     
     <body>
@@ -61,8 +59,8 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -70,7 +68,7 @@ and open the template in the editor.
             
          
         <div class="cajita">
-            <button id="AgregarP" onclick="visible_div();">Agregar Articulo</button>
+            <button id="AgregarP" >Agregar Articulo</button>
             
             <div class="cajitaSuc" id="esconder">
             <form enctype="multipart/form-data"  action="/PuntoDeVenta/articulo" method="POST">
@@ -180,30 +178,7 @@ and open the template in the editor.
                 </fieldset>
             </form>
         </div>
-                     
-          <div class="Inv">
-                <label>Seleccione Sucursal: </label>
-                <select>
-                     <option value="1">Sucursal 1</option>
-                     <option value="2">Sucursal 2</option>
-                     <option value="3">Sucursal 3</option>
-                     <option value="4">Sucursal 4</option>
-                </select>
-                <button>Aceptar</button>             
-            </div>
-            
-            <div id="filtro">
-                <label>Filtar por: </label>
-                <select>
-                     <option value="1">Nombre</option>
-                     <option value="2">Departamento</option>
-                     <option value="3">Codigo</option>
-                     
-                </select>
-                 
-                 <input type="text"><button>Aceptar</button>
-            </div>
-            
+                                 
             
             <div class="TABLA_ER">
                 <table>

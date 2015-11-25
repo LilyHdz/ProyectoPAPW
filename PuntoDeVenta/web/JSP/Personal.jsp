@@ -47,7 +47,7 @@ and open the template in the editor.
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
             <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -57,34 +57,33 @@ and open the template in the editor.
           
        <div class="cajita">   
            <button id="AgregarP" onclick="window.location.href='<%= request.getServletContext().getContextPath()%>/mostrar?accion=llenar'" >Agregar Nuevo Empleado</button>
-            <div class="Busca"> 
-                <label>Buscar personal por: </label>
-                <select>
-                     <option value="Nombre">NOMBRE</option>
-                     <option value="Apellido">APELLIDO</option>
-                     <option value="CURP">CURP</option>
-                     <option value="Puesto">PUESTO</option>
-                </select>
-                <input type="text">
-                <button>Aceptar</button>                      
-            </div>
+                    
             
             <div class="TABLA_ER">
                 <table>
                
-                  <tr><th>FOTO</th><th>NOMBRE COMPLETO</th><th>PUESTO</th><th>SUCURSAL</th> <th>RFC</th> <th>Editar</th> <th>Eliminar</th></tr>
+                  <tr><th>FOTO</th><th>NOMBRE COMPLETO</th><th>PUESTO</th><th>SUCURSAL</th><th>FECHA NACIMIENTO</th> <th>RFC</th> <th>CURP</th> <th>MUNICIPIO</th> <th>ESTADO</th> <th>Editar</th> <th>Eliminar</th></tr>
                    <%
                     List<Usuario> usu = (List<Usuario>) request.getAttribute("usuario");
+                    String puesto = "";
                     if (usu != null) {
                     for (Usuario emp : usu) {
+                        
+                        if(emp.getPuesto().equalsIgnoreCase("m")) puesto = "Manager";
+                        else  puesto= "Cajero";
+                            
                     %>
                   
                   <tr>
                       <td><img src="<%= request.getServletContext().getContextPath() + "/imagen?id=" + emp.getId() %>" alt="Producto" width="50"></td> 
                       <td> <%= emp.getNombre() + ' ' + emp.getApePaterno() + ' ' +emp.getApeMaterno() %></td>
-                      <td><%= emp.getPuesto() %></td> 
-                      <td>Fundidora</td> 
+                      <td><%= puesto %></td> 
+                      <td><%= emp.getNombreS() %></td> 
+                      <td><%= emp.getFechaN() %></td>
                       <td><%= emp.getRfc() %></td> 
+                      <td><%= emp.getCurp() %></td> 
+                      <td><%= emp.getNombreM() %></td> 
+                      <td><%= emp.getNombreE() %></td> 
                       <td><a href="<%= request.getServletContext().getContextPath()%>/mostrar?accion=borrar&id=<%= emp.getId() %>">Eliminar</a></td> 
                       <td><a href="<%= request.getServletContext().getContextPath()%>/mostrar?accion=editar&id=<%= emp.getId() %>">Editar</a></td> 
                   </tr>

@@ -23,19 +23,18 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
          <link rel="stylesheet" type="text/css" href="/PuntoDeVenta/CSS/style.css">
-         
-         <script>
-             function esconde_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display = 'none';
-             }
-             
-             function visible_div(){
-                 var elemento = document.getElementById('esconder');
-                 elemento.style.display='block';
-             }
-    
-          </script>
+         <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+        
+       <script type="text/javascript" >
+           
+	$(document).ready(function()
+	    {
+	    $("#AgregarP").on( "click", function() {	 
+	        $("#target").toggle();
+	         });
+	    });
+       
+        </script>
           
     </head>
     
@@ -61,8 +60,8 @@ and open the template in the editor.
                     </ul>
             </li>
             <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
-            <li><a href="/PuntoDeVenta/JSP/PaginaInventario.jsp">Inventario</a></li>
-            <li><a href="/PuntoDeVenta/JSP/Reportes.jsp">Reportes</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
+            <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
              <hr>
          </div>
@@ -70,9 +69,9 @@ and open the template in the editor.
         </header>
  
         <div class="cajita">
-            <button id="AgregarP" onclick="visible_div();">Agregar Departamento</button>
+            <button id="AgregarP"  value="toggle()" >Agregar Departamento</button>
             
-            <div class="cajitaSuc" id="esconder">
+            <div class="cajitaSuc" id="target">
             <form action="/PuntoDeVenta/departamento" method="POST">
                 <fieldset >
                     <legend>Ingrese Nuevo Departamento:</legend>
@@ -93,19 +92,11 @@ and open the template in the editor.
             </form>
         </div>
                      
-            <div class="Busca">
-                <form method="post">
-                <label>Buscar: </label>
-                <input type="text"/>
-                <input type="submit" value="Aceptar"/>
-               </form>
-                                     
-            </div>
             
             <div class="TABLA_ER">
                 <table>
                
-                  <tr><th>Departamento</th></tr>
+                  <tr><th>DEPARTAMENTO</th><th>EDITAR</th><th>ELIMINAR</th></tr>
                     <%
                     List<Departamento> depa = (List<Departamento>) request.getAttribute("dep");
                     if (depa != null) {

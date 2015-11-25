@@ -32,6 +32,9 @@ public class Usuario {
     private int numero;
     private String colonia;
     private int municipio;
+    private String nombreM;
+    private String nombreS;
+    private String nombreE;
     private int estado;
     private int postal;
     private String contrasena;
@@ -123,6 +126,32 @@ public class Usuario {
         this.contrasena = contrasena;
         this.idSucursal = idSucursal;
     }
+
+    public String getNombreM() {
+        return nombreM;
+    }
+
+    public void setNombreM(String nombreM) {
+        this.nombreM = nombreM;
+    }
+
+    public String getNombreS() {
+        return nombreS;
+    }
+
+    public void setNombreS(String nombreS) {
+        this.nombreS = nombreS;
+    }
+
+    public String getNombreE() {
+        return nombreE;
+    }
+
+    public void setNombreE(String nombreE) {
+        this.nombreE = nombreE;
+    }
+    
+    
     
      public int getId() {
         return id;

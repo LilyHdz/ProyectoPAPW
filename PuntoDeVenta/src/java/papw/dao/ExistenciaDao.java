@@ -23,6 +23,7 @@ public class ExistenciaDao {
         try {
             cs = conn.prepareCall("{call sp_modificarExistencia (?,?)}");
             
+            
             cs.setInt(1,  e.getIdArticulo());
             cs.setInt(2, e.getCantidadExistencia());
 
