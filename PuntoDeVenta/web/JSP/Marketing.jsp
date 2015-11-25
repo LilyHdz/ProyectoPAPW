@@ -4,6 +4,8 @@
     Author     : Owner
 --%>
 
+<%@page import="papw.model.Sucursal"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -50,7 +52,9 @@ and open the template in the editor.
 
            
             <div class="merca">
+                <form method="post" enctype="multipart/form-data" action="/PuntoDeVenta/MarketingServlet" >
                 <label>Programaci&oacute;n de Promocionales</label>
+                
                 <table>
                     <tr>
                         <th>Eliminar</th>
@@ -62,17 +66,41 @@ and open the template in the editor.
                     </tr>
                     
                     <tr>
+                        <th><input type="image" action="/PuntoDeVenta/VentaArticulo"  name="eliminar" class="AgreButton"  value="" src="/PuntoDeVenta/images/cross.png"></th>
                         <th></th>
                     </tr>
                     
-                    <form>
+                    
                     <tr>
                         <th></th>
-                        <th><input> </th>
+                        <th><input type="file" name="archivo" size="50"></th>
+                        <th> 
+                            
+                             <input type="date" name="fechaInicio" >
+                            
+                             <input type="date" name="fechaFinal" >
+                             <% //List<Sucursal> listSucursal = (List<Sucursal>) request.getAttribute("listSucursal"); 
+                             %>
+                            <select>
+                                <option value="" name="">Selecciona una sucursal</option>
+                                <%
+                                   // for(Sucursal suc:listSucursal)
+                                   // {
+                                %>
+                                <%-- <option value="<%= suc.getId() %>" id="idSucursal" name="idSucursal"> <%= suc.getNombre() %> </option> --%>
+                                <%
+                                    //}
+                                %>
+                            </select>
+                        </th>
+                        <th>
+                            <input type="submit" name="videoBoton" method="post" text="agregar" value="agregarVideo">
+                        </th>
                     </tr>
-                    </form>
+                   
                         
                 </table>
+                </form>
             </div>
         
         <div id="inferior">

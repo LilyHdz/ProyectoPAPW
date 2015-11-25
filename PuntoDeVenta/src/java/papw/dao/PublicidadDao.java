@@ -8,6 +8,7 @@ package papw.dao;
 import papw.model.Publicidad;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 
 /**
@@ -22,9 +23,12 @@ public class PublicidadDao {
         Connection connection = pool.getConnection();
         CallableStatement cs = null;
         ResultSet rs = null;
+        java.util.Date fromDate = new java.util.Date() ;
+        Date sqlDate = new java.sql.Date(fromDate.getTime());
         try {
-            cs = connection.prepareCall("{ call sp_validarLogin("+idUsuario+") }");
-
+            cs = connection.prepareCall("{ call sp_validarLogin(?,?) }");
+            cs.setInt(1, idUsuario);
+            cs.setDate(2, sqlDate);
             rs = cs.executeQuery();
             if (rs.next()) {
                 Publicidad u = new  Publicidad(rs.getString("patPublicidad"));

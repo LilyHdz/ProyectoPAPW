@@ -66,6 +66,15 @@
         <servlet-name>ReporteServlet</servlet-name>
         <servlet-class>papw.controller.ReporteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarketingServlet</servlet-name>
+        <servlet-class>papw.controller.MarketingServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>-1</max-file-size>
+            <max-request-size>-1</max-request-size>
+            <file-size-threshold>52428800</file-size-threshold>
+        </multipart-config>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UpdateUsu</servlet-name>
         <url-pattern>/update</url-pattern>
@@ -121,6 +130,10 @@
     <servlet-mapping>
         <servlet-name>ReporteServlet</servlet-name>
         <url-pattern>/ReporteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarketingServlet</servlet-name>
+        <url-pattern>/MarketingServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
