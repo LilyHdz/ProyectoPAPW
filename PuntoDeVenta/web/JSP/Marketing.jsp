@@ -79,17 +79,17 @@ and open the template in the editor.
                              <input type="date" name="fechaInicio" >
                             
                              <input type="date" name="fechaFinal" >
-                             <% //List<Sucursal> listSucursal = (List<Sucursal>) request.getAttribute("listSucursal"); 
+                             <% List<Sucursal> listSucursal = (List<Sucursal>) request.getAttribute("listSucursal"); 
                              %>
-                            <select>
+                            <select name="idSucursal">
                                 <option value="" name="">Selecciona una sucursal</option>
                                 <%
-                                   // for(Sucursal suc:listSucursal)
-                                   // {
+                                    for(Sucursal suc:listSucursal)
+                                    {
                                 %>
-                                <%-- <option value="<%= suc.getId() %>" id="idSucursal" name="idSucursal"> <%= suc.getNombre() %> </option> --%>
+                                <option value="<%= suc.getId() %>" id="idSucursal" > <%= suc.getNombre() %> </option>
                                 <%
-                                    //}
+                                    }
                                 %>
                             </select>
                         </th>

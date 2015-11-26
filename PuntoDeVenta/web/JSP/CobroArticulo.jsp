@@ -184,9 +184,13 @@
                         <tr>
                             <td>
                                 <video  width="480"  autoplay loop muted>
-                                    <% if(publicidad != null) { %>
+                                    <% if(publicidad != null) {
+                                        char cha =92;
+                                        char cha2 =47;
+                                        
+                                    %>
                                     
-                                    <source src="/PuntoDeVenta/images/<%= publicidad.getPathPublicidad() %>" type="video/mp4">
+                                    <source src="<%= getServletContext().getContextPath()+"/images/videos/"+ publicidad.getPathPublicidad() %>" type="video/mp4">
                                     <% 
                                     }
                                     else 

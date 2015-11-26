@@ -20,15 +20,18 @@ import java.util.Date;
  * @author Ayrton
  */
 public class VideoDao {
-    public static void insertarVideo(Video v,Date fechaInicio,Date fechaFin,int idSucursal)
+    public static void insertarVideo(Video v,String fechaInicio,String fechaFin,int idSucursal)
     {
          ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         CallableStatement cs2 = null;
         try {
-            cs = conn.prepareCall("{ call sp_agregarVideo(?) }");
+            cs = conn.prepareCall("{ call sp_agregarPublicidad(?,?,?,?) }");
             cs.setString(1, v.getNombre());
+            cs.setString(2, fechaInicio);
+            cs.setString(3, fechaFin);
+            cs.setInt(4, idSucursal);
             int res = cs.executeUpdate();  
             
             

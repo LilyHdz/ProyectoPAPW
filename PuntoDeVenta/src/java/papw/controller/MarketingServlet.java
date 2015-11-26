@@ -65,9 +65,8 @@ public class MarketingServlet extends HttpServlet {
             
             String agregarVideo =request.getParameter("videoBoton");
             String fechaInicio = request.getParameter("fechaInicio");
-            String fechaFin = request.getParameter("fechaFin");
-            Part filePart = request.getPart("archivo");
-            String sucursal=request.getParameter("sucursal");
+            String fechaFin = request.getParameter("fechaFinal");
+            String sucursal=request.getParameter("idSucursal");
             String eliminar=request.getParameter("eliminar");
             
             
@@ -75,6 +74,8 @@ public class MarketingServlet extends HttpServlet {
             
             if(!"".equals(agregarVideo)&&agregarVideo!=null)
             {
+                
+                Part filePart = request.getPart("archivo");
                 Video  video;
                 
                  
@@ -101,15 +102,10 @@ public class MarketingServlet extends HttpServlet {
                          SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd"); 
                          Date date1;
                          Date date2;
-                        try{
-                            date1=ft.parse(fechaInicio);
-                            date2=ft.parse(fechaFin);
-                            VideoDao.insertarVideo(video,date1,date2,Integer.parseInt(sucursal));
-                        }
-                        catch(ParseException  e){
-                             RequestDispatcher disp =  getServletContext().getRequestDispatcher("/JSP/MarketingServlet.jsp");
-                             disp.forward(request, response); 
-                        }
+                         VideoDao.insertarVideo(video,fechaInicio,fechaFin,Integer.parseInt(sucursal));
+
+                        
+                     
                          
                      }
                  }
@@ -118,7 +114,7 @@ public class MarketingServlet extends HttpServlet {
             
              request.setAttribute("listSucursal", listSucursal);
                
-            RequestDispatcher disp =  getServletContext().getRequestDispatcher("/JSP/MarketingServlet.jsp");
+            RequestDispatcher disp =  getServletContext().getRequestDispatcher("/JSP/Marketing.jsp");
             disp.forward(request, response);
             
         }

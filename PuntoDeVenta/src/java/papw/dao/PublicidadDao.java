@@ -25,17 +25,19 @@ public class PublicidadDao {
         ResultSet rs = null;
         java.util.Date fromDate = new java.util.Date() ;
         Date sqlDate = new java.sql.Date(fromDate.getTime());
+        Publicidad u;
         try {
-            cs = connection.prepareCall("{ call sp_validarLogin(?,?) }");
+                cs = connection.prepareCall("{ call sp_consultaPublicidad(?,?) }");
             cs.setInt(1, idUsuario);
             cs.setDate(2, sqlDate);
             rs = cs.executeQuery();
             if (rs.next()) {
-                Publicidad u = new  Publicidad(rs.getString("patPublicidad"));
+                u = new  Publicidad(rs.getString("pathPublicidad"));
                                
                 return u;
             }
-            return null;
+            else{
+            return null;}
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
