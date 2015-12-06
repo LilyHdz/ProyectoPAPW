@@ -34,12 +34,8 @@ and open the template in the editor.
     <body>
         <div class="main">
         
-        <header id="Encabezado">  
-            
-         <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
-        <h3>"Donde encuentra de todo"</h3>
+       
         
-         <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
          
         <div id="Nav">
             
@@ -52,17 +48,14 @@ and open the template in the editor.
                         
                     </ul>
             </li>
-            <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarMark">Marketing</a></li>
             <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
             <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
+             <a class="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
              <hr>
          </div>
-                        
-        </header>
-            
-
-                     
+          
         <%
             Usuario persona = (Usuario) request.getAttribute("usuario");
             int id = 0;
@@ -103,11 +96,11 @@ and open the template in the editor.
          
          
          <div class="cajita">
-            <form enctype="multipart/form-data" action="<%= request.getServletContext().getContextPath()%>/update?accion=modificar&id=<%= persona.getId() %>" method="POST" id="dataf" >
-                <fieldset >
+            <form enctype="multipart/form-data" id="dataf" action="<%= request.getServletContext().getContextPath()%>/update?accion=modificar&id=<%=id %>" method="POST">
+                <fieldset>
                     <legend>Ingrese la informaci&oacute;n:</legend>
 		
-                        <table>
+                    <table>
                             <tr>
                                 <td><label>Foto de Empleado:</label></td>
                                 <td><img src="<%= request.getServletContext().getContextPath() + "/imagen?id=" + id %>" alt="Producto" width="80"></td>
@@ -162,7 +155,7 @@ and open the template in the editor.
                     
                             <tr>
                                 <td><label>Fecha de Nacimiento:</label></td>
-                                <td><input type="date" style="width:200px; height: 25px;" name="fecha" value="<%= fecha %> "><br></td>
+                                <td><input type="date" style="width:200px; height: 25px;" name="fecha" value="<%=fecha%>"><br></td>
                             </tr>
                             
                             <tr>

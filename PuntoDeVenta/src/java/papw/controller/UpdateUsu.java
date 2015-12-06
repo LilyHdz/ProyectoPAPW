@@ -48,22 +48,11 @@ public class UpdateUsu extends HttpServlet  {
     String strId = request.getParameter("id");
         
          int id = 0;
-            if (strId != null && !strId.equals("")) {
+         
+         if (strId != null && !strId.equals("")) {
                 id = Integer.parseInt(strId);
             }
-            
-        String uploadPath = getServletContext().getRealPath("/" + directorio + "/");
-        System.out.println("PATH: " + uploadPath);
-        
-        File fdir = new File(uploadPath);
-        if (!fdir.exists()) {
-            fdir.mkdir();
-        }
-        
-        Part filePart = request.getPart("foto");
-        
-        InputStream inputStream = filePart.getInputStream();
-        
+                         
         String nombre = request.getParameter("nombre");
         String apePaterno = request.getParameter("apP");
         String apeMaterno = request.getParameter("apM");
@@ -114,9 +103,7 @@ public class UpdateUsu extends HttpServlet  {
             idsucursal = Integer.parseInt(strSucursal);
         }
         
-        Encriptar enc = new Encriptar();
-        
-        String encripContra =  enc.Encrip(strContrasena);
+        String encripContra = Encriptar.Encrip(strContrasena);
         
         if ("modificar".equals(accion)) {
         Usuario usuario = new Usuario(id,nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
@@ -127,6 +114,18 @@ public class UpdateUsu extends HttpServlet  {
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/mostrar");
         disp.forward(request, response);
          } else {
+            
+        String uploadPath = getServletContext().getRealPath("/" + directorio + "/");
+        System.out.println("PATH: " + uploadPath);
+        
+        File fdir = new File(uploadPath);
+        if (!fdir.exists()) {
+            fdir.mkdir();
+        }
+        
+        Part filePart = request.getPart("foto");       
+        InputStream inputStream = filePart.getInputStream();   
+            
         Usuario usuario = new Usuario(nombre, apePaterno, apeMaterno, strPuesto, strSexo, strNivel, strRfc, strCurp,nomina,inputStream, strCalle, calle_num, strColonia,idciudad, idestado,postal,encripContra,idsucursal);
         usuario.setFechaN(strFecha);
         UsuarioDao.insertar(usuario);

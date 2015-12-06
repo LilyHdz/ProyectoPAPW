@@ -166,14 +166,13 @@ public class UsuarioDao {
         ResultSet rs = null;
         try {
             
-            Encriptar enc = new Encriptar();
-
             cs = connection.prepareCall("{ call sp_buscarPersona(?) }");
             cs.setInt(1, id);
             rs = cs.executeQuery();
             if (rs.next()) {
                 
-               String desContra =  enc.desencp(rs.getString("Contaseña"));
+               String desContra =(rs.getString("Contrasenia"));
+               String desC =  Encriptar.desencp(desContra);
                 
                Usuario user = new Usuario(
                         rs.getInt("idUsuario"),
@@ -188,7 +187,7 @@ public class UsuarioDao {
                         rs.getInt("NumeroNominaUsuario"),
                         rs.getBinaryStream("FotoUsuario"),
                         rs.getString("Calle"),
-                       rs.getInt("numero"), 
+                        rs.getInt("numero"), 
                         rs.getString("Colonia"),
                         rs.getInt("idmunicipio"),
                         rs.getInt("idEstado"),
@@ -217,7 +216,7 @@ public static void editar(Usuario e) {
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{call sp_modificarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{call sp_modificarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setInt(1, e.getId());
             cs.setString(2, e.getNombre());
             cs.setString(3, e.getApePaterno());
@@ -229,12 +228,13 @@ public static void editar(Usuario e) {
             cs.setString(9, e.getCurp());
             cs.setString(10, e.getCalle());
             cs.setInt(11, e.getNumero());
-            cs.setString(12, e.getColonia());
-            cs.setInt(13, e.getMunicipio());
-            cs.setInt(14, e.getEstado());
-            cs.setInt(15, e.getPostal());
-            cs.setString(16, e.getContrasena());
-            cs.setInt(17, e.getIdSucursal());
+            cs.setString(12, e.getFechaN());
+            cs.setString(13, e.getColonia());
+            cs.setInt(14, e.getMunicipio());
+            cs.setInt(15, e.getEstado());
+            cs.setInt(16, e.getPostal());
+            cs.setString(17, e.getContrasena());
+            cs.setInt(18, e.getIdSucursal());
 
             int res = cs.executeUpdate();   
             

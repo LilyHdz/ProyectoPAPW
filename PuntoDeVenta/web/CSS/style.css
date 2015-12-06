@@ -24,17 +24,16 @@ html, body {
 
 .main{
     height: 100%;
-    width: 1200px;
+    width: 1100px;
     top: 0%;
-    bottom: 0%; 
+    bottom: 0%;
     margin: 0 auto;
     margin-bottom: 0%;
     margin-top: -50px;
-    border-radius: 5px; 
-    background-color: #efefef;   
+    border-radius: 5px;
+    background-color: #efefef;
     position: relative;
-    border: 6px groove #0f4e5d;
-    
+    border: 10px groove #0f4e5d;
 }
 
 #Encabezado{
@@ -162,13 +161,12 @@ h4{
 
 div.Vision{
     float: right;
-    margin: 70px 150px 250px 10px;
+    margin: 70px 120px 250px 10px;
     width: 400px;
     height: 450px;
     border-radius: 10px;
     background-color: #ffffff;
     /*opacity: 0.6;*/
-     
 }
 
 div.Vision p{
@@ -195,6 +193,7 @@ div.index{
     border-radius: 10px 10px 10px 10px;
     background: url("../images/fondoPrincipal.png") no-repeat;
     margin: 0 auto;
+    margin-left: 85px;
 }
 
 .index table{
@@ -300,10 +299,22 @@ hr{
 
 /*////////////////////////Personal/////////////////////////////////////*/
 #AgregarP{
-    width: 200px;
-    height: 30px;
-    float: left;
-    margin: 55px 20px 20px 90px;
+   float: left;
+   margin: 55px 90px 50px 40px;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #0f4e5d;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+#AgregarP:hover{
+  background: #2f77a3;
+  text-decoration: none;
 }
 
 .Busca {
@@ -337,49 +348,38 @@ hr{
     margin-left: 10px;
    
 }
-
 /*TABLA DATOS EMPLEADOS Y ARTICULOS*/
-.TABLA_ER{
-    width: 1100px;
+
+#cajitaPersonal{
+    width: 900px;
+    height: 100%;
     margin: 0 auto;
-    margin-top: 40px;
-    text-align: center;
-    margin-bottom: 200px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 5px 5px 5px 5px;
 }
 
-.TABLA_ER table {
-    width: 100%;
-    border: 1px;  
-    
-}
-
-.TABLA_ER table{
-    border: 1px solid black;
-    border-collapse: collapse;
-    font-family: "Cambria", Arial;
-    text-align: center;
-    padding: 1px;
+.TABLA_ER {
+    /* height: 300px; */
+    margin: 0 auto;
+    text-align:center;
+    margin-bottom: 30px;
 }
 
 .TABLA_ER td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    font-family: "Cambria", Arial;
-    font-size: 10pt;
-    text-align: center;
-    padding: 1px;
+    border:1px dotted #DAE4EE;
+    background: #DAE4EE;
+    font-size: 11pt; 
+    padding: 5px;
+    
 }
 
-.TABLA_ER th{
-    background-color: #868686;
-    color: white;
-    border: 1px solid black;
-    border-collapse: collapse;
-    font-family: "Cambria", Arial;
-    font-size: 5pt;
-    text-align: center;
-    padding: 1px;
-} 
+.TABLA_ER  th{
+    border:1px dotted #AAC2D8;
+    font-size: 11pt;
+    background: #AAC2D8;
+     padding: 5px;
+}  
 
 .TABLA_ER tr:nth-child(odd){
     background-color: #bbe8ff;
@@ -393,14 +393,28 @@ hr{
     background-color: #c8c8c8;
 }
 
+/*////////////////////////Marketing////////////////////////////////////*/
+.mercaM td{
+    font-family: "Cambria", Arial;
+    font-size: 12pt;
+    text-align: left;
+    border: 1px black groove;
+}
+
+.mercaM th{
+    font-family: "Cambria", Arial;
+    font-size: 12pt;
+    text-align: left;
+    border: 1px black groove;
+}
+
 /*////////////////////////AgregarPersonal/////////////////////////////////////*/
 .cajita{
     width: 1000px;
-    height: 500px;
-    //border: 6px groove #0f4e5d;
+    height: 100%;
     margin: 0 auto;
     margin-top: 50px;
-    margin-bottom: 20px;
+     margin-bottom: 170px; 
     padding: 5px 5px 5px 5px;
 }
 
@@ -416,15 +430,16 @@ hr{
 }
 
 .cajita table{
-    padding-top: 10px;
+    padding-top: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.cajita table td{
+.cajita table th,td{
     font-family: "Cambria", Arial;
-    font-size: 12pt;
-    padding-top: 10px;
-    text-align: left;
-    padding-left: 50px;
+    font-size: 13pt;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .cajita input{
@@ -441,22 +456,21 @@ hr{
 }
 /*//////////////////AgregarSucursal-Departamento-Articulo/////////////////////*/
 .cajitaSuc{
-    width: 600px;
-    //height: 200px;
-    margin: 20px 20px 60px 50px;
-    padding:  50px 20px 20px 10px;
+    width: 650px;
+    height: 325px;
+    margin: 20px 20px 20px 50px;
+    padding:  50px 20px 10px 10px;
     display: none;
 }
 
 .cajitaSuc fieldset{
-    width: 600px; 
+    width: 600px;
     border: 6px groove #0f4e5d;
     border-radius: 10px;
     font-size: 15pt;
     margin: 0 auto;
     margin-right: 50px;
-    margin-bottom: 80px;
-    
+    margin-bottom: 50px;
 }
 
 .cajitaSuc table{
@@ -520,24 +534,7 @@ hr{
     margin-left: 20px;
     margin-right: 20px;
 }
-/*////////////////////////Inventario////////////////////////////////////*/
-
-.merca{
-    
-}
-
-.merca table{
-    padding-top: 10px;
-}
-
-.merca table td{
-    font-family: "Cambria", Arial;
-    font-size: 12pt;
-    padding-top: 10px;
-    text-align: left;
-    padding-left: 50px;
-}
-
+/*/////////////////////////////////////////////////////////////////////////////*/
 /*TABLA REPORTES */
 .TABLA_RE{
     width: 1100px;

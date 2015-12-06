@@ -42,13 +42,6 @@ and open the template in the editor.
     
     <body>
         <div class="main">
-        
-        <header id="Encabezado">  
-            
-         <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
-        <h3>"Donde encuentra de todo"</h3>
-        
-         <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
          
          <div id="Nav">
             
@@ -60,13 +53,13 @@ and open the template in the editor.
                         <li><a href="<%= request.getServletContext().getContextPath()%>/mostrardepa">Departamentos</a></li>
                     </ul>
             </li>
-            <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarMark">Marketing</a></li>
             <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
             <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
+             <a class="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
              <hr>
          </div>
-        </header>
                     
           <%
             Articulo articulo = (Articulo) request.getAttribute("articulo");

@@ -13,16 +13,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import papw.model.Departamento;
-import papw.dao.DepartamentoDao;
+import papw.dao.PublicidadDao;
+import papw.dao.SucursalDao;
+import papw.dao.UsuarioDao;
+import papw.model.Estado;
+import papw.model.Publicidad;
+import papw.model.Sucursal;
+
 /**
  *
- * @author Owner
+ * @author Liliana
  */
-public class MostrarDepartamentos extends HttpServlet{
+public class MostrarMarketing extends HttpServlet{
     
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
         
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) { 
@@ -35,32 +40,36 @@ public class MostrarDepartamentos extends HttpServlet{
             }
             
             if ("borrar".equals(accion) && id > 0) {
-                DepartamentoDao.borrar(Integer.parseInt(strId));
+                SucursalDao.borrar(Integer.parseInt(strId));
                 request.setAttribute("mensaje", "Registro borrado exitosamente!");
 
-                List<Departamento> dep = DepartamentoDao.buscarDepartamentos();
-                request.setAttribute("dep", dep);
+                List<Sucursal> sucu = SucursalDao.buscarSucursales();
+                request.setAttribute("sucu", sucu);
 
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Departamentos.jsp");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Sucursales.jsp");
                 disp.forward(request, response);
                 
-            } else if (("editar".equals(accion) && id > 0) || "agregar".equals(accion)) {
-                //List<Departamento> departamentos = DepartamentoDao.buscarDepartamentos();
-                //request.setAttribute("departamentos", departamentos);
+            }
+            else if (("editar".equals(accion) && id > 0) || "agregar".equals(accion)) {
+                 List<Sucursal> sucu = SucursalDao.buscarSucursales();
+                 request.setAttribute("listSucursal", sucu);
 
                 if ("editar".equals(accion)) {
-                    Departamento departamento = DepartamentoDao.buscarDepartamento(id);
-                    request.setAttribute("departamento", departamento);
+                    Publicidad publi = PublicidadDao.buscarPublicidad2(id);
+                    request.setAttribute("publi", publi);
                 }
 
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarDepartamentos.jsp");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/ModificarVideos.jsp");
                 disp.forward(request, response);
 
-            } else {
-                List<Departamento> dep = DepartamentoDao.buscarDepartamentos();
-                request.setAttribute("dep", dep);
-
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Departamentos.jsp");
+            }else {
+                List<Sucursal> sucu = SucursalDao.buscarSucursales();
+                request.setAttribute("listSucursal", sucu);
+                
+                List<Publicidad> publicidad = PublicidadDao.buscarPublicidad();
+                request.setAttribute("publicidad", publicidad);
+                
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/JSP/Marketing.jsp");
                 disp.forward(request, response);
             }
         }
@@ -104,5 +113,4 @@ public class MostrarDepartamentos extends HttpServlet{
     public String getServletInfo() {
         return "Short description";
     }// </editor-f
-    
 }

@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Marketing
-    Created on : Nov 11, 2015, 10:01:21 PM
-    Author     : Owner
+    Document   : ModificarVideos
+    Created on : 3/12/2015, 01:45:59 AM
+    Author     : Liliana
 --%>
-
 <%@page import="papw.model.Sucursal"%>
 <%@page import="papw.model.Publicidad"%>
 <%@page import="java.util.List"%>
@@ -28,11 +27,20 @@ and open the template in the editor.
            
             $(document).ready(function()
 	    {
-	    $("#AgregarP").on( "click", function() {	 
-	        $("#target").toggle();
+	    $("#boton1").on( "click", function() {	 
+	        $("#horario").toggle();
+                $("#contenido1").text("");
 	         });
 	    });
-       
+            
+            $(document).ready(function()
+	    {
+	    $("#boton2").on( "click", function() {	 
+	        $("#dia").toggle();
+                 $("#contenido2").text("");
+	         });
+	    });
+                        
             </script>
     </head>
     
@@ -79,11 +87,28 @@ and open the template in the editor.
             </tr> 
          </table>
 
-        <button id="AgregarP"  value="toggle()" ><img src="/PuntoDeVenta/images/garra.png" alt="Producto" width="20" style="padding-right: 8px;">Agregar Nuevo Video</button>
-         <div class="TABLA_ER" id="target" style="display: none;">
-           <fieldset >
-             <legend>Ingrese Nuevo Horaio-Video:</legend>
-            <form method="post" enctype="multipart/form-data" action="/PuntoDeVenta/MarketingServlet">
+         <%
+            Publicidad publi = (Publicidad) request.getAttribute("publi");
+            int id = 0;
+            int dia = 0;
+            int hora = 0;
+            String path = "";
+
+
+            if (publi != null) {
+                
+                id = publi.getIdPublicidad();
+                dia = publi.getDia();
+                hora = publi.getHorarios();
+                path = publi.getPathPublicidad() != null ? publi.getPathPublicidad() : "";
+ 
+            }
+        %>
+        
+         <div class="TABLA_ER" style="">
+           <fieldset>
+            <legend>Ingrese Nuevo Horaio-Video:</legend>
+            <form method="post" enctype="multipart/form-data" action="/PuntoDeVenta/MarketingServlet?accion=modificar&id=<%=id%>">
                 <table>
                     <tr>
                         <th>Video</th> 
@@ -93,14 +118,33 @@ and open the template in the editor.
                     </tr>
                     
                     <tr>  
-                        <td><input type="file" name="archivo" size="50"></td>
-                        <td><select name="horario">
-                                <option value="1">Matutino</option>
-                                <option value="2">Vespertino</option>
-                                <option value="3">Nocturno</option>
+                         <td><video  width="480"  width="128" height="240" controls muted>
+                                    <% if(publi != null) {
+                                        char cha =92;
+                                        char cha2 =47;
+                                        
+                                    %>
+                                    
+                                    <source src="<%= getServletContext().getContextPath()+"/images/videos/"+ publi.getPathPublicidad() %>" type="video/mp4">
+                                    <% 
+                                    }
+                                     %>
+                                    
+                                    Your browser does not support HTML5 video.
+                            </video></td>   
+                        <td>                                                    
+                 <label type="text" value="<%=publi.getHorarios()%>" id="contenido1" name="contenido1"><%=Publicidad.horario(publi.getHorarios())%> </label> 
+                 <label id="boton1"value="toggle()" >Cambiar</label> 
+                 <select name="horario" id="horario" style="display: none;">
+                                <option id="1" value="1">Matutino</option>
+                                <option id="2" value="2">Vespertino</option>
+                                <option id="3" value="3">Nocturno</option>
                             </select>    
                         </td>
-                        <td><select name="dia">
+                        <td>
+                <label type="text" value="<%=publi.getDia()%>" id="contenido2" name="contenido2"><%=Publicidad.dia(publi.getDia())%> </label>
+                <label id="boton2"value="toggle()" >Cambiar</label> 
+                <select name="dia" id="dia" style="display: none;">
                                 <option value="1">Domingo</option>
                                 <option value="2">Lunes</option>
                                 <option value="3">Martes</option>
@@ -131,54 +175,7 @@ and open the template in the editor.
                 </fieldset>
             </form>
         </div>
-               
-        <div class="TABLA_ER">
-            <table>
-                    <tr>
-                        <th>Eliminar</th>
-                         <th>Editar</th>
-                        <th>Video</th>
-                        <th>Dia</th>
-                        <th>Horario</th>                         
-                        <th>Sucursal</th>
-                    </tr>
-                    <%
-                    List<Publicidad> usu = (List<Publicidad>) request.getAttribute("publicidad");  
-                                      
-                    if (usu != null) {
-                        
-                    for (Publicidad publi : usu) {   
-
-                         String dia = Publicidad.dia(publi.getDia());
-                         String horario = Publicidad.horario(publi.getHorarios());
-                    %>
-                    <tr>
-                        <td><input type="image" action="<%= request.getServletContext().getContextPath()%>/mostrarMark?accion=borrar&id=<%=publi.getIdPublicidad()%>"  name="eliminar" value="" src="/PuntoDeVenta/images/cross.png"></td>
-                        <td><a href="<%= request.getServletContext().getContextPath()%>//mostrarMark?accion=editar&id=<%=publi.getIdPublicidad()%>"  name="modi" value="" >Editar</a></td>
-                        <td><video  width="480"  width="128" height="240" controls muted>
-                                    <% if(publi != null) {
-                                        char cha =92;
-                                        char cha2 =47;
-                                        
-                                    %>
-                                    
-                                    <source src="<%= getServletContext().getContextPath()+"/images/videos/"+ publi.getPathPublicidad() %>" type="video/mp4">
-                                    <% 
-                                    }
-                                     %>
-                                    
-                                    Your browser does not support HTML5 video.
-                                </video></td>
-                        <td><%=dia%></td>
-                        <td><%=horario%></td> 
-                        <td><%=publi.getNomSuc()%></td>    
-                    </tr> 
-                                  <%      }
-                }
-            %>
-             </table>
-        </div>
-                            
+                              
         </div>
         
         <div id="inferior">
@@ -189,4 +186,5 @@ and open the template in the editor.
     </div>
     </body>
 </html>
+
 

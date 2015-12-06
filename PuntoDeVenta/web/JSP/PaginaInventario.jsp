@@ -41,12 +41,6 @@ and open the template in the editor.
     <body>
         <div class="main">
         
-        <header id="Encabezado">  
-            
-         <img id="Letrero" src="/PuntoDeVenta/images/Logo_Tienda3.png" alt="MercaTodo" >
-        <h3>"Donde encuentra de todo"</h3>
-        
-         <a id="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
          
          <div id="Nav">
             
@@ -58,17 +52,16 @@ and open the template in the editor.
                         <li><a href="<%= request.getServletContext().getContextPath()%>/mostrardepa">Departamentos</a></li>
                     </ul>
             </li>
-            <li><a href="/PuntoDeVenta/JSP/Marketing.jsp">Marketing</a></li>
+            <li><a href="<%= request.getServletContext().getContextPath()%>/mostrarMark">Marketing</a></li>
             <li><a href="<%= request.getServletContext().getContextPath()%>/mostrararti">Inventario</a></li>
             <li><a href="/PuntoDeVenta/ReporteServlet">Reportes</a></li>
             </ul>
+             <a class="Salir" href="/PuntoDeVenta/index.jsp" >Cerrar Sesi&oacute;n</a>
              <hr>
          </div>
-        </header>
-            
-         
+
         <div class="cajita">
-            <button id="AgregarP" >Agregar Articulo</button>
+            <button id="AgregarP" ><img src="/PuntoDeVenta/images/garra.png" alt="Producto" width="20" style="padding-right: 8px;">Agregar Articulo</button>
             
             <div class="cajitaSuc" id="esconder">
             <form enctype="multipart/form-data"  action="/PuntoDeVenta/articulo" method="POST">
@@ -180,7 +173,7 @@ and open the template in the editor.
         </div>
                                  
             
-            <div class="TABLA_ER">
+       <div class="TABLA_ER" style="margin-top: 200px; ">
                 <table>
                
                 <tr><th>CODIGO</th><th>FOTO</th><th>ARTICULO</th><th>DEPARTAMENTO</th><th>DESCRIPCION</th> <th>PRECIO PUBLICO</th> <th>U. M.</th> <th>EXISTENCIA</th> <th>SUCURSAL</th> <th>Editar</th> <th>Eliminar</th></tr>
