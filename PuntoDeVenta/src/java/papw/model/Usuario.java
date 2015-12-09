@@ -85,6 +85,13 @@ public class Usuario {
         this.contrasena = contrasena;
     }
     
+    public Usuario(int id,String nombre, String apellidoPaterno)
+    {
+        this.id=id;
+        this.nombre=nombre;
+        this.apePaterno=apellidoPaterno;
+    }
+    
     public Usuario(int id, String nombre, String apePaterno, String apeMaterno, String Puesto, String sexo, String NivelEstudio, String rfc, String curp, int nomina,InputStream fotostream, String calle, int numero, String colonia, int municipio, int estado, int postal, String contrasena, int idSucursal) {
         this.id = id;
         this.nombre = nombre;

@@ -211,7 +211,7 @@ public class UsuarioDao {
         }
     }
         
-public static void editar(Usuario e) {
+        public static void editar(Usuario e) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
@@ -246,7 +246,7 @@ public static void editar(Usuario e) {
         }
     }
       
-    public static List<Estado> buscarEstados() {
+        public static List<Estado> buscarEstados() {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         CallableStatement cs = null;
@@ -276,8 +276,8 @@ public static void editar(Usuario e) {
             pool.freeConnection(connection);
         }
     }
-         
-    public static List<Estado> buscarMunicipios(int id) {
+      
+        public static List<Estado> buscarMunicipios(int id) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         CallableStatement cs = null;
@@ -309,4 +309,42 @@ public static void editar(Usuario e) {
         }
     }
         
+        public static List<Usuario> buscarCajeros()
+        {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+             Encriptar enc = new Encriptar();
+        
+            
+            List<Usuario> usuario = new ArrayList();
+            cs = connection.prepareCall("{ call sp_buscarCajeros() }");
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                
+                
+                Usuario user = new Usuario(
+                        rs.getInt("idUsuario"),
+                        rs.getString("NombreUsuario"), 
+                        rs.getString("ApellidoParternoUsuario")
+                        );
+                               
+                usuario.add(user);
+            }
+            return usuario;
+        } catch (Exception ex) 
+        {
+            ex.printStackTrace();
+            return null;
+            
+        } 
+        finally 
+        {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
+        }
 }

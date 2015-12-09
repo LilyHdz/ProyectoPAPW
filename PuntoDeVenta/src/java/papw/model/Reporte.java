@@ -21,6 +21,8 @@ public class Reporte {
     private int descuento;
     private String formaPago;
     private String aplicaImpuesto;
+    private int totalVenta;
+    private int precio;
 
     public Date getFechaVenta() {
         return fechaVenta;
@@ -98,6 +100,29 @@ public class Reporte {
         this.formaPago=formaPago;
         this.aplicaImpuesto=aplicaImpuesto;
     }
+    public Reporte(String nombreSucursal,String nombreDepartamento,String nombreUsuario,int cantidadProducto,int descuento,int totalVenta, int precio)
+    {
+        this.nombreSucursal=nombreSucursal;
+        this.nombreUsuario=nombreUsuario;
+        this.cantidadProducto=cantidadProducto;
+        this.descuento=descuento;
+        this.totalVenta=totalVenta;
+        this.precio=precio;
+    }
+    
+    public Reporte(Date fechaVenta,String nombreSucursal,String nombreDepartamento, String nombreUsuario, String descripcionCorta, int cantidadProducto, int descuento,String aplicaImpuesto, int precio)
+    {
+        this.fechaVenta=fechaVenta;
+        this.nombreSucursal=nombreSucursal;
+        this.nombreDepartamento=nombreDepartamento;
+        this.nombreUsuario=nombreUsuario;
+        this.descripcionCorta=descripcionCorta;
+        this.cantidadProducto=cantidadProducto;
+        this.descuento=descuento;
+        this.precio=precio;
+        this.aplicaImpuesto=aplicaImpuesto;
+    }
+    
 
     public String getAplicaImpuesto() {
         return aplicaImpuesto;
@@ -105,5 +130,21 @@ public class Reporte {
 
     public void setAplicaImpuesto(String aplicaImpuesto) {
         this.aplicaImpuesto = aplicaImpuesto;
+    }
+
+    public int getTotalVenta() {
+        return totalVenta;
+    }
+
+    public void setTotalVenta(int totalVenta) {
+        this.totalVenta = totalVenta;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 }

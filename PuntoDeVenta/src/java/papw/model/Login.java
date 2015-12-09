@@ -13,11 +13,19 @@ public class Login {
     private int id;
     private String email;
     private String puesto;
+    private int idSucursal;
 
     public Login(int id, String email, String puesto) {
         this.id = id;
         this.email = email;
         this.puesto = puesto;
+    }
+    
+        public Login(int id, String email, String puesto,int idSucursal) {
+        this.id = id;
+        this.email = email;
+        this.puesto = puesto;
+        this.idSucursal=idSucursal;
     }
 
     public int getId() {
@@ -42,6 +50,14 @@ public class Login {
 
     public void setPuesto(String puesto) {
         this.puesto = puesto;
+    }
+
+    public int getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(int idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
 

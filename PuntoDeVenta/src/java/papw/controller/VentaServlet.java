@@ -61,6 +61,7 @@ public class VentaServlet extends HttpServlet {
             String finalizar=request.getParameter("finalizar");
             String limpiarTicket=request.getParameter("LimpiarTicket");
             String salir = request.getParameter("accion");
+            String formaPago=request.getParameter("formaPago");
             
             
             
@@ -87,14 +88,17 @@ public class VentaServlet extends HttpServlet {
             if(!"".equals(finalizar)&&finalizar!=null)
             {
                 ticket =(List<Articulo>)session.getAttribute("Ticket");
-                int totalVenta =0;
+                double totalVenta =0;
+                double descuento=0;
                 for(Articulo ticketL :ticket)
                 {
-                    totalVenta+=ticketL.getCantidad() * ticketL.getPrecio();
+                    descuento = ticketL.getDescuento();
+                    descuento=descuento/100;
+                    totalVenta+=((ticketL.getPrecio())-(descuento*ticketL.getPrecio())) * ticketL.getCantidad();
                 }
                     
                 Login user= (Login)session.getAttribute("user");
-                Venta venta = new Venta(user.getId(),totalVenta,"Efectivo");
+                Venta venta = new Venta(user.getId(),totalVenta,formaPago,user.getIdSucursal());
                 int idVenta=VentaDao.InsertarVenta(venta);
                 
                 for(Articulo ticketL :ticket)

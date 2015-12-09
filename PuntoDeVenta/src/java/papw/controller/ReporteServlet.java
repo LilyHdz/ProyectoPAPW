@@ -16,12 +16,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import papw.dao.DepartamentoDao;
 import papw.dao.ReporteDao;
 import papw.dao.SucursalDao;
+import papw.dao.UsuarioDao;
 import papw.model.Departamento;
+import papw.model.Login;
 import papw.model.Reporte;
 import papw.model.Sucursal;
+import papw.model.Usuario;
 
 /**
  *
@@ -45,31 +49,41 @@ public class ReporteServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             List<Departamento> listDepartamento ;
             List<Sucursal> listSucursal;
+            List<Usuario> listCajeros;
+            listCajeros = UsuarioDao.buscarCajeros();
             listDepartamento= DepartamentoDao.buscarDepartamentos();
             listSucursal=SucursalDao.buscarSucursales();
             
             String reporteDepartamento= request.getParameter("departamento");
             String reporteSucursal=request.getParameter("sucursal");
+            String reporteCajero=request.getParameter("cajero");
             String repoteFecha=request.getParameter("fecha");
             String idDepartamento=request.getParameter("idDepartamento");
             String idSucursal= request.getParameter("idSucursal");
             String fechaInicio=request.getParameter("fecha1");
             String fechaFin=request.getParameter("fecha2");
 
+            if(!"".equals(reporteCajero)&&reporteCajero!=null)
+            {
+                List<Reporte> listReporte;
+                listReporte=ReporteDao.consultaReporteCajero(Integer.parseInt(reporteCajero), fechaInicio, fechaFin);
+                request.setAttribute("listReporte", listReporte);
+            }
+            
             if(!"".equals(reporteDepartamento)&&reporteDepartamento!=null)
             {
                 List<Reporte> listReporte;
-                listReporte=ReporteDao.consultaReporteDepartamento(Integer.parseInt( reporteDepartamento));
+                listReporte=ReporteDao.consultaReporteDepartamento(Integer.parseInt( reporteDepartamento),fechaInicio,fechaFin);
                 request.setAttribute("listReporte", listReporte);
             }
             
             if(!"".equals(reporteSucursal)&&reporteSucursal!=null)
             {
                 List<Reporte> listReporte;
-                listReporte=ReporteDao.consultaReporteDepartamento(Integer.parseInt( reporteSucursal));
+                listReporte=ReporteDao.consultaReporteSucursal(Integer.parseInt( reporteSucursal),fechaInicio,fechaFin);
                 request.setAttribute("listReporte", listReporte);
             }
-            
+            /*
             if((!"".equals(fechaInicio)&&fechaInicio!=null)&&(!"".equals(fechaFin)&&fechaFin!=null))
             {
                 List<Reporte> listReporte;
@@ -91,10 +105,10 @@ public class ReporteServlet extends HttpServlet {
                    disp.forward(request, response); 
                 }
                 
-            }
+            }*/
             
             
-            
+            request.setAttribute("listCajero", listCajeros);
             request.setAttribute("listSucursal", listSucursal);
             request.setAttribute("listDepartamento", listDepartamento);
                

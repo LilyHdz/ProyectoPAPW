@@ -64,7 +64,7 @@ public class ReporteDao {
         }
     }
     
-    public static List<Reporte> consultaReporteDepartamento(int idDepartamento)
+    public static List<Reporte> consultaReporteDepartamento(int idDepartamento,String fechaInicio ,String fechaFin)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -72,19 +72,22 @@ public class ReporteDao {
         ResultSet rs = null;
          try {
             List<Reporte> listReporte = new ArrayList<Reporte>();
-            cs = conn.prepareCall("{ call sp_reporteDepartamento("+idDepartamento+") }");
+            cs = conn.prepareCall("{ call sp_reporteDepartamento(?,?,?) }");
+            cs.setInt(1, idDepartamento);
+            cs.setString(2, fechaInicio);
+            cs.setString(3, fechaFin);
             rs = cs.executeQuery();
             while (rs.next()) {
                 Reporte reporte = new Reporte(
-                                    rs.getDate("fechaVenta"),
-                                    rs.getString("nombreSucursal"),
+                        
+                        rs.getString("nombreSucursal"),
                         rs.getString("nombreDepartamento"),
                         rs.getString("nombreUsuario"),
-                        rs.getString("descripcionCorta"),
                         rs.getInt("cantidadProducto"),
                         rs.getInt("descuento"),
-                        rs.getString("aplicaImpuesto"),
-                        rs.getString("formaPago"));
+                        rs.getInt("totalVenta"),
+                        rs.getInt("Precio")
+                        );
 
                 listReporte.add(reporte);
             }
@@ -100,7 +103,7 @@ public class ReporteDao {
         }
     }
     
-    public static List<Reporte> consultaReporteSucursal(int idSucursal)
+    public static List<Reporte> consultaReporteSucursal(int idSucursal,String fechaInicio ,String fechaFin)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -108,7 +111,10 @@ public class ReporteDao {
         ResultSet rs = null;
          try {
             List<Reporte> listReporte = new ArrayList<Reporte>();
-            cs = conn.prepareCall("{ call sp_reporteSucursal("+idSucursal+") }");
+            cs = conn.prepareCall("{ call sp_reporteSucursal(?,?,?) }");
+            cs.setInt(1, idSucursal);
+            cs.setString(2, fechaInicio);
+            cs.setString(3, fechaFin);
             rs = cs.executeQuery();
             while (rs.next()) {
                 Reporte reporte = new Reporte(
@@ -120,7 +126,46 @@ public class ReporteDao {
                         rs.getInt("cantidadProducto"),
                         rs.getInt("descuento"),
                         rs.getString("aplicaImpuesto"),
-                        rs.getString("formaPago"));
+                        rs.getInt("Precio"));
+
+                listReporte.add(reporte);
+            }
+            return listReporte;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+            
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+    
+    public static List<Reporte> consultaReporteCajero(int idUsuario,String fechaInicio ,String fechaFin)
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+         try {
+            List<Reporte> listReporte = new ArrayList<Reporte>();
+            cs = conn.prepareCall("{ call sp_reporteCajero(?,?,?) }");
+            cs.setInt(1, idUsuario);
+            cs.setString(2, fechaInicio);
+            cs.setString(3, fechaFin);
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                Reporte reporte = new Reporte(
+                        rs.getDate("fechaVenta"),
+                        rs.getString("nombreSucursal"),
+                        rs.getString("nombreDepartamento"),
+                        rs.getString("nombreUsuario"),
+                        rs.getString("descripcionCorta"),
+                        rs.getInt("cantidadProducto"),
+                        rs.getInt("descuento"),
+                        rs.getString("aplicaImpuesto"),
+                        rs.getInt("Precio"));
 
                 listReporte.add(reporte);
             }

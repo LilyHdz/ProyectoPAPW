@@ -26,8 +26,9 @@
     
 <body>
     
-    <%          Articulo articulo = (Articulo) request.getAttribute("Articulo");
-                Publicidad publicidad = (Publicidad) request.getAttribute("publicidad");
+    <%          
+        Articulo articulo = (Articulo) request.getAttribute("Articulo");
+        Publicidad publicidad = (Publicidad) request.getAttribute("publicidad");
     %>
      
        <div class="main">
@@ -60,20 +61,29 @@
              </table>
                 <table width="100%" border="1">
                
-                    <tr class="ProductList"><th>Eliminar</th> <th>CANT.</th> <th>ARTICULO</th> <th>PRE. UNIT</th> <th>TOTAL</th></tr>
+                    <tr class="ProductList">
+                        <th>Eliminar</th> 
+                        <th>CANT.</th> 
+                        <th>ARTICULO</th>
+                        <th>PRE. UNIT</th> 
+                        <th>Descuento</th>
+                        <th>TOTAL</th>
+                    </tr>
                  
                 <% 
     
                     List<Articulo> ticket = (List<Articulo>) request.getAttribute("Ticket");
                     double Total=0;
                     double IVA=0;
-                    int Subtotal=0;
+                    double Subtotal=0;
                     int index=0;
                     if(ticket!=null) 
                     {
                         for(Articulo ticketL :ticket)
                         {   
-                            int totalArticulo =( ticketL.getPrecio()-ticketL.getDescuento()) * ticketL.getCantidad();
+                            double descuento =ticketL.getDescuento();
+                            descuento =descuento/100;
+                            double totalArticulo =((ticketL.getPrecio())-(descuento*ticketL.getPrecio())) * ticketL.getCantidad();
                             Subtotal = Subtotal + totalArticulo;
                             if(ticketL.getAplicaImpuesto()==null)
                                 ticketL.setAplicaImpuesto("N");
@@ -92,6 +102,7 @@
                         <td><%= ticketL.getCantidad() %>  </td>
                         <td><%= ticketL.getDescripcionCorta() %></td> 
                         <td><%= ticketL.getPrecio() %></td>
+                        <td><%= ticketL.getDescuento() %> </td>
                         <td> <%= totalArticulo %></td> 
                     </tr>
                  </form>
@@ -101,9 +112,9 @@
                      }
                     }
                  %>
-                 <tr class="ProductList"><th>--------</th> <th>--------</th> <th>---------   IVA  ----------</th> <th>--------</th> <th><%= IVA %></th> </tr>
-                 <tr class="ProductList"><th>--------</th> <th>--------</th> <th>--------- Subtotal ----------</th> <th>--------</th> <th><%= Subtotal %></th> </tr>
-                 <tr class="ProductList"><th>--------</th> <th>--------</th> <th>---------  TOTAL  ----------</th> <th>--------</th> <th><%= Total %></th> </tr>
+                 <tr class="ProductList"><th>--------</th> <th>--------</th> <th>---------   IVA  ----------</th> <th>--------</th> <th>--------</th><th><%= IVA %></th> </tr>
+                 <tr class="ProductList"><th>--------</th> <th>--------</th> <th>--------- Subtotal ----------</th> <th>--------</th> <th>--------</th><th><%= Subtotal %></th> </tr>
+                 <tr class="ProductList"><th>--------</th> <th>--------</th> <th>---------  TOTAL  ----------</th> <th>--------</th> <th>--------</th><th><%= Total %></th> </tr>
 
                  
                 </table>
@@ -115,6 +126,19 @@
                          <th></th> 
                          <th></th> 
                          <th><input type="submit" action="/PuntoDeVenta/VentaArticulo" method ="post" name="finalizar" value="Finalizar Compra"></th>
+                         <th></th> 
+                         <th></th> 
+                     </tr>
+                     <tr class="ProductList">
+                         <th></th> 
+                         <th></th> 
+                         <th>                
+                             <select name="formaPago">
+                                <option value="Efectivo" name="">Efectivo</option>
+                                <option value="Tarjeta de Devito" name="">Tarjeta de Debito</option>
+                                <option value="Tarjeta de Credito" name="">Tarjeta de Credito</option>
+                              </select>
+                         </th>
                          <th></th> 
                          <th></th> 
                      </tr>

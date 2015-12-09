@@ -27,7 +27,13 @@ public class LoginDao {
             cs.setString(2, password);
             rs = cs.executeQuery();
             if (rs.next()) {
-                Login u = new Login(rs.getInt("idUsuario"),rs.getString("NumeroNominaUsuario"),rs.getString("PuestoUsuario")); 
+                Login u = new Login(
+                        rs.getInt("idUsuario"),
+                        rs.getString("NumeroNominaUsuario"),
+                        rs.getString("PuestoUsuario"),
+                        rs.getInt("idSucursal")
+                        
+                ); 
                                
                 return u;
             }

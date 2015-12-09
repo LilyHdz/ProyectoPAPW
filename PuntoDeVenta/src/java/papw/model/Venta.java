@@ -14,8 +14,9 @@ public class Venta {
 
     
         private int idUsuario;
-        private int totalVenta;
+        private double totalVenta;
         private String formaPago;
+        private int idSucursal;
 
 
     public int getIdUsuario() {
@@ -26,7 +27,7 @@ public class Venta {
         this.idUsuario = idUsuario;
     }
 
-    public int getTotalVenta() {
+    public double getTotalVenta() {
         return totalVenta;
     }
 
@@ -48,6 +49,21 @@ public class Venta {
         this.idUsuario=idUsuario;
         this.totalVenta=totalVenta;
         this.formaPago=formaPago;
+    }
+    public Venta(int idUsuario, double totalVenta, String formaPago,int idSucursal)
+    {
+        this.idSucursal=idSucursal;
+        this.idUsuario=idUsuario;
+        this.totalVenta=totalVenta;
+        this.formaPago=formaPago;
+    }
+
+    public int getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(int idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     

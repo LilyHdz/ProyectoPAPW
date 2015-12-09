@@ -32,12 +32,13 @@ public class VentaDao {
         int  idVenta=0;
          
         try {
-            cs = conn.prepareCall("{call sp_agregarVenta (?,?,?,?)}");
+            cs = conn.prepareCall("{call sp_agregarVenta (?,?,?,?,?)}");
             
             cs.setInt(2, e.getIdUsuario());
-            cs.setInt(3, e.getTotalVenta());
+            cs.setDouble(3, e.getTotalVenta());
             cs.setString(4, e.getFormaPago());
             cs.setDate(1,  sqlDate);
+            cs.setInt(5, e.getIdSucursal());
       
             rs = cs.executeQuery();
             while (rs.next()) {
